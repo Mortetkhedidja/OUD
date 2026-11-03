@@ -1,0 +1,40 @@
+{
+  "id": "/",
+  "name": "منصة عضد",
+  "short_name": "عضد",
+  "description": "منصة عضد تجمع الشباب مع المبادرات والحملات التطوعية، وتساعد على اكتشاف فرص التطوع والمشاركة فيها وتوثيق الإنجازات التطوعية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#073B3A",
+  "theme_color": "#073B3A",
+  "categories": ["social", "education", "lifestyle"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "الحملات التطوعية",
+      "short_name": "الحملات",
+      "url": "/#campaigns",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "دليل المتطوعين",
+      "short_name": "الدليل",
+      "url": "/pages/participants.html",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "دخول المتطوع",
+      "short_name": "الدخول",
+      "url": "/pages/login.html",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}
