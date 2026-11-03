@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#073B3A">
+    <title>لا يوجد اتصال | منصة عضد</title>
+
+    <!-- كل التنسيق داخل الصفحة لأنها تُعرض بدون إنترنت. -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #073B3A, #0B5D5B);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .logo {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: #D6AD45;
+            color: #073B3A;
+            font-size: 38px;
+            font-weight: 700;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 24px;
+        }
+
+        p {
+            margin: 0 0 26px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        button {
+            padding: 12px 28px;
+            border: 0;
+            border-radius: 9px;
+            background: #D6AD45;
+            color: #073B3A;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <div class="logo" aria-hidden="true">ع</div>
+        <h1>لا يوجد اتصال بالإنترنت</h1>
+        <p>تحتاج منصة عضد إلى الإنترنت لعرض الحملات والمشاركات. تحقق من اتصالك ثم أعد المحاولة.</p>
+        <button type="button" onclick="location.reload()">إعادة المحاولة</button>
+    </main>
+
+    <script>
+        // إعادة تحميل الصفحة تلقائياً عند عودة الاتصال.
+        window.addEventListener("online", () => location.reload());
+    </script>
+</body>
+</html>
