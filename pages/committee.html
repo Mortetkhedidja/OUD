@@ -1,0 +1,2620 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لجنة المتابعة | منصة عضد</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7f6, #edf3f1);
+            color: #1d2d2b;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #123c35, #28665e);
+            color: white;
+            padding: 22px 7%;
+            box-shadow: 0 8px 25px rgba(0,0,0,.12);
+        }
+
+        .header-content {
+            max-width: 1150px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand h1 { margin: 0; font-size: 27px; }
+
+        .brand p {
+            margin: 7px 0 0;
+            color: #dfc98f;
+            font-size: 14px;
+        }
+
+        .header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .header-button {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            transition: .2s;
+        }
+
+        .back-button { background: #c6a15b; }
+        .back-button:hover { background: #a98543; transform: translateY(-2px); }
+
+        main {
+            width: 88%;
+            max-width: 1150px;
+            margin: 35px auto 60px;
+        }
+
+        .page-introduction {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+            border-right: 5px solid #c6a15b;
+        }
+
+        .page-introduction h2 {
+            margin: 0 0 8px;
+            color: #123c38;
+            font-size: 23px;
+        }
+
+        .page-introduction p {
+            margin: 0;
+            color: #687773;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .stat-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            background: #edf5f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+        }
+
+        .stat-number {
+            font-size: 27px;
+            font-weight: 800;
+            color: #123c38;
+        }
+
+        .stat-label { color: #71807d; font-size: 13px; margin-top: 3px; }
+
+        .candidates-box {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 5px 25px rgba(0,0,0,.07);
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            color: #123c38;
+            font-size: 21px;
+        }
+
+        .section-title span {
+            background: #edf5f3;
+            color: #277a50;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .candidate {
+            background: linear-gradient(135deg, #fff, #f8faf9);
+            border: 1px solid #e2e9e6;
+            padding: 24px;
+            margin-bottom: 18px;
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: .25s;
+        }
+
+        .candidate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(18,60,56,.08);
+        }
+
+        .candidate::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: #c6a15b;
+        }
+
+        .candidate-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .candidate-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #123c38, #28665e);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            flex-shrink: 0;
+        }
+
+        .candidate h3 { margin: 0; color: #123c38; font-size: 20px; }
+
+        .candidate-status {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background: #fff7e6;
+            color: #9a701d;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .guest-status { background: #eef6ff; color: #2865a5; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: #f5f8f7;
+            border-radius: 11px;
+            padding: 12px 14px;
+            line-height: 1.7;
+        }
+
+        .info-label {
+            display: block;
+            color: #788582;
+            font-size: 12px;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            color: #233b37;
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        .participation-count { color: #277a50; font-size: 18px; }
+
+        .approve-button {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            background: linear-gradient(135deg, #123c38, #28665e);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .approve-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(18,60,56,.20);
+        }
+
+        .approve-button:disabled { opacity: .6; cursor: wait; transform: none; }
+
+        .empty {
+            text-align: center;
+            padding: 40px 25px;
+            border-radius: 16px;
+            background: #f7faf9;
+            border: 1px dashed #ccd8d4;
+            color: #6f7c79;
+            line-height: 2;
+            white-space: pre-line;
+        }
+
+        .empty-icon { font-size: 45px; margin-bottom: 10px; }
+
+        .loading { text-align: center; padding: 35px; color: #777; }
+        /* إدارة صور بطاقات المتطوعين */
+.cards-management {
+    background: #fff;
+    border-radius: 22px;
+    padding: 28px;
+    margin-top: 25px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.07);
+}
+
+.cards-toolbar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.cards-search {
+    flex: 1;
+    min-width: 200px;
+    padding: 13px 15px;
+    border: 1px solid #d8e2de;
+    border-radius: 11px;
+    font: inherit;
+    outline: none;
+}
+
+.cards-search:focus {
+    border-color: #28665e;
+}
+
+.cards-refresh {
+    border: none;
+    background: #123c38;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 11px;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.volunteer-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.volunteer-card-item {
+    border: 1px solid #e0e8e4;
+    border-radius: 17px;
+    padding: 18px;
+    background: #f9fbfa;
+    min-width: 0;
+}
+
+.volunteer-card-item h3 {
+    color: #123c38;
+    margin: 0 0 12px;
+    font-size: 18px;
+}
+
+.volunteer-card-photo {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    background: #edf3f1;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    border: 1px dashed #ccd8d4;
+}
+
+.volunteer-card-placeholder {
+    width: 100%;
+    height: 220px;
+    background: #edf3f1;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #71807d;
+    gap: 8px;
+}
+
+.volunteer-card-placeholder span {
+    font-size: 42px;
+}
+
+.volunteer-card-details {
+    line-height: 1.9;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+    margin-bottom: 14px;
+}
+
+.volunteer-card-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+}
+
+.volunteer-card-actions button {
+    border: none;
+    border-radius: 10px;
+    padding: 11px 8px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.card-upload-button {
+    background: #123c38;
+    color: #fff;
+}
+
+.card-print-button {
+    background: #c6a15b;
+    color: #fff;
+}
+
+.card-upload-button:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.card-upload-status {
+    font-size: 13px;
+    color: #687773;
+    line-height: 1.8;
+    margin-top: 10px;
+    white-space: pre-line;
+}
+
+.card-upload-status.error {
+    color: #b42318;
+}
+
+.card-upload-status.success {
+    color: #277a50;
+}
+
+@media (max-width: 700px) {
+    .cards-management {
+        padding: 20px;
+    }
+
+    .volunteer-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+        @media (max-width: 700px) {
+            header { padding: 20px; }
+            main { width: 92%; margin-top: 25px; }
+            .stats, .info-grid { grid-template-columns: 1fr; }
+            .header-content { align-items: stretch; }
+            .header-actions { width: 100%; }
+            .header-button { flex: 1; }
+            .candidates-box { padding: 20px; }
+        }
+
+/* نافذة نجاح إصدار بطاقة عُضد */
+.success-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(9, 32, 29, 0.65);
+    backdrop-filter: blur(5px);
+    animation: modalFadeIn .25s ease;
+}
+
+.success-modal {
+    width: min(100%, 520px);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, .25);
+    text-align: center;
+    padding: 32px 28px;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    color: #1d2d2b;
+    animation: modalSlideIn .3s ease;
+}
+
+.success-modal-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e8f5ed;
+    color: #277a50;
+    font-size: 38px;
+    border: 2px solid #c6e7d2;
+}
+
+.success-modal h2 {
+    margin: 0 0 10px;
+    color: #123c38;
+    font-size: 25px;
+}
+
+.success-modal-description {
+    color: #71807d;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+.success-card-details {
+    text-align: right;
+    background: #f5f8f7;
+    border: 1px solid #e2e9e6;
+    border-radius: 16px;
+    padding: 8px 18px;
+    margin-bottom: 18px;
+}
+
+.success-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e9e6;
+    line-height: 1.7;
+}
+
+.success-card-row:last-child {
+    border-bottom: none;
+}
+
+.success-card-label {
+    color: #71807d;
+    flex-shrink: 0;
+}
+
+.success-card-value {
+    color: #123c38;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.success-card-number {
+    direction: ltr;
+    display: inline-block;
+    color: #277a50;
+    background: #e8f5ed;
+    border-radius: 8px;
+    padding: 5px 10px;
+    letter-spacing: .5px;
+}
+
+.success-email-status {
+    text-align: right;
+    border-radius: 12px;
+    padding: 13px 15px;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+.success-email-status.sent {
+    background: #eaf6ee;
+    color: #277a50;
+}
+
+.success-email-status.failed {
+    background: #fff4e5;
+    color: #9a6515;
+}
+
+.success-modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.success-modal-button {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 15px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.success-modal-button:hover {
+    transform: translateY(-2px);
+}
+
+.success-copy-button {
+    background: #edf5f3;
+    color: #123c38;
+}
+
+.success-close-button {
+    background: linear-gradient(135deg, #123c38, #28665e);
+    color: #fff;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .success-modal {
+        padding: 25px 18px;
+    }
+
+    .success-modal-actions {
+        flex-direction: column;
+    }
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="brand">
+            <h1>منصة عُضد</h1>
+            <p>لجنة المتابعة وإصدار بطاقات المتطوعين</p>
+        </div>
+
+        <div class="header-actions">
+            <button type="button" class="header-button back-button" id="backButton">
+                ← العودة إلى الإدارة
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="page-introduction">
+        <h2>👥 لجنة المتابعة</h2>
+        <p>
+            من هنا تقوم اللجنة بمراجعة الأشخاص الذين أكملوا خمس مشاركات
+            تطوعية مؤكدة أو أكثر، ثم اعتماد بطاقة عُضد الخاصة بهم.
+        </p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-icon">👤</div>
+            <div>
+                <div class="stat-number" id="candidateCount">0</div>
+                <div class="stat-label">أشخاص ينتظرون المراجعة</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🪪</div>
+            <div>
+                <div class="stat-number">5+</div>
+                <div class="stat-label">الحد الأدنى لإصدار البطاقة</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="candidates-box">
+        <div class="section-title">
+            <h2>المتطوعون المؤهلون للبطاقة</h2>
+            <span>مراجعة اللجنة</span>
+        </div>
+
+        <div id="candidates">
+            <div class="loading">جاري تحميل المتطوعين...</div>
+        </div>
+    </div>
+    <!-- إدارة صور بطاقات المتطوعين -->
+<section class="cards-management" id="volunteerCardsSection">
+    <div class="section-title">
+        <h2>🪪 إدارة صور بطاقات المتطوعين</h2>
+        <span>البطاقات الصادرة</span>
+    </div>
+
+    <p style="color:#687773;line-height:1.9;margin-bottom:20px;">
+        يمكنك البحث عن بطاقة متطوع، ورفع صورتها أو استبدالها،
+        ثم معاينتها وطباعتها. تُحفظ الصورة في Cloudinary
+        ويُحفظ رابطها في سجل البطاقة.
+    </p>
+
+    <div class="cards-toolbar">
+        <input
+            type="search"
+            id="volunteerCardsSearch"
+            class="cards-search"
+            placeholder="ابحثي بالاسم أو رقم البطاقة أو البريد الإلكتروني..."
+            aria-label="البحث عن بطاقة متطوع"
+        >
+
+        <button
+            type="button"
+            class="cards-refresh"
+            id="reloadVolunteerCards"
+        >
+            🔄 تحديث البطاقات
+        </button>
+    </div>
+
+    <div id="volunteerCardsMessage" class="card-upload-status"></div>
+
+    <div id="volunteerCardsList" class="volunteer-cards-grid">
+        <div class="loading">جاري تحميل البطاقات...</div>
+    </div>
+</section>
+</main>
+
+<script type="module">
+import {
+    initializeApp,
+    getApps
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import {
+    getFunctions,
+    httpsCallable
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-functions.js";
+
+import { app, auth, db } from "../js/firebase.js";
+
+import {
+    onAuthStateChanged,
+    createUserWithEmailAndPassword,
+    signOut,
+    getAuth
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+    collection,
+    query,
+    where,
+    getDocs,
+    getDoc,
+    doc,
+    addDoc,
+    setDoc,
+    updateDoc,
+    serverTimestamp,
+    Timestamp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+/* تطبيق ثانوي حتى لا يتم تسجيل خروج الإدارة */
+const secondaryApp =
+    getApps().find(item => item.name === "volunteerAccountCreator") ||
+    initializeApp(app.options, "volunteerAccountCreator");
+
+
+const secondaryAuth = getAuth(secondaryApp);
+
+const candidatesContainer = document.getElementById("candidates");
+const candidateCount = document.getElementById("candidateCount");
+
+document.getElementById("backButton").addEventListener("click", () => {
+    window.location.href = "admin.html";
+});
+
+let isAdminVerified = false;
+
+onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+        window.location.replace("login.html");
+        return;
+    }
+
+    try {
+        const snapshot = await getDoc(doc(db, "users", user.uid));
+
+        if (!snapshot.exists() || !["admin", "committee"].includes(snapshot.data().role)) {
+            showError("ليس لديك صلاحية الدخول إلى صفحة لجنة المتابعة.");
+            return;
+        }
+
+        isAdminVerified = true;
+        await loadCandidates();
+        await loadCardsWithoutAccounts();
+        await loadVolunteerCards();
+
+    } catch (error) {
+        console.error("خطأ التحقق أو تحميل بيانات اللجنة:", error);
+        showError("تعذر التحقق من الصلاحيات أو تحميل البيانات: " + error.message);
+    }
+});
+
+
+async function loadCandidates() {
+    candidatesContainer.innerHTML =
+        '<div class="loading">جاري تحميل المتطوعين...</div>';
+
+    candidateCount.textContent = "0";
+
+    try {
+        const snapshot = await getDocs(
+            query(
+                collection(db, "participationRecords"),
+                where("verified", "==", true)
+            )
+        );
+
+        const groups = {};
+
+        snapshot.forEach((item) => {
+            const data = item.data();
+            const key = data.userId
+                ? "user:" + data.userId
+                : data.guestId
+                    ? "guest:" + data.guestId
+                    : null;
+
+            if (!key) return;
+
+            if (!groups[key]) groups[key] = [];
+            groups[key].push({ id: item.id, ...data });
+        });
+
+        candidatesContainer.innerHTML = "";
+        let total = 0;
+
+        for (const key of Object.keys(groups)) {
+            const participations = groups[key];
+
+            if (participations.length < 5) continue;
+
+            const isGuest = key.startsWith("guest:");
+            const userId = isGuest ? null : key.substring(5);
+            const guestId = isGuest ? key.substring(6) : null;
+
+            const cards = await getDocs(
+                query(
+                    collection(db, "volunteerCards"),
+                    where(isGuest ? "guestId" : "userId", "==",
+                        isGuest ? guestId : userId)
+                )
+            );
+
+            if (!cards.empty) continue;
+
+            let personData = {};
+            const first = participations[0];
+
+            if (!isGuest) {
+                const userSnapshot = await getDoc(doc(db, "users", userId));
+                if (userSnapshot.exists()) personData = userSnapshot.data();
+            }
+
+            const fullName = personData.fullName ||
+                first.fullName || first.participantName || "بدون اسم";
+            const email = personData.email || first.email || "";
+            const phone = personData.phone || first.phone || "غير متوفر";
+            const birthDate = personData.birthDate || first.birthDate || "غير متوفر";
+            const category = personData.category || first.category || "غير متوفر";
+
+            total++;
+
+            const card = document.createElement("div");
+            card.className = "candidate";
+
+            card.innerHTML = `
+                <div class="candidate-header">
+                    <div class="candidate-icon">${isGuest ? "👤" : "🙋"}</div>
+                    <div>
+                        <h3>${escapeHtml(fullName)}</h3>
+                        <span class="candidate-status ${isGuest ? "guest-status" : ""}">
+                            ${isGuest ? "زائر مؤهل" : "متطوع مسجل مؤهل"}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    ${info("البريد الإلكتروني", email || "غير متوفر")}
+                    ${info("رقم الهاتف", phone)}
+                    ${info("تاريخ الميلاد", birthDate)}
+                    ${info("الفئة", category)}
+                    ${info("المشاركات المؤكدة", participations.length + " مشاركة", true)}
+                    ${info("نوع التسجيل", isGuest ? "زائر" : "متطوع مسجل")}
+                </div>
+
+                <button class="approve-button" type="button">
+                    🪪 الموافقة على إصدار بطاقة عُضد وإنشاء الحساب
+                </button>
+            `;
+
+            const button = card.querySelector("button");
+
+            button.addEventListener("click", () => approveVolunteer({
+                userId, guestId, isGuest, personData: {
+                    ...personData, fullName, email, phone, birthDate, category
+                }
+            }, button));
+
+            candidatesContainer.appendChild(card);
+        }
+
+        candidateCount.textContent = total;
+
+        if (total === 0) {
+            candidatesContainer.innerHTML = `
+                <div class="empty">
+                    <div class="empty-icon">🪪</div>
+                    لا يوجد حاليًا أشخاص ينتظرون مراجعة اللجنة.
+                    سيظهر الشخص هنا بعد إكمال 5 مشاركات مؤكدة وعدم امتلاكه بطاقة.
+                </div>`;
+        }
+
+    } catch (error) {
+        console.error(error);
+        showError("تعذر تحميل بيانات المتطوعين: " + error.message);
+    }
+}
+// إرسال بريد إلكتروني عند إصدار بطاقة المتطوع
+
+async function sendCardIssuedEmail(email, fullName, cardNumber) {
+    if (!window.emailjs) {
+        throw new Error("لم يتم تحميل مكتبة EmailJS. أعيدي تحميل الصفحة وحاولي مجددًا.");
+    }
+
+    if (!email) {
+        throw new Error("لا يوجد بريد إلكتروني لإرسال البطاقة إليه.");
+    }
+
+    return await window.emailjs.send(
+        "service_lmyb4id",
+        "template_lvs4k47",
+        {
+            to_email: email,
+            to_name: fullName || "متطوع عُضد",
+            card_number: cardNumber
+        },
+        {
+            publicKey: "WrJp8PbUBH7eSBif8"
+        }
+    );
+}
+
+function showCardIssuedSuccess({
+    fullName,
+    cardNumber,
+    completedActivities,
+    rank,
+    linkedExistingAccount,
+    emailSent,
+    email
+}) {
+    const previous = document.getElementById("cardIssuedSuccessModal");
+    if (previous) previous.remove();
+
+    const overlay = document.createElement("div");
+    overlay.id = "cardIssuedSuccessModal";
+    overlay.className = "success-modal-overlay";
+
+    const accountMessage = linkedExistingAccount
+        ? "تم ربط البطاقة بالحساب الموجود، ولم يتم تغيير كلمة المرور."
+        : "تم إنشاء حساب المتطوع. كلمة المرور الأولية هي رقم البطاقة، وسيُطلب منه تغييرها عند أول دخول.";
+
+    overlay.innerHTML = `
+        <section class="success-modal"
+                 role="dialog"
+                 aria-modal="true"
+                 aria-labelledby="cardSuccessTitle">
+
+            <div class="success-modal-icon">✓</div>
+
+            <h2 id="cardSuccessTitle">تم إصدار بطاقة عُضد بنجاح!</h2>
+
+            <p class="success-modal-description">
+                تمت الموافقة على المتطوع واعتماد بطاقته من لجنة المتابعة.
+            </p>
+
+            <div class="success-card-details">
+                <div class="success-card-row">
+                    <span class="success-card-label">الاسم الكامل</span>
+                    <span class="success-card-value">${escapeHtml(fullName)}</span>
+                </div>
+
+                <div class="success-card-row">
+                    <span class="success-card-label">رقم البطاقة</span>
+                    <span class="success-card-value success-card-number"
+                          id="issuedCardNumber">${escapeHtml(cardNumber)}</span>
+                </div>
+
+                <div class="success-card-row">
+                    <span class="success-card-label">المشاركات المؤكدة</span>
+                    <span class="success-card-value">${escapeHtml(completedActivities)}</span>
+                </div>
+
+                <div class="success-card-row">
+                    <span class="success-card-label">الرتبة</span>
+                    <span class="success-card-value">${escapeHtml(rank)}</span>
+                </div>
+            </div>
+
+            <div class="success-email-status ${emailSent ? "sent" : "failed"}">
+                ${emailSent
+                    ? `✓ تم إرسال رسالة إصدار البطاقة إلى البريد: <strong>${escapeHtml(email)}</strong>`
+                    : "⚠️ تم إصدار البطاقة، لكن تعذر إرسال البريد الإلكتروني. تحققي من إعدادات خدمة البريد."}
+            </div>
+
+            <p style="font-size:13px;line-height:1.9;color:#687773;margin-bottom:22px;">
+                ${escapeHtml(accountMessage)}
+            </p>
+
+            <div class="success-modal-actions">
+                <button type="button"
+                        class="success-modal-button success-copy-button"
+                        id="copyIssuedCardNumber">
+                    نسخ رقم البطاقة
+                </button>
+
+                <button type="button"
+                        class="success-modal-button success-close-button"
+                        id="closeIssuedCardModal">
+                    حسنًا، متابعة
+                </button>
+            </div>
+        </section>
+    `;
+
+    document.body.appendChild(overlay);
+
+    const closeModal = () => overlay.remove();
+
+    overlay.querySelector("#closeIssuedCardModal")
+        .addEventListener("click", closeModal);
+
+    overlay.addEventListener("click", event => {
+        if (event.target === overlay) closeModal();
+    });
+
+    overlay.querySelector("#copyIssuedCardNumber")
+        .addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(cardNumber);
+
+                const copyButton = overlay.querySelector("#copyIssuedCardNumber");
+                copyButton.textContent = "✓ تم نسخ الرقم";
+
+            } catch (error) {
+                showNotice(
+                    "تعذر النسخ",
+                    "يمكنك تحديد رقم البطاقة ونسخه يدويًا.",
+                    "error"
+                );
+            }
+        });
+}
+
+
+async function approveVolunteer(candidate, button) {
+    if (!isAdminVerified || !auth.currentUser) {
+        alert("انتهت جلسة الإدارة. يرجى تسجيل الدخول مجددًا.");
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "جاري إصدار البطاقة وإنشاء الحساب...";
+
+    try {
+        const { userId: oldUserId, guestId, isGuest, personData } = candidate;
+        let linkedUserId = oldUserId || null;
+        let linkedExistingAccount = Boolean(oldUserId);
+        const email = String(personData.email || "").trim().toLowerCase();
+        const fullName = personData.fullName || "متطوع عُضد";
+
+        if (!email) throw new Error("لا يوجد بريد إلكتروني لهذا الشخص.");
+
+        const participationSnapshot = await getDocs(
+            isGuest
+                ? query(
+                    collection(db, "participationRecords"),
+                    where("guestId", "==", guestId),
+                    where("verified", "==", true)
+                )
+                : query(
+                    collection(db, "participationRecords"),
+                    where("userId", "==", oldUserId),
+                    where("verified", "==", true)
+                )
+        );
+
+        const completedActivities = participationSnapshot.size;
+
+        if (completedActivities < 5) {
+            throw new Error("يجب أن يمتلك الشخص خمس مشاركات مؤكدة على الأقل.");
+        }
+
+        const existingCards = await getDocs(
+            query(
+                collection(db, "volunteerCards"),
+                where(isGuest ? "guestId" : "userId", "==",
+                    isGuest ? guestId : oldUserId)
+            )
+        );
+
+        if (!existingCards.empty) {
+            throw new Error("هذا الشخص لديه بطاقة بالفعل.");
+        }
+
+        const cardNumber = generateCardNumber();
+        const initialPassword = cardNumber;
+        const rank = getRank(completedActivities);
+        const issueDate = Timestamp.now();
+
+        const expiry = new Date();
+        expiry.setFullYear(expiry.getFullYear() + 1);
+        const expiryDate = Timestamp.fromDate(expiry);
+
+        let newUserId = linkedUserId;
+
+        /*
+         * إذا كان الشخص زائرًا لكن لديه حساب Firebase مسبقًا،
+         * نبحث عن ملفه في users بواسطة البريد ونربط البطاقة بمعرّفه.
+         * لا نغيّر كلمة مرور الحساب الموجود.
+         */
+        if (!newUserId) {
+            const existingUserQuery = await getDocs(query(
+                collection(db, "users"),
+                where("email", "==", email)
+            ));
+
+            if (!existingUserQuery.empty) {
+                const existingUserDoc = existingUserQuery.docs[0];
+                newUserId = existingUserDoc.id;
+                linkedExistingAccount = true;
+            } else {
+                const credential = await createUserWithEmailAndPassword(
+                    secondaryAuth,
+                    email,
+                    initialPassword
+                );
+                newUserId = credential.user.uid;
+                await signOut(secondaryAuth);
+            }
+        }
+
+        await setDoc(doc(db, "users", newUserId), {
+            fullName,
+            email,
+            phone: personData.phone || "",
+            category: personData.category || "",
+            birthDate: personData.birthDate || "",
+            role: "volunteer",
+            cardNumber,
+            cardStatus: "active",
+            completedActivities,
+            rank,
+            mustChangePassword: !linkedExistingAccount,
+            accountCreated: true,
+            updatedAt: serverTimestamp(),
+            ...(linkedExistingAccount ? {} : { createdAt: serverTimestamp() })
+        }, { merge: true });
+
+        const cardData = {
+            userId: newUserId,
+            guestId: guestId || null,
+            cardNumber,
+            email,
+            fullName,
+            phone: personData.phone || "",
+            birthDate: personData.birthDate || "",
+            category: personData.category || "",
+            registrationType: "volunteer",
+            rank,
+            completedActivities,
+            issueDate,
+            expiryDate,
+            status: "active",
+            accountCreated: true,
+            mustChangePassword: !linkedExistingAccount,
+            verifiedBy: auth.currentUser.uid,
+            verifiedAt: issueDate
+        };
+
+        const cardRef = await addDoc(
+            collection(db, "volunteerCards"),
+            cardData
+        );
+
+        await setDoc(doc(db, "publicCardVerifications", cardNumber), {
+            cardNumber,
+            fullName,
+            rank,
+            completedActivities,
+            issueDate,
+            expiryDate,
+            status: "active"
+        });
+
+        
+await Promise.all(
+    participationSnapshot.docs.map(async (item) => {
+        const record = item.data();
+
+        // تحديث السجل الخاص كما كان سابقًا.
+        await updateDoc(
+            doc(db, "participationRecords", item.id),
+            {
+                userId: newUserId,
+                cardNumber,
+                guestId: guestId || null
+            }
+        );
+
+        // لا ننشر أي مشاركة دون موافقة صريحة.
+        if (record.publicConsent !== true) {
+            return;
+        }
+
+        const participantName =
+            record.participantName ||
+            record.fullName ||
+            fullName;
+
+        // مستند عام منفصل لا يحتوي على بيانات الاتصال.
+        await setDoc(
+            doc(db, "publicParticipationRecords", item.id),
+            {
+                participantName,
+                campaignId: record.campaignId || "",
+                campaignTitle: record.campaignTitle || "حملة تطوعية",
+                date: record.date || "",
+                hours: Number(record.hours) || 0,
+                verified: true,
+                publicConsent: true
+            }
+        );
+    })
+);
+
+        if (guestId) {
+            const registrations = await getDocs(
+                query(
+                    collection(db, "registrations"),
+                    where("guestId", "==", guestId)
+                )
+            );
+
+            await Promise.all(
+                registrations.docs.map((item) =>
+                    updateDoc(doc(db, "registrations", item.id), {
+                        userId: newUserId,
+                        cardNumber,
+                        registrationType: "volunteer"
+                    })
+                )
+            );
+        }
+        let emailNotice = "";
+
+let emailSent = false;
+
+try {
+    await sendCardIssuedEmail(email, fullName, cardNumber);
+    emailSent = true;
+} catch (error) {
+    console.error("تعذر إرسال بريد إصدار البطاقة:", error);
+}
+
+showCardIssuedSuccess({
+    fullName,
+    cardNumber,
+    completedActivities,
+    rank,
+    linkedExistingAccount,
+    emailSent,
+    email
+});
+
+await loadCandidates();
+await loadCardsWithoutAccounts();
+await loadVolunteerCards();
+
+    } catch (error) {
+        console.error("خطأ إصدار البطاقة:", error);
+
+        let message = error.message || "حدث خطأ غير معروف.";
+
+        if (error.code === "auth/email-already-in-use") {
+            message =
+                "هذا البريد لديه حساب Firebase بالفعل. " +
+                "يجب ربط البطاقة بالحساب الموجود بدل إنشاء حساب جديد.";
+        } else if (error.code === "auth/weak-password") {
+            message = "رفض Firebase كلمة المرور. تحققي من إعدادات سياسة كلمات المرور.";
+        }
+
+        showNotice("تعذر إكمال العملية", message, "error");
+
+    } finally {
+        button.disabled = false;
+        button.textContent = "🪪 الموافقة على إصدار بطاقة عُضد وإنشاء الحساب";
+    }
+}
+
+async function loadCardsWithoutAccounts() {
+    let section = document.getElementById("unlinkedCardsSection");
+
+    if (!section) {
+        section = document.createElement("div");
+        section.id = "unlinkedCardsSection";
+        section.className = "candidates-box";
+        section.style.marginTop = "25px";
+        document.querySelector("main").appendChild(section);
+    }
+
+    section.innerHTML = `
+        <div class="section-title">
+            <h2>🔗 بطاقات تحتاج إلى ربط بحساب</h2>
+            <span>إصلاح البطاقات القديمة</span>
+        </div>
+        <div id="unlinkedCardsContainer">
+            <div class="loading">جاري التحقق...</div>
+        </div>
+    `;
+
+    const container = document.getElementById("unlinkedCardsContainer");
+
+    try {
+        const snapshot = await getDocs(
+            query(
+                collection(db, "volunteerCards"),
+                where("status", "==", "active")
+            )
+        );
+
+        const cards = snapshot.docs.filter((item) => {
+            const data = item.data();
+            return !data.userId && data.email;
+        });
+
+        if (!cards.length) {
+            container.innerHTML = '<div class="empty">لا توجد بطاقات نشطة بدون حساب.</div>';
+            return;
+        }
+
+        cards.forEach((cardDoc) => {
+            const data = cardDoc.data();
+            const item = document.createElement("div");
+            item.className = "candidate";
+
+            item.innerHTML = `
+                <div class="candidate-header">
+                    <div class="candidate-icon">🪪</div>
+                    <div>
+                        <h3>${escapeHtml(data.fullName || "بدون اسم")}</h3>
+                        <span class="candidate-status">بطاقة موجودة بدون حساب</span>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    ${info("رقم البطاقة", data.cardNumber || "غير متوفر")}
+                    ${info("البريد الإلكتروني", data.email || "غير متوفر")}
+                    ${info("رقم الهاتف", data.phone || "غير متوفر")}
+                </div>
+
+                <button type="button" class="approve-button">
+                    🔗 ربط البطاقة بحساب جديد
+                </button>
+            `;
+
+            item.querySelector("button").addEventListener("click", function () {
+                repairExistingCard(cardDoc.id, data, this);
+            });
+
+            container.appendChild(item);
+        });
+
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = `
+            <div class="empty">تعذر تحميل البطاقات القديمة: ${escapeHtml(error.message)}</div>`;
+    }
+}
+
+async function repairExistingCard(cardId, cardData, button) {
+    if (!isAdminVerified || !auth.currentUser) {
+        alert("يرجى تسجيل الدخول بحساب الإدارة.");
+        return;
+    }
+
+    button.disabled = true;
+
+    try {
+        const email = String(cardData.email || "").trim().toLowerCase();
+        const cardNumber = cardData.cardNumber;
+
+        if (!email || !cardNumber) {
+            throw new Error("البطاقة لا تحتوي على البريد الإلكتروني أو رقم البطاقة.");
+        }
+
+        /*
+         * كلمة المرور الأولية = رقم البطاقة القديمة.
+         * إذا كان البريد مستخدمًا في Firebase، تتوقف العملية
+         * ولا نحاول إنشاء حساب مكرر.
+         */
+        const credential = await createUserWithEmailAndPassword(
+            secondaryAuth,
+            email,
+            cardNumber
+        );
+
+        const newUserId = credential.user.uid;
+        await signOut(secondaryAuth);
+
+        await setDoc(doc(db, "users", newUserId), {
+            fullName: cardData.fullName || "متطوع عُضد",
+            email,
+            phone: cardData.phone || "",
+            category: cardData.category || "",
+            birthDate: cardData.birthDate || "",
+            role: "volunteer",
+            cardNumber,
+            cardStatus: "active",
+            completedActivities: cardData.completedActivities || 0,
+            rank: cardData.rank || "مبتدئ",
+            mustChangePassword: true,
+            accountCreated: true,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+        });
+
+        await updateDoc(doc(db, "volunteerCards", cardId), {
+            userId: newUserId,
+            accountCreated: true,
+            mustChangePassword: true,
+            accountSetupSent: false
+        });
+
+        const participations = await getDocs(
+            query(
+                collection(db, "participationRecords"),
+                where("cardNumber", "==", cardNumber)
+            )
+        );
+
+        await Promise.all(
+            participations.docs.map((item) =>
+                updateDoc(doc(db, "participationRecords", item.id), {
+                    userId: newUserId
+                })
+            )
+        );
+
+        const registrations = await getDocs(
+            query(
+                collection(db, "registrations"),
+                where("cardNumber", "==", cardNumber)
+            )
+        );
+
+        await Promise.all(
+            registrations.docs.map((item) =>
+                updateDoc(doc(db, "registrations", item.id), {
+                    userId: newUserId,
+                    registrationType: "volunteer"
+                })
+            )
+        );
+
+        alert(
+            "تم ربط بطاقة المتطوع بالحساب وإنشاء بيانات الدخول بنجاح ✅\n\n" +
+            "رقم البطاقة: " + cardNumber + "\n" +
+            "كلمة المرور الأولية: رقم البطاقة نفسه.\n\n" +
+            "يمكن للمتطوع الدخول عبر صفحة تسجيل الدخول في منصة عُضد، وسيُطلب منه تعيين كلمة مرور جديدة عند أول دخول."
+        );
+
+        await loadCardsWithoutAccounts();
+
+    } catch (error) {
+        console.error(error);
+
+        let message = error.message || "حدث خطأ.";
+
+        if (error.code === "auth/email-already-in-use") {
+            message =
+                "هذا البريد لديه حساب Firebase بالفعل، لكن لم يُعثر على ملف مطابق له في مجموعة users. " +
+                "أضيفي/تحققي من ملف المستخدم في Firestore أو اربطيه عبر إجراء إداري موثوق؛ لم يتم إنشاء حساب مكرر.";
+        }
+
+        showNotice("تعذر ربط البطاقة", message, "error");
+
+    } finally {
+        button.disabled = false;
+        button.textContent = "🔗 ربط البطاقة بحساب جديد";
+    }
+}
+// =============================================
+// إدارة صور بطاقات المتطوعين - Cloudinary
+// =============================================
+
+const CLOUDINARY_CLOUD_NAME = "vfrzksbw";
+const CLOUDINARY_UPLOAD_PRESET = "oud_cards";
+const MAX_CARD_IMAGE_SIZE = 5 * 1024 * 1024;
+
+const volunteerCardsList =
+    document.getElementById("volunteerCardsList");
+
+const volunteerCardsSearch =
+    document.getElementById("volunteerCardsSearch");
+
+const volunteerCardsMessage =
+    document.getElementById("volunteerCardsMessage");
+
+const reloadVolunteerCardsButton =
+    document.getElementById("reloadVolunteerCards");
+
+let allVolunteerCards = [];
+let volunteerCardsLoadInProgress = false;
+
+reloadVolunteerCardsButton.addEventListener("click", () => {
+    loadVolunteerCards();
+});
+
+volunteerCardsSearch.addEventListener("input", () => {
+    renderVolunteerCards();
+});
+
+async function loadVolunteerCards() {
+    if (!isAdminVerified || !auth.currentUser) {
+        return;
+    }
+
+    if (volunteerCardsLoadInProgress) {
+        return;
+    }
+
+    volunteerCardsLoadInProgress = true;
+    volunteerCardsList.innerHTML =
+        '<div class="loading">جاري تحميل البطاقات...</div>';
+
+    volunteerCardsMessage.textContent = "";
+    volunteerCardsMessage.className = "card-upload-status";
+
+    reloadVolunteerCardsButton.disabled = true;
+
+    try {
+        const snapshot = await getDocs(
+            collection(db, "volunteerCards")
+        );
+
+        allVolunteerCards = snapshot.docs.map(cardDoc => ({
+            id: cardDoc.id,
+            ...cardDoc.data()
+        }));
+
+        renderVolunteerCards();
+
+        if (allVolunteerCards.length === 0) {
+            volunteerCardsList.innerHTML = `
+                <div class="empty">
+                    <div class="empty-icon">🪪</div>
+                    لا توجد بطاقات مسجلة حاليًا.
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error("خطأ تحميل بطاقات المتطوعين:", error);
+
+        volunteerCardsList.innerHTML = `
+            <div class="empty">
+                تعذر تحميل البطاقات.
+                <br>
+                ${escapeHtml(error.message)}
+            </div>
+        `;
+    } finally {
+        volunteerCardsLoadInProgress = false;
+        reloadVolunteerCardsButton.disabled = false;
+    }
+}
+
+function renderVolunteerCards() {
+    const searchTerm = String(
+        volunteerCardsSearch.value || ""
+    ).trim().toLowerCase();
+
+    const filteredCards = allVolunteerCards.filter(card => {
+        const searchableText = [
+            card.fullName,
+            card.cardNumber,
+            card.email,
+            card.phone
+        ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+
+        return searchableText.includes(searchTerm);
+    });
+
+    if (filteredCards.length === 0) {
+        volunteerCardsList.innerHTML = `
+            <div class="empty">
+                لا توجد بطاقات مطابقة للبحث.
+            </div>
+        `;
+        return;
+    }
+
+    volunteerCardsList.innerHTML = "";
+
+    filteredCards.forEach(card => {
+        const item = document.createElement("article");
+        item.className = "volunteer-card-item";
+
+        const safePhotoUrl = getSafeCloudinaryUrl(card.photoUrl);
+
+        const photoHTML = safePhotoUrl
+            ? `
+                <img
+                    class="volunteer-card-photo"
+                    src="${escapeHtml(safePhotoUrl)}"
+                    alt="صورة بطاقة ${escapeHtml(card.fullName || "المتطوع")}"
+                    loading="lazy"
+                >
+            `
+            : `
+                <div class="volunteer-card-placeholder">
+                    <span>🪪</span>
+                    <strong>لم تُرفع صورة البطاقة بعد</strong>
+                </div>
+            `;
+
+        item.innerHTML = `
+            ${photoHTML}
+
+            <h3>${escapeHtml(card.fullName || "بدون اسم")}</h3>
+
+            <div class="volunteer-card-details">
+                <div>
+                    <strong>رقم البطاقة:</strong>
+                    ${escapeHtml(card.cardNumber || "غير متوفر")}
+                </div>
+
+                <div>
+                    <strong>البريد الإلكتروني:</strong>
+                    ${escapeHtml(card.email || "غير متوفر")}
+                </div>
+
+                <div>
+                    <strong>الرتبة:</strong>
+                    ${escapeHtml(card.rank || "غير محددة")}
+                </div>
+
+                <div>
+                    <strong>الحالة:</strong>
+                    ${escapeHtml(card.status || "غير محددة")}
+                </div>
+            </div>
+
+            <div class="volunteer-card-actions">
+                <button
+                    type="button"
+                    class="card-upload-button"
+                    data-action="upload"
+                >
+                    ${safePhotoUrl ? "🖼️ استبدال الصورة" : "📤 رفع صورة"}
+                </button>
+
+                <button
+                    type="button"
+                    class="card-print-button"
+                    data-action="print"
+                    ${safePhotoUrl ? "" : "disabled"}
+                >
+                    🖨️ طباعة البطاقة
+                </button>
+            </div>
+
+            <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                hidden
+            >
+
+            <div class="card-upload-status" aria-live="polite"></div>
+        `;
+
+        const uploadButton =
+            item.querySelector('[data-action="upload"]');
+
+        const printButton =
+            item.querySelector('[data-action="print"]');
+
+        const fileInput = item.querySelector('input[type="file"]');
+        const statusElement = item.querySelector(".card-upload-status");
+
+        uploadButton.addEventListener("click", () => {
+            if (!isAdminVerified || !auth.currentUser) {
+                showNotice(
+                    "انتهت جلسة الإدارة",
+                    "يرجى تسجيل الدخول مجددًا.",
+                    "error"
+                );
+                return;
+            }
+
+            fileInput.click();
+        });
+
+        fileInput.addEventListener("change", async () => {
+            const file = fileInput.files?.[0];
+
+            if (!file) return;
+
+            await uploadVolunteerCardPhoto({
+                card,
+                file,
+                uploadButton,
+                printButton,
+                statusElement
+            });
+
+            // يسمح باختيار الصورة نفسها مجددًا إذا لزم الأمر.
+            fileInput.value = "";
+        });
+
+        printButton.addEventListener("click", () => {
+            printVolunteerCard(card);
+        });
+
+        volunteerCardsList.appendChild(item);
+    });
+}
+
+function getSafeCloudinaryUrl(url) {
+    if (typeof url !== "string" || !url.trim()) {
+        return "";
+    }
+
+    try {
+        const parsed = new URL(url);
+
+        if (
+            parsed.protocol === "https:" &&
+            parsed.hostname === "res.cloudinary.com" &&
+            parsed.pathname.startsWith(
+                `/${CLOUDINARY_CLOUD_NAME}/`
+            )
+        ) {
+            return parsed.href;
+        }
+    } catch (error) {
+        console.warn("رابط صورة غير صالح.");
+    }
+
+    return "";
+}
+
+async function uploadVolunteerCardPhoto({
+    card,
+    file,
+    uploadButton,
+    printButton,
+    statusElement
+}) {
+    if (!isAdminVerified || !auth.currentUser) {
+        showNotice(
+            "غير مصرح",
+            "يجب تسجيل الدخول بحساب الإدارة.",
+            "error"
+        );
+        return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+        setCardUploadStatus(
+            statusElement,
+            "يرجى اختيار ملف صورة.",
+            "error"
+        );
+        return;
+    }
+
+    const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+        setCardUploadStatus(
+            statusElement,
+            "الصيغ المدعومة هي JPG وPNG وWebP.",
+            "error"
+        );
+        return;
+    }
+
+    if (file.size > MAX_CARD_IMAGE_SIZE) {
+        setCardUploadStatus(
+            statusElement,
+            "حجم الصورة أكبر من 5 ميغابايت. اختاري صورة أصغر.",
+            "error"
+        );
+        return;
+    }
+
+    const previousButtonText = uploadButton.textContent;
+
+    uploadButton.disabled = true;
+    printButton.disabled = true;
+    uploadButton.textContent = "جاري الرفع...";
+
+    setCardUploadStatus(
+        statusElement,
+        "جاري رفع الصورة إلى Cloudinary...",
+        ""
+    );
+
+    try {
+        const uploadData = new FormData();
+        uploadData.append("file", file);
+        uploadData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        uploadData.append("folder", "oud_cards");
+
+        const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+            {
+                method: "POST",
+                body: uploadData
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                result?.error?.message ||
+                "رفض Cloudinary رفع الصورة. تحققي من إعدادات Upload Preset."
+            );
+        }
+
+        const photoUrl = getSafeCloudinaryUrl(result.secure_url);
+
+        if (!photoUrl || !result.public_id) {
+            throw new Error(
+                "لم يرجع Cloudinary رابط صورة صالحًا أو معرّف الملف."
+            );
+        }
+
+        setCardUploadStatus(
+            statusElement,
+            "تم رفع الصورة. جاري حفظ الرابط في قاعدة البيانات...",
+            ""
+        );
+
+        await updateDoc(
+            doc(db, "volunteerCards", card.id),
+            {
+                photoUrl,
+                photoPublicId: result.public_id,
+                photoUpdatedAt: serverTimestamp()
+            }
+        );
+
+        card.photoUrl = photoUrl;
+        card.photoPublicId = result.public_id;
+
+        setCardUploadStatus(
+            statusElement,
+            "تم رفع الصورة وحفظها بنجاح.",
+            "success"
+        );
+
+        renderVolunteerCards();
+
+        volunteerCardsMessage.textContent =
+            `تم تحديث صورة بطاقة ${card.fullName || card.cardNumber || ""} بنجاح.`;
+
+        volunteerCardsMessage.className =
+            "card-upload-status success";
+
+    } catch (error) {
+        console.error("خطأ رفع صورة البطاقة:", error);
+
+        let message = error.message || "حدث خطأ أثناء رفع الصورة.";
+
+        if (error.code === "permission-denied") {
+            message =
+                "رفضت قواعد Firestore تحديث البطاقة. " +
+                "تحققي من صلاحيات الإدارة لتحديث وثائق volunteerCards.";
+        }
+
+        setCardUploadStatus(statusElement, message, "error");
+
+    } finally {
+        uploadButton.disabled = false;
+        uploadButton.textContent = previousButtonText;
+
+        // لا نفعّل الطباعة إلا إذا كانت الصورة صالحة.
+        printButton.disabled = !getSafeCloudinaryUrl(card.photoUrl);
+    }
+}
+
+function setCardUploadStatus(element, message, type) {
+    element.textContent = message;
+    element.className = "card-upload-status";
+
+    if (type) {
+        element.classList.add(type);
+    }
+}
+
+
+function printVolunteerCard(card) {
+    if (!isAdminVerified || !auth.currentUser) {
+        showNotice(
+            "غير مصرح",
+            "يجب تسجيل الدخول بحساب الإدارة.",
+            "error"
+        );
+        return;
+    }
+
+    const photoUrl = getSafeCloudinaryUrl(card.photoUrl);
+
+    if (!photoUrl) {
+        showNotice(
+            "لا توجد صورة",
+            "ارفعي صورة البطاقة قبل الطباعة.",
+            "error"
+        );
+        return;
+    }
+
+    // فتح نافذة الطباعة مباشرة استجابةً لضغط اللجنة على الزر.
+    const printWindow = window.open(
+        "",
+        "_blank",
+        "width=1100,height=850"
+    );
+
+    if (!printWindow) {
+        showNotice(
+            "تعذر فتح الطباعة",
+            "اسمحي بالنوافذ المنبثقة في المتصفح ثم أعيدي المحاولة.",
+            "error"
+        );
+        return;
+    }
+
+    // حماية النصوص المعروضة داخل البطاقة.
+    const fullName = escapeHtml(card.fullName || "غير متوفر");
+    const cardNumber = escapeHtml(card.cardNumber || "غير متوفر");
+    const birthDate = escapeHtml(formatCardDate(card.birthDate));
+    const issueDate = escapeHtml(formatCardDate(card.issueDate));
+    const expiryDate = escapeHtml(formatCardDate(card.expiryDate));
+    const safePhotoUrl = escapeHtml(photoUrl);
+
+    // رابط التحقق نفسه المستخدم في card.html.
+    const verificationUrl = new URL(
+        "https://oud-platform-613fe.web.app/pages/verify.html"
+    );
+
+    verificationUrl.searchParams.set(
+        "card",
+        card.cardNumber || ""
+    );
+
+    const qrUrl = escapeHtml(verificationUrl.href);
+
+    printWindow.document.open();
+
+    printWindow.document.write(`
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>بطاقة التطوع — ${fullName}</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background: #fff;
+        }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            background: #fff;
+            font-family: Arial, Tahoma, sans-serif;
+            color: #172b29;
+        }
+
+        .page {
+            width: min(100%, 880px);
+            margin: 0 auto;
+        }
+
+        /* نفس تصميم البطاقة في card.html */
+        .card {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            min-height: 420px;
+            overflow: hidden;
+            padding: 30px 34px;
+            border: 3px solid #d5b86a;
+            border-radius: 28px;
+            color: #fff;
+
+            background:
+                radial-gradient(
+                    circle at 72% 40%,
+                    rgba(255,255,255,.055) 0 2px,
+                    transparent 3px
+                ),
+                radial-gradient(
+                    circle at 30% 80%,
+                    rgba(255,255,255,.035) 0 2px,
+                    transparent 3px
+                ),
+                linear-gradient(
+                    145deg,
+                    #0c263f 0%,
+                    #123b61 48%,
+                    #071f35 100%
+                );
+
+            box-shadow:
+                0 18px 45px rgba(0,0,0,.22),
+                inset 0 0 0 1px rgba(255,255,255,.08);
+
+            isolation: isolate;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: 420px;
+            height: 190px;
+            left: -100px;
+            top: -95px;
+            background: #07552f;
+            transform: rotate(-12deg);
+            border-bottom: 7px solid #d7b75e;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px rgba(215,183,94,.25);
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: 520px;
+            height: 220px;
+            right: -170px;
+            bottom: -130px;
+            background: #07552f;
+            transform: rotate(-18deg);
+            border-top: 7px solid #d7b75e;
+            border-radius: 50%;
+        }
+
+        .gold-line {
+            position: absolute;
+            height: 4px;
+            background: #d7b75e;
+            opacity: .95;
+            border-radius: 10px;
+        }
+
+        .gold-line.one {
+            width: 250px;
+            left: 0;
+            top: 48px;
+            transform: rotate(-17deg);
+        }
+
+        .gold-line.two {
+            width: 300px;
+            right: -15px;
+            bottom: 95px;
+            transform: rotate(-32deg);
+        }
+
+        .leaf-pattern {
+            position: absolute;
+            z-index: -1;
+            right: 260px;
+            bottom: 20px;
+            width: 300px;
+            height: 260px;
+            opacity: .08;
+            background:
+                radial-gradient(
+                    ellipse at 50% 100%,
+                    #b8e0c7 0 10%,
+                    transparent 11%
+                ),
+                radial-gradient(
+                    ellipse at 30% 70%,
+                    #b8e0c7 0 9%,
+                    transparent 10%
+                ),
+                radial-gradient(
+                    ellipse at 70% 55%,
+                    #b8e0c7 0 9%,
+                    transparent 10%
+                );
+            transform: rotate(-25deg);
+        }
+
+        .header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            min-height: 95px;
+        }
+
+        .brand {
+            text-align: center;
+            width: 245px;
+        }
+
+        .emblem {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 8px;
+            border: 3px solid #d7b75e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d7b75e;
+            font-size: 38px;
+            font-weight: bold;
+            background: rgba(3,24,43,.55);
+            box-shadow: inset 0 0 0 5px rgba(215,183,94,.08);
+        }
+
+        .brand-name {
+            color: #f0d78e;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .title-block {
+            text-align: right;
+            padding-top: 3px;
+            min-width: 350px;
+        }
+
+        .title {
+            margin: 0;
+            color: #e4c46d;
+            font-size: clamp(28px, 4vw, 46px);
+            font-weight: 800;
+            letter-spacing: .2px;
+        }
+
+        .title-decoration {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 13px;
+        }
+
+        .title-decoration span {
+            display: block;
+            width: 95px;
+            height: 2px;
+            background: #d7b75e;
+        }
+
+        .title-decoration b {
+            color: #d7b75e;
+            font-size: 20px;
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            gap: 28px;
+            align-items: start;
+            margin-top: 18px;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo-frame {
+            width: 165px;
+            height: 190px;
+            border: 3px solid #d7b75e;
+            border-radius: 17px;
+            padding: 7px;
+            background: #e9edf0;
+            box-shadow: 0 7px 18px rgba(0,0,0,.18);
+            overflow: hidden;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .motto {
+            margin-top: 17px;
+            text-align: center;
+            color: #f2e7c6;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .motto .leaf {
+            color: #d7b75e;
+            font-size: 22px;
+        }
+
+        .motto strong {
+            color: #fff1c5;
+        }
+
+        .info-column {
+            padding-top: 4px;
+        }
+
+        .field {
+            min-height: 45px;
+            margin-bottom: 9px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 14px 6px 8px;
+            border: 1px solid rgba(214,183,102,.9);
+            border-radius: 16px;
+
+            background: linear-gradient(
+                90deg,
+                rgba(246,247,247,.95),
+                rgba(218,222,222,.94)
+            );
+
+            color: #1d2b2d;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+        }
+
+        .field-label {
+            min-width: 125px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #23363a;
+        }
+
+        .field-value {
+            flex: 1;
+            font-size: 16px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .field-icon {
+            width: 32px;
+            height: 32px;
+            flex: 0 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #0d5a35;
+            color: #f2d37b;
+            font-size: 18px;
+        }
+
+        .bottom-area {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            margin-top: 8px;
+        }
+
+        .qr-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #qrcode {
+            width: 92px;
+            height: 92px;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 2px solid #d7b75e;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.2);
+            flex: 0 0 92px;
+        }
+
+        #qrcode img,
+        #qrcode canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .validity {
+            text-align: left;
+            color: #d9efdf;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .validity strong {
+            color: #e6ca78;
+            font-size: 15px;
+        }
+
+        .print-message {
+            text-align: center;
+            font-family: Arial, Tahoma, sans-serif;
+            color: #44534f;
+            padding: 12px;
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 8mm;
+            }
+
+            html,
+            body {
+                width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 0;
+                background: #fff;
+            }
+
+            .page {
+                width: 100%;
+                max-width: none;
+                margin: 0;
+            }
+
+            .card {
+                width: 100%;
+                aspect-ratio: 3 / 2;
+                min-height: 0;
+                margin: 0 auto;
+                box-shadow: none;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .print-message {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="card">
+
+            <div class="gold-line one"></div>
+            <div class="gold-line two"></div>
+            <div class="leaf-pattern"></div>
+
+            <div class="header">
+                <div class="brand">
+                    <div class="emblem">ع</div>
+                    <div class="brand-name">عضد</div>
+                </div>
+
+                <div class="title-block">
+                    <h1 class="title">بطاقة التطوع</h1>
+                   
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="left-column">
+                    <div class="photo-frame">
+                        <img
+                            id="volunteerPhoto"
+                            src="${safePhotoUrl}"
+                            alt="صورة المتطوع"
+                        >
+                    </div>
+
+                    <div class="motto">
+                        <div class="leaf"> </div>
+                        <strong>المساهمة ليست مجرد رقم</strong>
+                        <br>
+                        <span>بل بصمة أمل</span>
+                    </div>
+                </div>
+
+                <div class="info-column">
+                    <div class="field">
+                        <div class="field-label">الاسم الكامل :</div>
+                        <div class="field-value">${fullName}</div>
+                        <div class="field-icon">👤</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">تاريخ الميلاد :</div>
+                        <div class="field-value">${birthDate}</div>
+                        <div class="field-icon">📅</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">تاريخ الإصدار :</div>
+                        <div class="field-value">${issueDate}</div>
+                        <div class="field-icon">📅</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">تاريخ الانتهاء :</div>
+                        <div class="field-value">${expiryDate}</div>
+                        <div class="field-icon">📅</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">رقم البطاقة :</div>
+                        <div class="field-value">${cardNumber}</div>
+                        <div class="field-icon">🪪</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-area">
+                <div class="qr-box">
+                    <div id="qrcode"></div>
+                </div>
+
+                <div class="validity">
+                    <strong></strong>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="print-message" id="printMessage">
+            جاري تجهيز البطاقة للطباعة...
+        </div>
+    </div>
+
+    <script>
+        const verificationLink = ${JSON.stringify(verificationUrl.href)};
+        const photo = document.getElementById("volunteerPhoto");
+        const printMessage = document.getElementById("printMessage");
+
+        let printingStarted = false;
+
+        function startPrinting() {
+            if (printingStarted) return;
+            printingStarted = true;
+
+            // منح المتصفح وقتًا لرسم الصورة ورمز QR قبل فتح نافذة الطباعة.
+            setTimeout(function () {
+                window.focus();
+                window.print();
+            }, 500);
+        }
+
+        function prepareCard() {
+            if (typeof QRCode === "undefined") {
+                printMessage.textContent =
+                    "تعذر تحميل مكتبة رمز QR. تحققي من اتصال الإنترنت ثم أعيدي المحاولة.";
+                return;
+            }
+
+            try {
+                new QRCode(document.getElementById("qrcode"), {
+                    text: verificationLink,
+                    width: 100,
+                    height: 100,
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            } catch (error) {
+                console.error("QR Code error:", error);
+                printMessage.textContent = "تعذر إنشاء رمز QR.";
+                return;
+            }
+
+            if (photo.complete && photo.naturalWidth > 0) {
+                startPrinting();
+            } else {
+                photo.onload = startPrinting;
+                photo.onerror = function () {
+                    printMessage.textContent =
+                        "تعذر تحميل صورة البطاقة. تحققي من رابط الصورة ثم أعيدي المحاولة.";
+                };
+            }
+        }
+
+        window.addEventListener("load", prepareCard);
+    <\/script>
+</body>
+</html>
+    `);
+
+    printWindow.document.close();
+}
+
+/* تحويل تاريخ Firestore إلى تاريخ مقروء */
+function formatCardDate(value) {
+    if (!value) return "غير متوفر";
+
+    try {
+        let date;
+
+        if (typeof value.toDate === "function") {
+            date = value.toDate();
+        } else if (value instanceof Date) {
+            date = value;
+        } else {
+            date = new Date(value);
+        }
+
+        if (Number.isNaN(date.getTime())) {
+            return String(value);
+        }
+
+        return date.toLocaleDateString("fr-FR");
+    } catch (error) {
+        console.warn("تعذر تنسيق التاريخ:", error);
+        return "غير متوفر";
+    }
+}
+
+
+function getRank(count) {
+    if (count >= 20) return "سفير التطوع";
+    if (count >= 15) return "متقدم";
+    if (count >= 10) return "متوسط";
+    return "مبتدئ";
+}
+
+function generateCardNumber() {
+    const year = new Date().getFullYear();
+    const random = Math.floor(100000 + Math.random() * 900000);
+    return `OUD-${year}-${random}`;
+}
+
+function info(label, value, green = false) {
+    return `
+        <div class="info-item">
+            <span class="info-label">${escapeHtml(label)}</span>
+            <span class="info-value ${green ? "participation-count" : ""}">
+                ${escapeHtml(value)}
+            </span>
+        </div>
+    `;
+}
+
+function escapeHtml(value) {
+    if (value === null || value === undefined) return "";
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function showNotice(title, message, type = "info") {
+    const previous = document.getElementById("committeeNoticeOverlay");
+    if (previous) previous.remove();
+
+    const overlay = document.createElement("div");
+    overlay.id = "committeeNoticeOverlay";
+    overlay.style.cssText = "position:fixed;inset:0;background:rgba(10,30,28,.48);display:flex;align-items:center;justify-content:center;padding:20px;z-index:99999;";
+    overlay.innerHTML = `
+        <div role="dialog" aria-modal="true" style="width:min(100%,480px);background:#fff;border-radius:18px;padding:24px;box-shadow:0 18px 60px rgba(0,0,0,.22);direction:rtl;text-align:right;font-family:inherit;">
+            <div style="font-size:25px;margin-bottom:10px;">${type === "error" ? "⚠️" : "✅"}</div>
+            <h3 style="margin:0 0 12px;color:#173f3a;">${escapeHtml(title)}</h3>
+            <p style="white-space:pre-line;line-height:1.9;color:#465652;margin:0 0 20px;">${escapeHtml(message)}</p>
+            <button type="button" id="committeeNoticeClose" style="border:0;border-radius:10px;padding:10px 22px;background:#176b61;color:#fff;font-weight:600;cursor:pointer;">حسنًا</button>
+        </div>`;
+    document.body.appendChild(overlay);
+    const close = () => overlay.remove();
+    overlay.querySelector("#committeeNoticeClose").addEventListener("click", close);
+    overlay.addEventListener("click", event => { if (event.target === overlay) close(); });
+}
+
+function showError(message) {
+    candidatesContainer.innerHTML = `
+        <div class="empty">
+            <div class="empty-icon">⚠️</div>
+            <strong>${escapeHtml(message)}</strong>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>

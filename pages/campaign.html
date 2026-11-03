@@ -1,0 +1,1959 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>تفاصيل الحملة | عُضد</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f7f6;
+            color: #1f2933;
+        }
+
+
+        header {
+            background: #123c35;
+            color: white;
+            padding: 22px 8%;
+        }
+
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+
+        main {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+
+        .campaign-container {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+        }
+
+
+        h1 {
+            color: #123c35;
+            margin-top: 0;
+        }
+
+
+        .info {
+            margin: 15px 0;
+            padding: 13px;
+            background: #f5f7f6;
+            border-radius: 8px;
+        }
+
+
+        .section {
+            margin-top: 30px;
+        }
+
+
+        .register-button {
+            border: none;
+            background: #c6a15b;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+        .register-button:hover {
+            background: #a98543;
+        }
+
+
+        .register-button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #eef5f2;
+        }
+
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+        }
+
+
+        .error {
+            color: #b42318;
+        }
+
+
+        /* =========================
+           التسجيل
+        ========================= */
+
+        .registration-box {
+            margin-top: 20px;
+            padding: 22px;
+            border: 1px solid #e1e7e4;
+            border-radius: 14px;
+            background: #fafcfb;
+        }
+
+
+        .registration-box h3 {
+            margin-top: 0;
+            color: #123c35;
+        }
+
+
+        .choice-container {
+            display: grid;
+            grid-template-columns:
+                repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 18px;
+        }
+
+
+        .choice-button {
+            border: 1px solid #d9e1de;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+
+        .choice-button:hover {
+            border-color: #123c35;
+            transform: translateY(-2px);
+        }
+
+
+        .choice-button strong {
+            display: block;
+            color: #123c35;
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+
+        .choice-button span {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+
+        .form-box {
+            margin-top: 20px;
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #e1e7e4;
+        }
+
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #123c35;
+        }
+
+
+        .submit-button {
+            width: 100%;
+            border: none;
+            background: #123c35;
+            color: white;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+
+        .submit-button:hover {
+            background: #1d554a;
+        }
+
+
+        .submit-button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+
+        .back-button {
+            border: none;
+            background: transparent;
+            color: #123c35;
+            cursor: pointer;
+            padding: 5px 0;
+            font-family: inherit;
+            margin-bottom: 10px;
+        }
+
+
+        .success {
+            background: #eaf7ef;
+            color: #17633a;
+        }
+
+
+        .warning {
+            background: #fff8e8;
+            color: #795b16;
+        }
+
+
+        @media (max-width: 650px) {
+
+            .campaign-container {
+                padding: 22px;
+            }
+
+
+            .choice-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <a href="../index.html">
+        ← العودة إلى الحملات
+    </a>
+
+</header>
+
+
+
+<main>
+
+    <div
+        id="campaignContainer"
+        class="campaign-container"
+    >
+
+        <div class="loading">
+            جاري تحميل تفاصيل الحملة...
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<script type="module">
+
+
+import {
+    db,
+    auth
+}
+from "../js/firebase.js";
+
+
+import {
+    doc,
+    getDoc,
+    collection,
+    query,
+    where,
+    getDocs,
+    setDoc,
+    addDoc,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+import {
+    onAuthStateChanged,
+    signInWithEmailAndPassword
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+
+const container =
+    document.getElementById(
+        "campaignContainer"
+    );
+
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const campaignId =
+    urlParams.get("id");
+
+
+let currentUser = null;
+
+let currentCampaign = null;
+
+
+
+/* =====================================
+   المستخدم الحالي
+===================================== */
+
+onAuthStateChanged(
+    auth,
+    function(user) {
+
+        currentUser = user;
+
+    }
+);
+
+
+
+/* =====================================
+   التاريخ
+===================================== */
+
+function getToday() {
+
+    const now = new Date();
+
+    const year =
+        now.getFullYear();
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(2, "0");
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+
+/* =====================================
+   تحويل الوقت إلى دقائق
+===================================== */
+
+function timeToMinutes(time) {
+
+    const parts =
+        time.split(":");
+
+    const hours =
+        parseInt(parts[0]);
+
+    const minutes =
+        parseInt(parts[1]);
+
+    return (
+        hours * 60 +
+        minutes
+    );
+
+}
+
+
+
+/* =====================================
+   فحص تعارض المواعيد
+   للمتطوع صاحب الحساب
+===================================== */
+
+async function hasTimeConflict(
+    userId,
+    newCampaign
+) {
+
+    const registrationsQuery =
+        query(
+            collection(
+                db,
+                "registrations"
+            ),
+
+            where(
+                "userId",
+                "==",
+                userId
+            )
+        );
+
+
+    const snapshot =
+        await getDocs(
+            registrationsQuery
+        );
+
+
+    const newStart =
+        timeToMinutes(
+            newCampaign.startTime
+        );
+
+
+    const newEnd =
+        timeToMinutes(
+            newCampaign.endTime
+        );
+
+
+    for (
+        const registration
+        of snapshot.docs
+    ) {
+
+        const data =
+            registration.data();
+
+
+        if (
+            data.status ===
+            "cancelled"
+        ) {
+            continue;
+        }
+
+
+        if (
+            !data.campaignId
+        ) {
+            continue;
+        }
+
+
+        const oldCampaignSnapshot =
+            await getDoc(
+                doc(
+                    db,
+                    "campaigns",
+                    data.campaignId
+                )
+            );
+
+
+        if (
+            !oldCampaignSnapshot.exists()
+        ) {
+            continue;
+        }
+
+
+        const oldCampaign =
+            oldCampaignSnapshot.data();
+
+
+        if (
+            oldCampaign.date !==
+            newCampaign.date
+        ) {
+            continue;
+        }
+
+
+        const oldStart =
+            timeToMinutes(
+                oldCampaign.startTime
+            );
+
+
+        const oldEnd =
+            timeToMinutes(
+                oldCampaign.endTime
+            );
+
+
+        if (
+            newStart < oldEnd &&
+            newEnd > oldStart
+        ) {
+
+            return oldCampaign;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+
+/* =====================================
+   إظهار اختيار نوع التسجيل
+===================================== */
+
+function showRegistrationChoices() {
+
+    const registrationBox =
+        document.getElementById(
+            "registrationBox"
+        );
+
+
+    registrationBox.innerHTML = `
+
+        <h3>
+            التسجيل في الحملة
+        </h3>
+
+        <p>
+            اختر طريقة التسجيل المناسبة لك:
+        </p>
+
+
+        <div class="choice-container">
+
+            <button
+                type="button"
+                class="choice-button"
+                id="guestChoice"
+            >
+
+                <strong>
+                    لا أملك بطاقة
+                </strong>
+
+                <span>
+                    التسجيل كمتطوع مشارك
+                    بدون إنشاء حساب
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="choice-button"
+                id="cardChoice"
+            >
+
+                <strong>
+                    لدي بطاقة متطوع
+                </strong>
+
+                <span>
+                    الدخول إلى حسابي والتسجيل
+                    من خلاله
+                </span>
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("guestChoice")
+        .addEventListener(
+            "click",
+            showGuestForm
+        );
+
+
+    document
+        .getElementById("cardChoice")
+        .addEventListener(
+            "click",
+            showCardLogin
+        );
+
+}
+
+
+
+/* =====================================
+   نموذج الزائر
+===================================== */
+
+function showGuestForm() {
+
+    const registrationBox =
+        document.getElementById(
+            "registrationBox"
+        );
+
+
+    registrationBox.innerHTML = `
+
+        <button
+            type="button"
+            class="back-button"
+            id="backToChoices"
+        >
+            ← العودة إلى الاختيار
+        </button>
+
+
+        <h3>
+            التسجيل كمتطوع مشارك
+        </h3>
+
+        <p>
+            لا تحتاج إلى إنشاء حساب أو امتلاك
+            بطاقة للتسجيل في هذه الحملة.
+        </p>
+
+
+        <form id="guestForm">
+
+
+            <div class="form-group">
+
+                <label>
+                    الاسم واللقب *
+                </label>
+
+                <input
+                    type="text"
+                    id="guestFullName"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    رقم الهاتف *
+                </label>
+
+                <input
+                    type="tel"
+                    id="guestPhone"
+                    required
+                    placeholder="05xxxxxxxx"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    البريد الإلكتروني *
+                </label>
+
+                <input
+                    type="email"
+                    id="guestEmail"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    الفئة *
+                </label>
+
+                <select
+                    id="guestCategory"
+                    required
+                >
+
+                    <option value="">
+                        اختر الفئة
+                    </option>
+
+                    <option value="طالب">
+                        طالب
+                    </option>
+
+                    <option value="موظف">
+                        موظف
+                    </option>
+
+                    <option value="أستاذ">
+                        أستاذ
+                    </option>
+
+                    <option value="باحث عن عمل">
+                        باحث عن عمل
+                    </option>
+
+                    <option value="أخرى">
+                        أخرى
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    تاريخ الميلاد
+                    <small>
+                        (اختياري)
+                    </small>
+                </label>
+
+                <input
+                    type="date"
+                    id="guestBirthDate"
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-button"
+                id="guestSubmit"
+            >
+                تأكيد التسجيل
+            </button>
+
+
+        </form>
+
+
+        <div
+            id="guestMessage"
+            class="message"
+            style="display:none;"
+        ></div>
+
+    `;
+
+
+    document
+        .getElementById("backToChoices")
+        .addEventListener(
+            "click",
+            showRegistrationChoices
+        );
+
+
+    document
+        .getElementById("guestForm")
+        .addEventListener(
+            "submit",
+            registerAsGuest
+        );
+
+}
+
+
+
+/* =====================================
+   تسجيل الزائر
+===================================== */
+
+async function registerAsGuest(event) {
+
+    event.preventDefault();
+
+
+    const submitButton =
+        document.getElementById(
+            "guestSubmit"
+        );
+
+
+    const message =
+        document.getElementById(
+            "guestMessage"
+        );
+
+
+    const fullName =
+        document
+            .getElementById(
+                "guestFullName"
+            )
+            .value
+            .trim();
+
+
+    const phone =
+        document
+            .getElementById(
+                "guestPhone"
+            )
+            .value
+            .trim();
+
+
+    const email =
+        document
+            .getElementById(
+                "guestEmail"
+            )
+            .value
+            .trim();
+
+
+    const category =
+        document
+            .getElementById(
+                "guestCategory"
+            )
+            .value;
+
+
+    const birthDate =
+        document
+            .getElementById(
+                "guestBirthDate"
+            )
+            .value;
+
+
+    if (
+        !fullName ||
+        !phone ||
+        !email ||
+        !category
+    ) {
+
+        message.style.display =
+            "block";
+
+        message.className =
+            "message warning";
+
+        message.textContent =
+            "يرجى ملء جميع الحقول المطلوبة.";
+
+        return;
+
+    }
+
+
+    submitButton.disabled =
+        true;
+
+    submitButton.textContent =
+        "جاري التسجيل...";
+
+
+    try {
+
+        /*
+         * نستخدم رقم الهاتف مع رقم الحملة
+         * لإنشاء معرف ثابت للتسجيل.
+         *
+         * إذا حاول نفس الزائر التسجيل
+         * مرة ثانية بنفس الرقم في نفس الحملة،
+         * لن يتم إنشاء تسجيل جديد.
+         */
+
+        const normalizedPhone =
+            phone.replace(
+                /[^0-9+]/g,
+                ""
+            );
+
+
+        const registrationId =
+            `guest_${campaignId}_${normalizedPhone}`;
+
+
+        const registrationRef =
+            doc(
+                db,
+                "registrations",
+                registrationId
+            );
+            
+
+        /*
+         * التسجيل كزائر:
+         *
+         * لا يوجد userId
+         * لا يوجد حساب
+         * لا توجد بطاقة
+         */
+
+        await setDoc(
+            registrationRef,
+            {
+
+                registrationType:
+                    "guest",
+
+                userId:
+                    null,
+
+                campaignId:
+                    campaignId,
+
+                fullName:
+                    fullName,
+
+                phone:
+                    normalizedPhone,
+
+                email:
+                    email,
+
+                category:
+                    category,
+
+                birthDate:
+                    birthDate || null,
+
+                registeredAt:
+                    serverTimestamp(),
+
+                status:
+                    "registered",
+
+                attendance:
+                    "pending"
+
+            }
+        );
+
+
+        message.style.display =
+            "block";
+
+        message.className =
+            "message success";
+
+
+        message.innerHTML = `
+
+            <strong>
+                ✓ تم تسجيلك في الحملة بنجاح.
+            </strong>
+
+            <br><br>
+
+            سيتم التواصل معك عبر رقم الهاتف
+            أو البريد الإلكتروني بالمعلومات
+            المتعلقة بالحملة.
+
+            <br><br>
+
+            <strong>
+                ${currentCampaign.title}
+            </strong>
+
+            <br>
+
+            التاريخ:
+            ${currentCampaign.date}
+
+            <br>
+
+            الوقت:
+            ${currentCampaign.startTime}
+            -
+            ${currentCampaign.endTime}
+
+            <br>
+
+            المكان:
+            ${currentCampaign.location}
+
+            <br><br>
+
+            <strong>
+                ملاحظة:
+            </strong>
+
+            التسجيل لا يعني احتساب المشاركة.
+            تحتسب المشاركة فقط بعد تأكيد حضورك
+            من الإدارة.
+
+        `;
+
+
+        submitButton.style.display =
+            "none";
+
+
+    } catch (error) {
+
+        console.error(
+            "Guest registration error:",
+            error
+        );
+
+
+        message.style.display =
+            "block";
+
+        message.className =
+            "message warning";
+
+
+        if (
+            error.code ===
+            "permission-denied"
+        ) {
+
+            message.textContent =
+                "لا يمكن إتمام التسجيل حاليًا. يرجى التأكد من إعدادات النظام.";
+
+        } else {
+
+            message.textContent =
+                "حدث خطأ أثناء التسجيل. حاول مرة أخرى.";
+
+        }
+
+
+        submitButton.disabled =
+            false;
+
+        submitButton.textContent =
+            "تأكيد التسجيل";
+
+    }
+
+}
+
+
+
+/* =====================================
+   تسجيل صاحب البطاقة
+===================================== */
+
+function showCardLogin() {
+
+    const registrationBox =
+        document.getElementById(
+            "registrationBox"
+        );
+
+
+    registrationBox.innerHTML = `
+
+        <button
+            type="button"
+            class="back-button"
+            id="backToChoices"
+        >
+            ← العودة إلى الاختيار
+        </button>
+
+
+        <h3>
+            الدخول باستخدام بطاقة المتطوع
+        </h3>
+
+
+        <p>
+            أدخل رقم بطاقتك وبيانات حسابك.
+        </p>
+
+
+        <div class="form-box">
+
+            <div class="form-group">
+
+                <label>
+                    رقم بطاقة المتطوع *
+                </label>
+
+                <input
+                    type="text"
+                    id="cardNumber"
+                    placeholder="OUD-2026-XXXXXX"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    البريد الإلكتروني *
+                </label>
+
+                <input
+                    type="email"
+                    id="volunteerEmail"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    كلمة المرور *
+                </label>
+
+                <input
+                    type="password"
+                    id="volunteerPassword"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="button"
+                class="submit-button"
+                id="volunteerLoginButton"
+            >
+                الدخول والتسجيل
+            </button>
+
+
+            <div
+                id="volunteerMessage"
+                class="message"
+                style="display:none;"
+            ></div>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("backToChoices")
+        .addEventListener(
+            "click",
+            showRegistrationChoices
+        );
+
+
+    document
+        .getElementById(
+            "volunteerLoginButton"
+        )
+        .addEventListener(
+            "click",
+            loginAndRegister
+        );
+
+}
+
+
+
+/* =====================================
+   دخول صاحب البطاقة ثم التسجيل
+===================================== */
+
+async function loginAndRegister() {
+
+    const cardNumber =
+        document
+            .getElementById(
+                "cardNumber"
+            )
+            .value
+            .trim()
+            .toUpperCase();
+
+
+    const email =
+        document
+            .getElementById(
+                "volunteerEmail"
+            )
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById(
+                "volunteerPassword"
+            )
+            .value;
+
+
+    const button =
+        document
+            .getElementById(
+                "volunteerLoginButton"
+            );
+
+
+    const message =
+        document
+            .getElementById(
+                "volunteerMessage"
+            );
+
+
+    if (
+        !cardNumber ||
+        !email ||
+        !password
+    ) {
+
+        message.style.display =
+            "block";
+
+        message.className =
+            "message warning";
+
+        message.textContent =
+            "يرجى إدخال رقم البطاقة والبريد الإلكتروني وكلمة المرور.";
+
+        return;
+
+    }
+
+
+    button.disabled =
+        true;
+
+    button.textContent =
+        "جاري التحقق...";
+
+
+    try {
+
+        /*
+         * أولًا: تسجيل الدخول إلى Firebase Auth
+         */
+
+        const credential =
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        const user =
+            credential.user;
+
+
+        /*
+         * ثانيًا: التأكد من أن الحساب
+         * يملك بطاقة بهذا الرقم
+         */
+
+        const cardsQuery =
+            query(
+                collection(
+                    db,
+                    "volunteerCards"
+                ),
+
+                where(
+                    "userId",
+                    "==",
+                    user.uid
+                ),
+
+                where(
+                    "cardNumber",
+                    "==",
+                    cardNumber
+                )
+            );
+
+
+        const cardsSnapshot =
+            await getDocs(
+                cardsQuery
+            );
+
+
+        if (
+            cardsSnapshot.empty
+        ) {
+
+            message.style.display =
+                "block";
+
+            message.className =
+                "message warning";
+
+            message.textContent =
+                "رقم البطاقة لا يتطابق مع هذا الحساب.";
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "الدخول والتسجيل";
+
+            return;
+
+        }
+
+
+        /*
+         * ثالثًا: التأكد أن البطاقة نشطة
+         */
+
+        const card =
+            cardsSnapshot
+                .docs[0]
+                .data();
+
+
+        if (
+            card.status !== "active"
+        ) {
+
+            message.style.display =
+                "block";
+
+            message.className =
+                "message warning";
+
+            message.textContent =
+                "هذه البطاقة غير نشطة حاليًا.";
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "الدخول والتسجيل";
+
+            return;
+
+        }
+
+
+        /*
+         * رابعًا: منع التسجيل المكرر
+         */
+
+        const duplicateQuery =
+            query(
+                collection(
+                    db,
+                    "registrations"
+                ),
+
+                where(
+                    "userId",
+                    "==",
+                    user.uid
+                ),
+
+                where(
+                    "campaignId",
+                    "==",
+                    campaignId
+                )
+            );
+
+
+        const duplicateSnapshot =
+            await getDocs(
+                duplicateQuery
+            );
+
+
+        if (
+            !duplicateSnapshot.empty
+        ) {
+
+            message.style.display =
+                "block";
+
+            message.className =
+                "message warning";
+
+            message.textContent =
+                "أنت مسجل بالفعل في هذه الحملة.";
+
+            button.disabled =
+                true;
+
+            button.textContent =
+                "مسجل بالفعل";
+
+            return;
+
+        }
+
+
+        /*
+         * خامسًا: فحص تعارض المواعيد
+         */
+
+        const conflict =
+            await hasTimeConflict(
+                user.uid,
+                currentCampaign
+            );
+
+
+        if (conflict) {
+
+            message.style.display =
+                "block";
+
+            message.className =
+                "message warning";
+
+            message.innerHTML = `
+
+                لا يمكن التسجيل في هذه الحملة
+                لأن موعدها يتعارض مع حملة:
+
+                <strong>
+                    ${conflict.title}
+                </strong>
+
+                <br>
+
+                في نفس اليوم.
+
+            `;
+
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "الدخول والتسجيل";
+
+            return;
+
+        }
+
+
+        /*
+         * سادسًا: إنشاء التسجيل
+         */
+
+        await addDoc(
+            collection(
+                db,
+                "registrations"
+            ),
+            {
+
+                registrationType:
+                    "volunteer",
+
+                userId:
+                    user.uid,
+
+                campaignId:
+                    campaignId,
+
+                fullName:
+                    user.email,
+
+                registeredAt:
+                    serverTimestamp(),
+
+                status:
+                    "registered",
+
+                attendance:
+                    "pending"
+
+            }
+        );
+
+
+        /*
+         * نجاح
+         */
+
+        message.style.display =
+            "block";
+
+        message.className =
+            "message success";
+
+
+        message.innerHTML = `
+
+            <strong>
+                ✓ تم تسجيلك في الحملة بنجاح.
+            </strong>
+
+            <br><br>
+
+            أنت مسجل الآن كمتطوع صاحب بطاقة.
+
+            <br><br>
+
+            <strong>
+                ملاحظة:
+            </strong>
+
+            التسجيل لا يعني احتساب المشاركة.
+            تحتسب المشاركة فقط بعد تأكيد حضورك
+            من الإدارة.
+
+        `;
+
+
+        button.style.display =
+            "none";
+
+
+    } catch (error) {
+
+        console.error(
+            "Volunteer registration error:",
+            error
+        );
+
+
+        message.style.display =
+            "block";
+
+        message.className =
+            "message warning";
+
+
+        if (
+            error.code ===
+            "auth/invalid-credential"
+        ) {
+
+            message.textContent =
+                "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+
+        } else {
+
+            message.textContent =
+                "تعذر الدخول أو التسجيل. تأكد من بياناتك وحاول مرة أخرى.";
+
+        }
+
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "الدخول والتسجيل";
+
+    }
+
+}
+
+
+
+/* =====================================
+   تحميل الحملة
+===================================== */
+
+async function loadCampaign() {
+
+    if (!campaignId) {
+
+        container.innerHTML = `
+
+            <h2>
+                الحملة غير موجودة
+            </h2>
+
+        `;
+
+        return;
+
+    }
+
+
+    try {
+
+        const campaignRef =
+            doc(
+                db,
+                "campaigns",
+                campaignId
+            );
+
+
+        const snapshot =
+            await getDoc(
+                campaignRef
+            );
+
+
+        if (
+            !snapshot.exists()
+        ) {
+
+            container.innerHTML = `
+
+                <h2>
+                    الحملة غير موجودة
+                </h2>
+
+            `;
+
+            return;
+
+        }
+
+
+        currentCampaign =
+            snapshot.data();
+
+
+        const campaign =
+            currentCampaign;
+
+
+        const today =
+            getToday();
+
+
+        container.innerHTML = `
+
+            <h1>
+                ${campaign.title}
+            </h1>
+
+
+            <div class="info">
+
+                <strong>
+                    المجال:
+                </strong>
+
+                ${campaign.field || "غير محدد"}
+
+            </div>
+
+
+            <div class="section">
+
+                <h2>
+                    عن الحملة
+                </h2>
+
+                <p>
+                    ${campaign.description || ""}
+                </p>
+
+            </div>
+
+
+            <div class="section">
+
+                <h2>
+                    معلومات الحملة
+                </h2>
+
+
+                <div class="info">
+
+                    <strong>
+                        التاريخ:
+                    </strong>
+
+                    ${campaign.date}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+                        الوقت:
+                    </strong>
+
+                    ${campaign.startTime}
+                    -
+                    ${campaign.endTime}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+                        المكان:
+                    </strong>
+
+                    ${campaign.location}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+                        السعة:
+                    </strong>
+
+                    ${campaign.capacity}
+                    مشارك
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+                        آخر موعد للتسجيل:
+                    </strong>
+
+                    ${campaign.registrationDeadline || "غير محدد"}
+
+                </div>
+
+            </div>
+
+
+            <div class="section">
+
+                <h2>
+                    الأهداف
+                </h2>
+
+                <p>
+                    ${
+                        campaign.objectives ||
+                        "سيتم تحديد الأهداف."
+                    }
+                </p>
+
+            </div>
+
+
+            <div class="section">
+
+                <h2>
+                    المهام
+                </h2>
+
+                <p>
+                    ${
+                        campaign.tasks ||
+                        "سيتم تحديد المهام."
+                    }
+                </p>
+
+            </div>
+
+
+            <div class="section">
+
+                <button
+                    id="registerButton"
+                    class="register-button"
+                >
+                    التسجيل في الحملة
+                </button>
+
+
+                <div
+                    id="message"
+                    class="message"
+                ></div>
+
+
+                <div
+                    id="registrationBox"
+                    class="registration-box"
+                    style="display:none;"
+                ></div>
+
+            </div>
+
+        `;
+
+
+        const registerButton =
+            document.getElementById(
+                "registerButton"
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        const registrationBox =
+            document.getElementById(
+                "registrationBox"
+            );
+
+
+        /*
+         * الحملة انتهت
+         */
+
+        if (
+            campaign.date <= today
+        ) {
+
+            registerButton.disabled =
+                true;
+
+            registerButton.textContent =
+                "التسجيل مغلق";
+
+            message.textContent =
+                "انتهى أجل التسجيل لأن موعد الحملة قد حان.";
+
+            return;
+
+        }
+
+
+        /*
+         * انتهى أجل التسجيل
+         */
+
+        if (
+            campaign.registrationDeadline &&
+            today >
+            campaign.registrationDeadline
+        ) {
+
+            registerButton.disabled =
+                true;
+
+            registerButton.textContent =
+                "التسجيل مغلق";
+
+            message.textContent =
+                "انتهى آخر أجل للتسجيل في هذه الحملة.";
+
+            return;
+
+        }
+
+
+        /*
+         * فتح خيارات التسجيل
+         */
+
+        registerButton.addEventListener(
+            "click",
+            function() {
+
+                registerButton.style.display =
+                    "none";
+
+                message.innerHTML =
+                    "";
+
+                registrationBox.style.display =
+                    "block";
+
+                showRegistrationChoices();
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <h2 class="error">
+                حدث خطأ أثناء تحميل الحملة.
+            </h2>
+
+        `;
+
+    }
+
+}
+
+
+loadCampaign();
+
+</script>
+
+
+</body>
+
+</html>
+

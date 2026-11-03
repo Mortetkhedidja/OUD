@@ -1,0 +1,243 @@
+rules_version = '2';
+
+service cloud.firestore {
+
+  match /databases/{database}/documents {
+
+
+    /* =====================================
+       USERS
+    ===================================== */
+
+    match /users/{userId} {
+
+      allow create:
+        if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.role == "volunteer";
+
+
+      allow read:
+        if request.auth != null
+        && (
+          request.auth.uid == userId
+          || isAdmin()
+          || isCommittee()
+        );
+
+
+      allow update:
+        if isAdmin();
+
+
+      allow update:
+        if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.role
+           == resource.data.role;
+
+    }
+
+
+    /* =====================================
+       CAMPAIGNS
+    ===================================== */
+
+    match /campaigns/{campaignId} {
+
+      allow read:
+        if resource.data.status == "published"
+        || isAdmin()
+        || isCommittee();
+
+
+      allow create, update, delete:
+        if isAdmin();
+
+    }
+
+
+    /* =====================================
+       REGISTRATIONS
+    ===================================== */
+
+    match /registrations/{registrationId} {
+
+      allow create:
+        if request.auth != null
+        && request.resource.data.userId
+           == request.auth.uid;
+
+
+      allow read:
+        if request.auth != null
+        && (
+          resource.data.userId
+             == request.auth.uid
+          || isAdmin()
+          || isCommittee()
+        );
+
+
+      allow update:
+        if isAdmin()
+        || isCommittee();
+
+    }
+
+
+    /* =====================================
+       PARTICIPATION RECORDS
+    ===================================== */
+
+    match /participationRecords/{recordId} {
+
+      allow read:
+        if request.auth != null
+        && (
+          resource.data.userId
+             == request.auth.uid
+          || isAdmin()
+          || isCommittee()
+        );
+
+
+      allow create, update:
+        if isAdmin()
+        || isCommittee();
+
+    }
+
+
+    /* =====================================
+       VOLUNTEER CARDS
+    ===================================== */
+
+    match /volunteerCards/{cardId} {
+
+      allow read:
+        if request.auth != null
+        && (
+          resource.data.userId
+             == request.auth.uid
+          || isAdmin()
+          || isCommittee()
+        );
+
+
+      allow create, update:
+        if isAdmin()
+        || isCommittee();
+
+    }
+
+
+    /* =====================================
+       PUBLIC CARD VERIFICATION
+    ===================================== */
+
+    match /publicCardVerifications/{cardNumber} {
+
+      /*
+        أي شخص يستطيع قراءة معلومات
+        التحقق العامة للبطاقة.
+      */
+
+      allow read:
+        if resource.data.status == "active";
+
+
+      /*
+        إنشاء وتعديل هذه البيانات
+        فقط من طرف الإدارة أو اللجنة.
+      */
+
+      allow create, update:
+        if isAdmin()
+        || isCommittee();
+
+    }
+
+
+    /* =====================================
+       INITIATIVES
+    ===================================== */
+
+    match /initiatives/{initiativeId} {
+
+      allow create:
+        if request.auth != null
+        && request.resource.data.submittedBy
+           == request.auth.uid;
+
+
+      allow read:
+        if request.auth != null
+        && (
+          resource.data.submittedBy
+             == request.auth.uid
+          || isAdmin()
+          || isCommittee()
+        );
+
+
+      allow update:
+        if isAdmin()
+        || isCommittee();
+
+    }
+
+
+    /* =====================================
+       NOTIFICATIONS
+    ===================================== */
+
+    match /notifications/{notificationId} {
+
+      allow read:
+        if request.auth != null
+        && resource.data.userId
+           == request.auth.uid;
+
+
+      allow create, update:
+        if isAdmin()
+        || isCommittee();
+
+    }
+
+
+    /* =====================================
+       ADMIN
+    ===================================== */
+
+    function isAdmin() {
+
+      return request.auth != null
+        &&
+        get(
+          /databases/$(database)
+          /documents/users/$(request.auth.uid)
+        ).data.role == "admin";
+
+    }
+
+
+    /* =====================================
+       COMMITTEE
+    ===================================== */
+
+    function isCommittee() {
+
+      return request.auth != null
+        &&
+        get(
+          /databases/$(database)
+          /documents/users/$(request.auth.uid)
+        ).data.role == "committee";
+
+    }
+
+  }
+
+}

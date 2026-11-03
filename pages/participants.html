@@ -1,0 +1,1533 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>دليل المتطوعين | منصة عضد</title>
+
+    <style>
+        :root {
+            --green: #123c35;
+            --teal: #28665e;
+            --gold: #c6a15b;
+            --cream: #f7f5ef;
+            --text: #243b37;
+            --muted: #71817d;
+            --border: #e2eae6;
+            --light-green: #edf5f1;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+        }
+
+        .navbar {
+            background: var(--green);
+            color: white;
+            padding: 17px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            color: white;
+            font-size: 23px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            border: 1px solid #ffffff45;
+            border-radius: 10px;
+            padding: 9px 14px;
+            transition: background 0.2s;
+        }
+
+        .nav-link:hover {
+            background: #ffffff15;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #123c35, #28665e);
+            color: white;
+            padding: 45px 6% 55px;
+        }
+
+        .hero-inner {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .hero h1 {
+            margin: 0 0 12px;
+        }
+
+        .hero p {
+            max-width: 720px;
+            line-height: 2;
+            color: #e2eeea;
+            margin: 0;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: -22px auto 45px;
+            position: relative;
+        }
+
+        /* الإحصائيات */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .stat,
+        .filters,
+        .person-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 5px 20px #123c3509;
+        }
+
+        .stat {
+            padding: 19px;
+            text-align: center;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 27px;
+            color: var(--green);
+            margin-bottom: 5px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* البحث والتصفية */
+
+        .filters {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .filter-intro {
+            margin: 0 0 2px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .search-wrap {
+            position: relative;
+        }
+
+        .search-wrap input { padding-right: 44px; }
+
+        .search-symbol {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 19px;
+            pointer-events: none;
+        }
+
+        .filter-label {
+            display: block;
+            margin: 0 0 6px;
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        .filter-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .reset-filters {
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: #fff;
+            color: var(--green);
+            padding: 9px 14px;
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .visible-summary {
+            margin: 0 0 18px;
+            color: var(--green);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            min-width: 0;
+            padding: 13px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font: inherit;
+            background: white;
+            color: var(--text);
+        }
+
+        input:focus,
+        select:focus {
+            outline: 2px solid #28665e55;
+            border-color: var(--teal);
+        }
+
+        /* عنوان النتائج */
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .heading h2 {
+            margin: 0;
+            color: var(--green);
+            font-size: 22px;
+        }
+
+        #resultCount {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* بطاقات المتطوعين */
+
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px;
+            align-items: start;
+        }
+
+        .person-card {
+            padding: 21px;
+            min-width: 0;
+        }
+
+        .person-top {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .avatar {
+            width: 54px;
+            height: 54px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: #e8f1ed;
+            color: var(--green);
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .person-name {
+            margin: 0 0 5px;
+            color: var(--green);
+            font-size: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        .person-title {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .chips {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 7px;
+            margin: 18px 0;
+        }
+
+        .chip {
+            background: var(--light-green);
+            color: #245a4e;
+            border-radius: 11px;
+            padding: 10px 5px;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .section-title {
+            color: var(--green);
+            font-size: 15px;
+            font-weight: 800;
+            margin: 20px 0 11px;
+        }
+
+        /* قائمة الحملات المختصرة */
+
+        .campaign-list {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .campaign-item {
+            border: 1px solid var(--border);
+            border-right: 3px solid var(--gold);
+            background: #fcfbf8;
+            border-radius: 10px 0 0 10px;
+            padding: 12px;
+            min-width: 0;
+        }
+
+        .campaign-summary {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .campaign-icon {
+            width: 35px;
+            height: 35px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: var(--light-green);
+            font-size: 17px;
+        }
+
+        .campaign-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .campaign-name {
+            margin: 1px 0 5px;
+            color: var(--green);
+            font-size: 14px;
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .campaign-meta {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        /* زر فتح التفاصيل */
+
+        details.campaign-details {
+            margin-top: 10px;
+            border-top: 1px solid var(--border);
+            padding-top: 9px;
+        }
+
+        .campaign-details summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            color: var(--teal);
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 0;
+            user-select: none;
+        }
+
+        .campaign-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .summary-label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .summary-arrow {
+            transition: transform 0.2s ease;
+            font-size: 16px;
+        }
+
+        details[open] .summary-arrow {
+            transform: rotate(180deg);
+        }
+
+        .details-content {
+            padding-top: 8px;
+            animation: appear 0.2s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(-3px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .detail-row {
+            padding: 10px 0;
+            border-bottom: 1px solid #e8eee9;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--teal);
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: var(--text);
+            font-size: 13px;
+            line-height: 1.9;
+            white-space: pre-line;
+            overflow-wrap: anywhere;
+        }
+
+        .hours-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--light-green);
+            color: #245a4e;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .cv-actions {
+            margin: 16px 0 4px;
+        }
+
+        .cv-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            background: var(--green);
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 800;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .cv-link:hover {
+            background: var(--teal);
+            transform: translateY(-1px);
+        }
+
+        .cv-unavailable {
+            margin: 15px 0 0;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: #f7f5ef;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* حالات التحميل والأخطاء */
+
+        .empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px 18px;
+            background: white;
+            border: 1px dashed #cbd9d3;
+            border-radius: 15px;
+            color: var(--muted);
+            line-height: 2;
+            overflow-wrap: anywhere;
+        }
+
+        .notice {
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            background: var(--green);
+            color: #e3eee9;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 760px) {
+            .people-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 520px) {
+            .stats {
+                gap: 8px;
+            }
+
+            .stat {
+                padding: 13px 5px;
+            }
+
+            .stat strong {
+                font-size: 23px;
+            }
+
+            .stat span {
+                font-size: 11px;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .chips {
+                gap: 5px;
+            }
+
+            .chip {
+                font-size: 11px;
+            }
+
+            .person-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <a class="brand" href="../index.html">عضد</a>
+    <a class="nav-link" href="../index.html">العودة إلى الصفحة الرئيسية ←</a>
+</header>
+
+<section class="hero">
+    <div class="hero-inner">
+        <h1>دليل المتطوعين</h1>
+        <p>
+            تعرّف على أصحاب الأثر، واكتشف مشاركاتهم التطوعية الموثقة
+            والحملات التي ساهموا فيها. اضغط على تفاصيل أي حملة لمعرفة المزيد.
+        </p>
+    </div>
+</section>
+
+<main class="container">
+
+    <section class="stats">
+        <div class="stat">
+            <strong id="peopleStat">—</strong>
+            <span>المشاركون في الدليل</span>
+        </div>
+
+        <div class="stat">
+            <strong id="campaignStat">—</strong>
+            <span>الحملات الموثقة</span>
+        </div>
+
+        <div class="stat">
+            <strong id="hoursStat">—</strong>
+            <span>الساعات التطوعية</span>
+        </div>
+    </section>
+
+    <section class="filters" aria-label="البحث في دليل المشاركين">
+        <p class="filter-intro">ابحث باسم المتطوع أو الحملة أو الجهة المنظمة. عند اختيار اسم الجهة المنظمة، ستظهر جميع المشاركين في الحملات التابعة لها.</p>
+        <div class="search-wrap">
+            <span class="search-symbol" aria-hidden="true">🔎</span>
+            <input id="searchInput" type="search" list="searchSuggestions"
+                placeholder="ابحث باسم المتطوع أو الحملة أو الجهة المنظمة..."
+                aria-label="البحث باسم المتطوع أو الحملة أو الجهة المنظمة"
+                autocomplete="off">
+            <datalist id="searchSuggestions"></datalist>
+        </div>
+    </section>
+
+    <p class="visible-summary" id="visibleSummary">عدد المشاركين الظاهرين: — · عدد الحملات الظاهرة: —</p>
+
+    <div class="heading">
+        <h2>المتطوعون المشاركون</h2>
+        <span id="resultCount">جارٍ تحميل الدليل...</span>
+    </div>
+
+    <section class="people-grid" id="peopleGrid">
+        <div class="empty">جارٍ تحميل البيانات...</div>
+    </section>
+
+    <p class="notice">
+        يعرض الدليل أسماء المشاركين ومشاركاتهم التطوعية الموثقة وتفاصيل الحملات العامة.
+        تظهر السيرة الذاتية في الدليل إذا رفعها المتطوع إلى حسابه.
+        لا تُعرض أرقام الهواتف أو عناوين البريد الإلكتروني أو تواريخ الميلاد
+        أو أرقام البطاقات أو معرّفات الحسابات.
+    </p>
+
+</main>
+
+<footer>منصة عضد— التطوع يصنع الأثر</footer>
+
+<script type="module">
+    import { db } from "../js/firebase.js";
+
+    import {
+        collection,
+        getDocs,
+        query,
+        where
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+    const grid = document.getElementById("peopleGrid");
+    const searchInput = document.getElementById("searchInput");
+    const visibleSummary = document.getElementById("visibleSummary");
+    const resultCount = document.getElementById("resultCount");
+
+    let people = [];
+
+    function safeText(value) {
+        if (value === null || value === undefined) {
+            return "";
+        }
+
+        if (Array.isArray(value)) {
+            value = value.join("، ");
+        }
+
+        if (typeof value === "object") {
+            return "";
+        }
+
+        return String(value).replace(/[&<>"']/g, character => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        })[character]);
+    }
+
+    // التحقق من أن رابط السيرة الذاتية صالح ويستخدم HTTPS.
+    function safeCvUrl(value) {
+        if (typeof value !== "string" || !value.trim()) return "";
+
+        try {
+            const url = new URL(value.trim());
+            if (url.protocol !== "https:") return "";
+            return url.href;
+        } catch {
+            return "";
+        }
+    }
+
+    function firstValue(object, names) {
+        for (const name of names) {
+            const value = object?.[name];
+
+            if (
+                value !== undefined &&
+                value !== null &&
+                value !== ""
+            ) {
+                return value;
+            }
+        }
+
+        return "";
+    }
+
+    function formatDate(value) {
+        if (!value) {
+            return "غير محدد";
+        }
+
+        if (typeof value.toDate === "function") {
+            value = value.toDate();
+        } else if (
+            typeof value === "object" &&
+            value.seconds !== undefined
+        ) {
+            value = new Date(value.seconds * 1000);
+        } else if (!(value instanceof Date) && typeof value === "object") {
+            return "غير محدد";
+        }
+
+        const date = value instanceof Date
+            ? value
+            : new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return safeText(value) || "غير محدد";
+        }
+
+        return new Intl.DateTimeFormat("ar-DZ", {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }).format(date);
+    }
+
+    function dateForSorting(value) {
+        if (!value) return 0;
+
+        if (typeof value.toDate === "function") {
+            return value.toDate().getTime();
+        }
+
+        if (typeof value === "object" && value.seconds != null) {
+            return value.seconds * 1000;
+        }
+
+        const result = new Date(value).getTime();
+
+        return Number.isNaN(result) ? 0 : result;
+    }
+
+    function formatTime(value) {
+        if (!value) return "";
+
+        if (typeof value === "string") {
+            return value;
+        }
+
+        if (typeof value === "object") {
+            if (typeof value.toDate === "function") {
+                const date = value.toDate();
+
+                return new Intl.DateTimeFormat("ar-DZ", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false
+                }).format(date);
+            }
+
+            return "";
+        }
+
+        return String(value);
+    }
+
+    function identityKeys(item) {
+    const normalizeName = value =>
+        String(value || "")
+            .trim()
+            .replace(/\s+/g, " ")
+            .toLocaleLowerCase("ar");
+
+    const name = normalizeName(
+        item.fullName || item.participantName || item.name
+    );
+
+    return [
+        item.userId && `user:${item.userId}`,
+        item.guestId && `guest:${item.guestId}`,
+        item.cardNumber && `card:${item.cardNumber}`,
+        name && `name:${name}`
+    ].filter(Boolean);
+}
+
+    // قراءة تفاصيل الحملة من المستند الأصلي في campaigns.
+    function normalizeCampaign(data, documentId) {
+        data = data || {};
+
+        const title = firstValue(data, [
+            "title",
+            "campaignTitle",
+            "campaignName",
+            "name"
+        ]);
+
+        const organizerType = String(firstValue(data, [
+            "organizerType",
+            "organizationType",
+            "organizerCategory"
+        ]) || "").trim();
+
+        const organizerName = String(firstValue(data, [
+            "organizerName",
+            "organizationName",
+            "organizer",
+            "organization",
+            "organizingEntity",
+            "organizerEntity"
+        ]) || "").trim();
+
+        let organizer = "";
+
+        if (organizerType && organizerName) {
+            organizer = organizerName.includes(organizerType)
+                ? organizerName
+                : `${organizerType} - ${organizerName}`;
+        } else {
+            organizer = organizerName || organizerType;
+        }
+
+        let location = String(firstValue(data, [
+            "location",
+            "campaignLocation",
+            "locationName",
+            "venue",
+            "place",
+            "address"
+        ]) || "").trim();
+
+        const wilaya = String(firstValue(data, [
+            "wilaya",
+            "province",
+            "state",
+            "city"
+        ]) || "").trim();
+
+        if (wilaya && !location.includes(wilaya)) {
+            location = location
+                ? `${location} - ${wilaya}`
+                : wilaya;
+        }
+
+        const startDate = firstValue(data, [
+            "startDate",
+            "date",
+            "campaignDate",
+            "start_date"
+        ]);
+
+        const endDate = firstValue(data, [
+            "endDate",
+            "end_date",
+            "campaignEndDate"
+        ]);
+
+        let startTime = formatTime(firstValue(data, [
+            "startTime",
+            "timeStart",
+            "startHour",
+            "fromTime"
+        ]));
+
+        let endTime = formatTime(firstValue(data, [
+            "endTime",
+            "timeEnd",
+            "endHour",
+            "toTime"
+        ]));
+
+        // إذا كانت أوقات الحملة محفوظة في حقل واحد.
+        const combinedTime = firstValue(data, [
+            "time",
+            "campaignTime",
+            "schedule"
+        ]);
+
+        if (!startTime && !endTime && combinedTime) {
+            startTime = formatTime(combinedTime);
+        }
+
+        return {
+            id: documentId,
+            title: String(title || ""),
+            field: String(firstValue(data, [
+                "field",
+                "campaignField",
+                "campaignCategory",
+                "domain",
+                "category",
+                "specialty"
+            ]) || ""),
+
+            organizer,
+            organizerType,
+            organizerName,
+            location,
+            wilaya,
+            campaignType: String(firstValue(data, [
+                "campaignType", "type", "eventType", "durationType", "campaignDurationType"
+            ]) || "").trim(),
+            date: startDate,
+            endDate,
+            startTime,
+            endTime,
+
+            description: firstValue(data, [
+                "description",
+                "campaignDescription",
+                "details"
+            ]),
+
+            objectives: firstValue(data, [
+                "objectives",
+                "goals",
+                "campaignObjectives"
+            ]),
+
+            tasks: firstValue(data, [
+                "tasks",
+                "duties",
+                "campaignTasks",
+                "responsibilities"
+            ]),
+
+            registrationDeadline: firstValue(data, [
+                "registrationDeadline",
+                "registrationEndDate",
+                "lastRegistrationDate",
+                "deadline"
+            ])
+        };
+    }
+
+    function renderCampaignDetails(campaign) {
+        const endDateText = campaign.endDate
+            ? ` → ${formatDate(campaign.endDate)}`
+            : "";
+
+        const timeText = [
+            campaign.startTime,
+            campaign.endTime
+        ].filter(Boolean).join(" — ") || "غير محدد";
+
+        return `
+            <details class="campaign-details">
+                <summary>
+                    <span class="summary-label">
+                        <span>＋</span>
+                        عرض تفاصيل الحملة
+                    </span>
+                    <span class="summary-arrow">⌄</span>
+                </summary>
+
+                <div class="details-content">
+
+                    <div class="detail-row">
+                        <div class="detail-label">📌 المجال</div>
+                        <div class="detail-value">
+                            ${safeText(campaign.field || "غير محدد")}
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label">🏛️ الجهة المنظمة</div>
+                        <div class="detail-value">
+                            ${safeText(campaign.organizer || "غير محدد")}
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label">📍 المكان</div>
+                        <div class="detail-value">
+                            ${safeText(campaign.location || "غير محدد")}
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label">📅 التاريخ</div>
+                        <div class="detail-value">
+                            ${safeText(formatDate(campaign.date))}${safeText(endDateText)}
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label">⏰ التوقيت</div>
+                        <div class="detail-value">
+                            ${safeText(timeText)}
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label">📝 وصف الحملة</div>
+                        <div class="detail-value">
+                            ${safeText(campaign.description || "غير محدد")}
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label">🎯 الأهداف</div>
+                        <div class="detail-value">
+                            ${safeText(campaign.objectives || "غير محدد")}
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label">📋 المهام</div>
+                        <div class="detail-value">
+                            ${safeText(campaign.tasks || "غير محدد")}
+                        </div>
+                    </div>
+
+                    <div class="detail-row">
+                        <div class="detail-label">⏳ آخر أجل للتسجيل</div>
+                        <div class="detail-value">
+                            ${safeText(
+                                campaign.registrationDeadline
+                                    ? formatDate(campaign.registrationDeadline)
+                                    : "غير محدد"
+                            )}
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+        `;
+    }
+
+   
+    // توحيد النص العربي لتسهيل البحث مع اختلافات الكتابة الشائعة
+    function normalizeSearchText(value) {
+        return String(value ?? "")
+            .normalize("NFKC")
+            .replace(/[\u064B-\u065F\u0670]/g, "") // التشكيل
+            .replace(/\u0640/g, "")                   // التطويل
+            .replace(/[أإآٱ]/g, "ا")
+            .replace(/[ؤئ]/g, "ء")
+            .replace(/ى/g, "ي")
+            .replace(/ة/g, "ه")
+            .replace(/\s+/g, " ")
+            .trim()
+            .toLocaleLowerCase("ar");
+    }
+
+    function render() {
+        const term = normalizeSearchText(searchInput.value);
+        const searchWords = term.split(/\s+/).filter(Boolean);
+
+        // البحث محصور في اسم المتطوع أو اسم الحملة أو الجهة المنظمة.
+        // عند البحث باسم جهة منظمة، تظهر كل الأسماء المرتبطة بحملاتها.
+        const filtered = people.filter(person => {
+            const campaigns = person.participatedCampaigns || [];
+            const searchableText = normalizeSearchText([
+                person.fullName,
+                ...campaigns.flatMap(campaign => [
+                    campaign.title,
+                    campaign.organizer,
+                    campaign.organizerType,
+                    campaign.organizerName
+                ])
+            ].filter(value => value !== null && value !== undefined).join(" "));
+
+            return searchWords.length === 0 ||
+                searchWords.every(word => searchableText.includes(word));
+        });
+
+        const visibleCampaigns = new Set();
+        filtered.forEach(person => (person.participatedCampaigns || []).forEach(campaign => {
+            visibleCampaigns.add(campaign.id);
+        }));
+
+        resultCount.textContent = `عدد النتائج: ${filtered.length}`;
+        visibleSummary.textContent = `عدد المشاركين الظاهرين: ${filtered.length} · عدد الحملات الظاهرة: ${visibleCampaigns.size}`;
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `
+                <div class="empty">
+                    لا توجد نتائج مطابقة.
+                    <br>
+                    جرّبي اسمًا آخر أو اختاري «جميع الحملات».
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = filtered.map(person => {
+            const campaigns = person.participatedCampaigns || [];
+
+            const totalHours = campaigns.reduce(
+                (sum, campaign) => sum + (Number(campaign.hours) || 0),
+                0
+            );
+
+            const uniqueCampaigns = new Set(
+                campaigns.map(campaign => campaign.id)
+            );
+
+            const initial = Array.from(person.fullName || "ع")[0] || "ع";
+
+            const campaignList = campaigns.length
+                ? campaigns.map(campaign => `
+                    <div class="campaign-item">
+                        <div class="campaign-summary">
+                            <div class="campaign-icon">🌱</div>
+
+                            <div class="campaign-main">
+                                <div class="campaign-name">
+                                    ${safeText(campaign.title)}
+                                </div>
+
+                                <div class="campaign-meta">
+                                    📅 ${safeText(formatDate(campaign.date))}
+                                </div>
+                            </div>
+
+                            <span class="hours-badge">
+                                ⏱ ${safeText(campaign.hours)} س
+                            </span>
+                        </div>
+
+                        ${renderCampaignDetails(campaign)}
+                    </div>
+                `).join("")
+                : `
+                    <div class="empty">
+                        لا توجد مشاركات موثقة.
+                    </div>
+                `;
+
+            return `
+                <article class="person-card">
+                    <div class="person-top">
+                        <div class="avatar">${safeText(initial)}</div>
+
+                        <div>
+                            <h3 class="person-name">
+                                ${safeText(person.fullName)}
+                            </h3>
+
+                            <p class="person-title">
+                                ${safeText(
+                                    person.category || "متطوع في منصة عُضد"
+                                )}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="chips">
+                        <div class="chip">
+                            ${campaigns.length}<br>
+                            مشاركة موثقة
+                        </div>
+
+                        <div class="chip">
+                            ${uniqueCampaigns.size}<br>
+                            حملة
+                        </div>
+
+                        <div class="chip">
+                            ${Number(totalHours.toFixed(2))}<br>
+                            ساعة تطوعية
+                        </div>
+                    </div>
+
+                    ${person.cvUrl ? `
+                        <div class="cv-actions">
+                            <a class="cv-link"
+                               href="${safeText(person.cvUrl)}"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                📄 ${safeText(person.cvName || "عرض / تحميل السيرة الذاتية")} ↗
+                            </a>
+                        </div>
+                    ` : `
+                        <p class="cv-unavailable">
+لم يرفع المتطوع سيرة ذاتية إلى حسابه.
+                        </p>
+                    `}
+
+                    <div class="section-title">
+                        🤝 الحملات التي شارك فيها
+                    </div>
+
+                    <div class="campaign-list">
+                        ${campaignList}
+                    </div>
+                </article>
+            `;
+        }).join("");
+    }
+
+
+    async function loadDirectory() {
+        grid.innerHTML = `
+            <div class="empty">جارٍ تحميل البيانات...</div>
+        `;
+
+        resultCount.textContent = "جارٍ تحميل الدليل...";
+
+        try {
+            const [
+    recordsSnapshot,
+    cardsSnapshot,
+    campaignsSnapshot,
+    publicVolunteersSnapshot
+] = await Promise.all([
+    getDocs(query(
+        collection(db, "participationRecords"),
+        where("verified", "==", true)
+    )),
+
+    getDocs(query(
+        collection(db, "volunteerCards"),
+        where("status", "==", "active")
+    )),
+
+    getDocs(query(
+        collection(db, "campaigns"),
+        where("status", "==", "published")
+    )),
+
+    getDocs(collection(db, "publicVolunteers")).catch(error => {
+        console.error(
+            "تعذرت قراءة بيانات الدليل العام:",
+            error
+        );
+        return null;
+    })
+]);
+
+            // ربط تفاصيل كل حملة بمعرّف مستندها في Firestore.
+            const campaignMap = new Map();
+
+            campaignsSnapshot.forEach(documentSnapshot => {
+                campaignMap.set(
+                    documentSnapshot.id,
+                    normalizeCampaign(
+                        documentSnapshot.data(),
+                        documentSnapshot.id
+                    )
+                );
+            });
+
+            const cards = cardsSnapshot.docs.map(documentSnapshot => ({
+                ...documentSnapshot.data(),
+                documentId: documentSnapshot.id
+            }));
+
+            const cardByKey = new Map();
+
+            cards.forEach(card => {
+                identityKeys(card).forEach(key => {
+                    cardByKey.set(key, card);
+                });
+            });
+
+            // فهرسة حسابات المتطوعين باستخدام معرّف الحساب ورقم البطاقة.
+            // يؤخذ رابط السيرة الذاتية مباشرة من users/{uid}.cvUrl.
+            const userByKey = new Map();
+
+(publicVolunteersSnapshot?.docs || []).forEach(documentSnapshot => {
+    const profileData = documentSnapshot.data() || {};
+
+    const profile = {
+        ...profileData,
+        userId: profileData.userId || documentSnapshot.id
+    };
+
+    identityKeys(profile).forEach(key => {
+        userByKey.set(key, profile);
+    });
+});
+
+            const grouped = new Map();
+
+            recordsSnapshot.docs.forEach(documentSnapshot => {
+                const record = {
+                    ...documentSnapshot.data(),
+                    recordId: documentSnapshot.id
+                };
+
+                if (record.verified !== true) {
+                    return;
+                }
+
+                const keys = identityKeys(record);
+
+                let card = null;
+
+                for (const key of keys) {
+                    if (cardByKey.has(key)) {
+                        card = cardByKey.get(key);
+                        break;
+                    }
+                }
+
+                let userProfile = null;
+                const profileKeys = [
+                    ...keys,
+                    ...identityKeys(card || {})
+                ];
+
+                for (const key of profileKeys) {
+                    if (userByKey.has(key)) {
+                        userProfile = userByKey.get(key);
+                        break;
+                    }
+                }
+
+                const fallbackKey = record.participantName
+                    ? `name:${String(record.participantName)
+                        .trim()
+                        .toLocaleLowerCase("ar")}`
+                    : `record:${record.recordId}`;
+
+                const groupKey = keys[0] || fallbackKey;
+
+                if (!grouped.has(groupKey)) {
+                    grouped.set(groupKey, {
+                        card,
+                        userProfile,
+                        records: [],
+                        keys: new Set(keys)
+                    });
+                }
+
+                const group = grouped.get(groupKey);
+
+                group.records.push(record);
+
+                if (!group.card && card) {
+                    group.card = card;
+                }
+
+                if (!group.userProfile && userProfile) {
+                    group.userProfile = userProfile;
+                }
+
+                keys.forEach(key => group.keys.add(key));
+            });
+
+            // دمج السجلات التي تعود إلى هوية واحدة،
+            // بما فيها مشاركات الشخص السابقة عندما كان يسجل كضيف.
+            let merged = true;
+
+            while (merged) {
+                merged = false;
+
+                const groups = [...grouped.entries()];
+
+                outer:
+                for (let i = 0; i < groups.length; i++) {
+                    for (let j = i + 1; j < groups.length; j++) {
+                        const [keyA, groupA] = groups[i];
+                        const [keyB, groupB] = groups[j];
+
+                        const overlap = [...groupA.keys].some(
+                            key => groupB.keys.has(key)
+                        );
+
+                        if (!overlap) {
+                            continue;
+                        }
+
+                        groupA.records.push(...groupB.records);
+
+                        groupB.keys.forEach(key => {
+                            groupA.keys.add(key);
+                        });
+
+                        if (!groupA.card) {
+                            groupA.card = groupB.card;
+                        }
+
+                        if (!groupA.userProfile) {
+                            groupA.userProfile = groupB.userProfile;
+                        }
+
+                        grouped.delete(keyB);
+
+                        merged = true;
+                        break outer;
+                    }
+                }
+            }
+
+            people = [...grouped.values()].map(group => {
+                const card = group.card || {};
+                const userProfile = group.userProfile || {};
+
+                // إظهار السيرة الذاتية مباشرة من users/{uid} دون الاعتماد على cvConsent.
+                const cvUrl = safeCvUrl(firstValue(userProfile, ["cvUrl", "cvURL", "resumeUrl", "resumeURL"]));
+                const cvName = String(firstValue(userProfile, ["cvName", "resumeName"]) || "").trim();
+
+                // إزالة تكرار السجل الواحد وترتيب المشاركات من الأحدث.
+                const uniqueRecords = [
+                    ...new Map(
+                        group.records.map(record => [
+                            record.recordId,
+                            record
+                        ])
+                    ).values()
+                ].sort((a, b) =>
+                    dateForSorting(b.date) - dateForSorting(a.date)
+                );
+
+                const participatedCampaigns = uniqueRecords.map(record => {
+                    const campaignId = String(record.campaignId || "");
+
+                    const originalCampaign =
+                        campaignMap.get(campaignId) || {};
+
+                    return {
+                        id: campaignId ||
+                            String(record.campaignTitle || record.recordId),
+
+                        title: originalCampaign.title ||
+                            String(record.campaignTitle || "حملة تطوعية"),
+
+                        // هذه الحقول تأتي من مستند الحملة، لا من فئة المتطوع.
+                        field: originalCampaign.field || "",
+                        organizer: originalCampaign.organizer || "",
+                        organizerType: originalCampaign.organizerType || "",
+                        organizerName: originalCampaign.organizerName || "",
+                        location: originalCampaign.location || "",
+                        wilaya: originalCampaign.wilaya || "",
+                        campaignType: originalCampaign.campaignType || "",
+
+                        date: originalCampaign.date || record.date || "",
+                        endDate: originalCampaign.endDate || "",
+
+                        startTime: originalCampaign.startTime || "",
+                        endTime: originalCampaign.endTime || "",
+
+                        description: originalCampaign.description || "",
+                        objectives: originalCampaign.objectives || "",
+                        tasks: originalCampaign.tasks || "",
+
+                        registrationDeadline:
+                            originalCampaign.registrationDeadline || "",
+
+                        // الساعات تأتي من سجل المشاركة الموثق.
+                        hours: Math.max(0, Number(record.hours) || 0)
+                    };
+                });
+
+                const latest = uniqueRecords[0] || {};
+
+                // لا نضع بيانات الاتصال أو المعرّفات في كائن العرض.
+                return {
+                    fullName: String(
+                        card.fullName ||
+                        userProfile.fullName ||
+                        latest.participantName ||
+                        "متطوع عُضد"
+                    ),
+
+                    category: String(
+                        card.category ||
+                        userProfile.category ||
+                        latest.category ||
+                        ""
+                    ),
+
+                    cvUrl,
+                    cvName,
+                    participatedCampaigns
+                };
+            });
+
+            // تحديث الإحصائيات.
+            const campaignIds = new Set();
+            let totalHours = 0;
+
+            people.forEach(person => {
+                person.participatedCampaigns.forEach(campaign => {
+                    campaignIds.add(campaign.id);
+                    totalHours += campaign.hours;
+                });
+            });
+
+            document.getElementById("peopleStat").textContent =
+                people.length;
+
+            document.getElementById("campaignStat").textContent =
+                campaignIds.size;
+
+            document.getElementById("hoursStat").textContent =
+                Number(totalHours.toFixed(2));
+
+            renderSearchSuggestions();
+            render();
+
+        } catch (error) {
+            console.error("Directory error:", error);
+            console.error("Error code:", error.code);
+            console.error("Error message:", error.message);
+
+            resultCount.textContent = "تعذر تحميل الدليل";
+
+            grid.innerHTML = `
+                <div class="empty">
+                    <strong>تعذر تحميل بيانات المتطوعين</strong>
+                    <p>${safeText(error.code || "")}</p>
+                    <p>${safeText(error.message || "حدث خطأ غير معروف.")}</p>
+                </div>
+            `;
+        }
+    }
+
+    searchInput.addEventListener("input", render);
+
+    function renderSearchSuggestions() {
+        const suggestions = new Set();
+        people.forEach(person => {
+            if (person.fullName) suggestions.add(String(person.fullName).trim());
+            (person.participatedCampaigns || []).forEach(campaign => {
+                if (campaign.title) suggestions.add(String(campaign.title).trim());
+                if (campaign.organizerName) suggestions.add(String(campaign.organizerName).trim());
+                if (campaign.organizer) suggestions.add(String(campaign.organizer).trim());
+            });
+        });
+        const datalist = document.getElementById("searchSuggestions");
+        datalist.replaceChildren(...[...suggestions]
+            .filter(Boolean)
+            .sort((a, b) => a.localeCompare(b, "ar"))
+            .map(value => new Option(value, value)));
+    }
+
+    loadDirectory();
+</script>
+
+</body>
+</html>

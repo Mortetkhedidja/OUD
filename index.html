@@ -1,0 +1,4312 @@
+ <!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> منصة عضد | </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            background: #f4f8f7;
+            color: #183b3a;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: linear-gradient(135deg, #073b3a, #0b5d5b);
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 18px rgba(0,0,0,.15);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #d6ad45;
+            color: #073b3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 23px;
+        }
+
+        .brand p {
+            margin: 3px 0 0;
+            font-size: 12px;
+            opacity: .8;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 15px;
+            border-radius: 9px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,.12);
+        }
+
+        .login-btn {
+            background: #d6ad45;
+            color: #073b3a !important;
+            font-weight: bold;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background:
+                linear-gradient(
+                    rgba(7,59,58,.92),
+                    rgba(11,93,91,.90)
+                );
+
+            color: white;
+            padding: 75px 7% 80px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin: 0 0 15px;
+        }
+
+        .hero h2 span {
+            color: #e2bd5a;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: auto;
+            line-height: 1.9;
+            font-size: 17px;
+            opacity: .92;
+        }
+
+        .hero-actions {
+            margin-top: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            text-decoration: none;
+            padding: 13px 24px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .hero-primary {
+            background: #d6ad45;
+            color: #073b3a;
+        }
+
+        .hero-secondary {
+            border: 1px solid rgba(255,255,255,.5);
+            color: white;
+        }
+
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .container {
+            width: 86%;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .section {
+            padding: 55px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            margin: 0 0 8px;
+            font-size: 30px;
+            color: #073b3a;
+        }
+
+        .section-title p {
+            margin: 0;
+            color: #647776;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: -24px;
+            position: relative;
+        }
+
+        .stat {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 28px;
+            color: #0b6b67;
+            margin-bottom: 6px;
+        }
+
+        .stat span {
+            color: #687977;
+            font-size: 14px;
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .filters {
+            background: white;
+            border-radius: 18px;
+            padding: 23px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+            margin-bottom: 25px;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 1px solid #d8e3e1;
+            border-radius: 11px;
+            outline: none;
+            font-size: 15px;
+            background: #fbfdfc;
+        }
+
+        .search-box input:focus {
+            border-color: #0b6b67;
+            box-shadow: 0 0 0 3px rgba(11,107,103,.08);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 13px;
+            font-size: 20px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .filter-grid select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8e3e1;
+            border-radius: 10px;
+            background: white;
+            outline: none;
+        }
+
+        .filter-grid select:focus {
+            border-color: #0b6b67;
+        }
+
+        .results-info {
+            margin-top: 17px;
+            color: #687977;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CAMPAIGNS
+        ========================= */
+
+        .campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .campaign-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 7px 25px rgba(0,0,0,.07);
+            border: 1px solid #e6eeec;
+            display: flex;
+            flex-direction: column;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.11);
+        }
+
+        .campaign-top {
+            background: linear-gradient(135deg, #073b3a, #0b6b67);
+            padding: 20px;
+            color: white;
+        }
+
+        .campaign-top h3 {
+            margin: 10px 0 0;
+            font-size: 19px;
+            line-height: 1.5;
+        }
+
+        .badges {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 20px;
+            padding: 5px 9px;
+            font-size: 11px;
+        }
+
+        .campaign-body {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .campaign-description {
+            color: #60716f;
+            line-height: 1.7;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .campaign-info {
+            display: grid;
+            gap: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: 13px;
+            color: #455957;
+        }
+
+        .info-icon {
+            width: 23px;
+            flex-shrink: 0;
+        }
+
+.participant-campaigns {
+    margin: 0 0 18px;
+}
+
+.participant-campaigns h4 {
+    margin: 0 0 12px;
+    color: #075957;
+    font-size: 14px;
+}
+
+.participant-campaign {
+    padding: 11px 12px;
+    margin-bottom: 9px;
+    border: 1px solid #e1ece8;
+    border-radius: 10px;
+    background: #f8fbfa;
+}
+
+.participant-campaign-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #183b3a;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.participant-campaign-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+    color: #687977;
+    font-size: 12px;
+}
+
+        .campaign-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #edf2f1;
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            border: none;
+            cursor: pointer;
+            border-radius: 9px;
+            padding: 11px 13px;
+            font-weight: bold;
+            font-size: 13px;
+            flex: 1;
+        }
+
+        .btn-details {
+            background: #eef5f4;
+            color: #075957;
+        }
+
+        .btn-participate {
+            background: #d6ad45;
+            color: #073b3a;
+        }
+
+        .btn-disabled {
+            background: #e8eceb;
+            color: #7b8584;
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           EMPTY / LOADING
+        ========================= */
+
+        .loading,
+        .empty {
+            background: white;
+            border-radius: 17px;
+            padding: 50px 20px;
+            text-align: center;
+            color: #687977;
+            grid-column: 1 / -1;
+        }
+
+        .loading-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+            z-index: 500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            padding: 28px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            left: 18px;
+            top: 15px;
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            background: #eef3f2;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: #073b3a;
+        }
+
+        .detail-section {
+            margin-top: 20px;
+        }
+
+        .detail-section h4 {
+            color: #0b6b67;
+            margin-bottom: 7px;
+        }
+
+        .detail-section p {
+            line-height: 1.8;
+            color: #566765;
+            white-space: pre-line;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 13px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: bold;
+            color: #35514f;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            border: 1px solid #d6e2df;
+            border-radius: 9px;
+            padding: 11px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #0b6b67;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 18px;
+            border: none;
+            border-radius: 10px;
+            padding: 13px;
+            background: #0b6b67;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .submit-btn:hover {
+            background: #084f4d;
+        }
+
+        .notice {
+            background: #f1f7f6;
+            border-right: 4px solid #0b6b67;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4c6260;
+            line-height: 1.7;
+            margin-bottom: 17px;
+        }
+
+        .registration-type {
+            background: #f8f4e8;
+            border-right: 4px solid #d6ad45;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #5d5132;
+            line-height: 1.7;
+            margin-bottom: 17px;
+        }
+
+        /* =====================================================
+           PROFESSIONAL MESSAGE MODAL
+        ===================================================== */
+
+        .message-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 35, 34, .68);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .message-modal.active {
+            display: flex;
+            animation: fadeIn .2s ease;
+        }
+
+        .message-box {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 34px 28px 28px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,.22);
+            animation: messageAppear .25s ease;
+        }
+
+        .message-close {
+            position: absolute;
+            top: 13px;
+            left: 13px;
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 50%;
+            background: #f1f4f3;
+            color: #49605e;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 34px;
+            transition: .2s;
+        }
+
+        .message-close:hover {
+            background: #e4ebea;
+        }
+
+        .message-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            font-weight: bold;
+        }
+
+        .message-icon.success {
+            background: #e7f7ef;
+            color: #16845a;
+        }
+
+        .message-icon.warning {
+            background: #fff5dc;
+            color: #b78318;
+        }
+
+        .message-icon.error {
+            background: #fdeaea;
+            color: #c94a4a;
+        }
+
+        .message-icon.info {
+            background: #e8f4f4;
+            color: #0b6b67;
+        }
+
+        .message-box h3 {
+            margin: 0 0 12px;
+            color: #073b3a;
+            font-size: 21px;
+        }
+
+        .message-box p {
+            margin: 0;
+            color: #60716f;
+            line-height: 1.9;
+            font-size: 14px;
+            white-space: pre-line;
+        }
+
+        .message-button {
+            width: 100%;
+            border: none;
+            border-radius: 11px;
+            padding: 12px;
+            margin-top: 22px;
+            background: #0b6b67;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .message-button:hover {
+            background: #084f4d;
+            transform: translateY(-1px);
+        }
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+        @keyframes messageAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px) scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #073b3a;
+            color: white;
+            padding: 35px 7%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer strong {
+            color: #e2bd5a;
+        }
+
+        footer p {
+            opacity: .75;
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .campaign-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 14px 5%;
+            }
+
+            nav a:not(.login-btn) {
+                display: none;
+            }
+
+            .hero {
+                padding: 55px 5%;
+            }
+
+            .hero h2 {
+                font-size: 31px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                margin-top: -20px;
+            }
+
+            .campaign-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .campaign-footer {
+                flex-direction: column;
+            }
+
+            .message-box {
+                padding: 30px 20px 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo-area">
+
+        <div class="logo">
+            ع
+        </div>
+
+        <div class="brand">
+
+            <h1>
+                منصة عضد
+            </h1>
+
+            <p>
+                يد تمتد و أثر  يمتد
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="#campaigns">
+            الحملات
+        </a>
+
+        <a href="/pages/participants.html">دليل المتطوعين</a>
+
+        <a href="#about">
+            عن المنصة
+        </a>
+
+
+        <a
+            href="./pages/login.html"
+            class="login-btn"
+        >
+            تسجيل الدخول
+        </a>
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <h2>
+        تطوّع اليوم، <span>واترك أثرًا</span>
+    </h2>
+
+    <p>
+        منصة عضد تجمع الشباب مع المبادرات والحملات التطوعية، وتساعد على اكتشاف فرص التطوع والمشاركة فيها وتوثيق الإنجازات التطوعية.
+    </p>
+
+
+    <div class="hero-actions">
+
+        <a
+            href="#campaigns"
+            class="hero-btn hero-primary"
+        >
+            اكتشف الحملات
+        </a>
+
+        <a
+            href="./pages/login.html"
+            class="hero-btn hero-secondary"
+        >
+            دخول المتطوعين
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<div class="container">
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <strong id="campaignCount">
+                0
+            </strong>
+
+            <span>
+                حملة منشورة
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                5
+            </strong>
+
+            <span>
+                مشاركات موثقة للحصول على بطاقة عُضد
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                عضد
+            </strong>
+
+            <span>
+                هوية رقمية للمتطوع
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CAMPAIGNS
+========================= -->
+
+<section
+    class="section"
+    id="campaigns"
+>
+
+    <div class="container">
+
+       
+    <div class="section-title">
+        <h2>دليل المشاركين في العمل التطوعي</h2>
+        <p>نحتفي بكل من ساهم في حملة تطوعية ووثّق مشاركته</p>
+    </div>
+
+    <div class="directory-note">
+        اكتشف المشاركين في الحملات التطوعية والأنشطة التي ساهموا فيها،
+        مع عرض المشاركات المؤكدة وساعات التطوع الموثقة.
+    </div>
+
+
+
+        <!-- FILTERS -->
+
+        <div class="filters">
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    🔎
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="ابحث عن حملة، مبادرة، جهة منظمة..."
+                >
+
+            </div>
+
+
+            <div class="filter-grid">
+
+                <select id="fieldFilter">
+
+                    <option value="">
+                        جميع المجالات
+                    </option>
+
+                    <option value="بيئي">
+                        🌱 بيئي
+                    </option>
+
+                    <option value="اجتماعي">
+                        🤝 اجتماعي
+                    </option>
+
+                    <option value="جامعي">
+                        🎓 جامعي
+                    </option>
+
+                    <option value="تربوي">
+                        📚 تربوي
+                    </option>
+
+                    <option value="ثقافي">
+                        🎭 ثقافي
+                    </option>
+
+                    <option value="رياضي">
+                        ⚽ رياضي
+                    </option>
+
+                    <option value="رقمي وتقني">
+                        💻 رقمي وتقني
+                    </option>
+
+                    <option value="صحي">
+                        🩺 صحي
+                    </option>
+
+                    <option value="إنساني">
+                        ❤️ إنساني
+                    </option>
+
+                    <option value="مجتمعي">
+                        🏘️ مجتمعي
+                    </option>
+
+                    <option value="حماية الحيوانات">
+                        🐾 حماية الحيوانات
+                    </option>
+
+                    <option value="أخرى">
+                        أخرى
+                    </option>
+
+                </select>
+
+
+                <select id="organizerFilter">
+
+                    <option value="">
+                        جميع الجهات المنظمة
+                    </option>
+
+                    <option value="جامعة">
+                        جامعة
+                    </option>
+
+                    <option value="مؤسسة تربوية">
+                        مؤسسة تربوية
+                    </option>
+
+                    <option value="جمعية">
+                        جمعية
+                    </option>
+
+                    <option value="مؤسسة عمومية">
+                        مؤسسة عمومية
+                    </option>
+
+                    <option value="مؤسسة اقتصادية / شركة">
+                        مؤسسة اقتصادية / شركة
+                    </option>
+
+                    <option value="مبادرة شبابية">
+                        مبادرة شبابية
+                    </option>
+
+                    <option value="بلدية أو جهة محلية">
+                        بلدية أو جهة محلية
+                    </option>
+
+                    <option value="مؤسسة صحية">
+                        مؤسسة صحية
+                    </option>
+
+                    <option value="هيئة أو منظمة">
+                        هيئة أو منظمة
+                    </option>
+
+                    <option value="أخرى">
+                        أخرى
+                    </option>
+
+                </select>
+
+
+                <select id="wilayaFilter">
+
+                    <option value="">
+                        جميع الولايات
+                    </option>
+
+                    <option>أدرار</option>
+                    <option>الشلف</option>
+                    <option>الأغواط</option>
+                    <option>أم البواقي</option>
+                    <option>باتنة</option>
+                    <option>بجاية</option>
+                    <option>بسكرة</option>
+                    <option>بشار</option>
+                    <option>البليدة</option>
+                    <option>البويرة</option>
+                    <option>تمنراست</option>
+                    <option>تبسة</option>
+                    <option>تلمسان</option>
+                    <option>تيارت</option>
+                    <option>تيزي وزو</option>
+                    <option>الجزائر</option>
+                    <option>الجلفة</option>
+                    <option>جيجل</option>
+                    <option>سطيف</option>
+                    <option>سعيدة</option>
+                    <option>سكيكدة</option>
+                    <option>سيدي بلعباس</option>
+                    <option>عنابة</option>
+                    <option>قالمة</option>
+                    <option>قسنطينة</option>
+                    <option>المدية</option>
+                    <option>مستغانم</option>
+                    <option>المسيلة</option>
+                    <option>معسكر</option>
+                    <option>ورقلة</option>
+                    <option>وهران</option>
+                    <option>البيض</option>
+                    <option>إليزي</option>
+                    <option>برج بوعريريج</option>
+                    <option>بومرداس</option>
+                    <option>الطارف</option>
+                    <option>تندوف</option>
+                    <option>تيسمسيلت</option>
+                    <option>الوادي</option>
+                    <option>خنشلة</option>
+                    <option>سوق أهراس</option>
+                    <option>تيبازة</option>
+                    <option>ميلة</option>
+                    <option>عين الدفلى</option>
+                    <option>النعامة</option>
+                    <option>عين تموشنت</option>
+                    <option>غرداية</option>
+                    <option>غليزان</option>
+                    <option>تيميمون</option>
+                    <option>برج باجي مختار</option>
+                    <option>أولاد جلال</option>
+                    <option>بني عباس</option>
+                    <option>عين صالح</option>
+                    <option>عين قزام</option>
+                    <option>تقرت</option>
+                    <option>جانت</option>
+                    <option>المغير</option>
+                    <option>المنيعة</option>
+
+                </select>
+
+
+                <select id="typeFilter">
+
+                    <option value="">
+                        جميع أنواع الحملات
+                    </option>
+
+                    <option value="حملة يوم واحد">
+                        حملة يوم واحد
+                    </option>
+
+                    <option value="حملة متعددة الأيام">
+                        حملة متعددة الأيام
+                    </option>
+
+                    <option value="برنامج تطوعي">
+                        برنامج تطوعي
+                    </option>
+
+                    <option value="فعالية تطوعية">
+                        فعالية تطوعية
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="results-info">
+
+                عدد الحملات الظاهرة:
+                <strong id="resultCount">0</strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- CAMPAIGN LIST -->
+
+        <div
+            class="campaign-grid"
+            id="campaignGrid"
+        >
+
+            <div class="loading">
+
+                <div class="loading-icon">
+                    ⏳
+                </div>
+
+                جارٍ تحميل الحملات...
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section
+    class="section"
+    id="about"
+    style="background:#edf5f3;"
+>
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+                كيف تعمل منصة عضد؟
+            </h2>
+
+            <p>
+                خطوات بسيطة للمشاركة في العمل التطوعي
+            </p>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <strong>
+                    01
+                </strong>
+
+                <span>
+                    اكتشف حملة تطوعية تناسب اهتماماتك
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    02
+                </strong>
+
+                <span>
+                    سجّل للمشاركة وانتظر تأكيد لجنة المتابعة
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong>
+                    03
+                </strong>
+
+                <span>
+                    بعد توثيق 5 مشاركات يمكنك الحصول على بطاقة عُضد
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DETAILS MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="detailsModal"
+>
+
+    <div class="modal-content">
+
+        <button
+            class="close"
+            onclick="closeModal('detailsModal')"
+        >
+            ×
+        </button>
+
+        <h2 id="detailsTitle"></h2>
+
+        <div id="detailsContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     REGISTRATION MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="registrationModal"
+>
+
+    <div class="modal-content">
+
+        <button
+            class="close"
+            onclick="closeModal('registrationModal')"
+        >
+            ×
+        </button>
+
+        <h2>
+            التسجيل في الحملة
+        </h2>
+
+
+        <div
+            class="notice"
+            id="registrationCampaignName"
+        ></div>
+
+
+        <div
+            class="registration-type"
+            id="registrationTypeMessage"
+        ></div>
+
+
+        <form id="registrationForm">
+
+            <input
+                type="hidden"
+                id="registrationCampaignId"
+            >
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        الاسم واللقب *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="participantName"
+                        required
+                    >
+
+                </div>
+
+
+                <div
+                    class="form-group"
+                    id="phoneGroup"
+                >
+
+                    <label>
+                        رقم الهاتف *
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="participantPhone"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        البريد الإلكتروني *
+                    </label>
+
+                    <input
+                        type="email"
+                        id="participantEmail"
+                        required
+                    >
+
+                </div>
+
+
+                <div
+                    class="form-group"
+                    id="categoryGroup"
+                >
+
+                    <label>
+                        الفئة *
+                    </label>
+
+                    <select
+                        id="participantCategory"
+                        required
+                    >
+
+                        <option value="">
+                            اختر الفئة
+                        </option>
+
+                        <option value="طالب">
+                            طالب
+                        </option>
+
+                        <option value="موظف">
+                            موظف
+                        </option>
+
+                        <option value="باحث عن عمل">
+                            باحث عن عمل
+                        </option>
+
+                        <option value="أستاذ / معلم">
+                            أستاذ / معلم
+                        </option>
+
+                        <option value="صاحب مشروع">
+                            صاحب مشروع
+                        </option>
+
+                        <option value="أخرى">
+                            أخرى
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    class="form-group"
+                    id="birthDateGroup"
+                >
+
+                    <label>
+                        تاريخ الميلاد *
+                    </label>
+
+                    <input
+                        type="date"
+                        id="participantBirthDate"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="notice"
+                style="margin-top:15px;"
+            >
+
+                سيتم إرسال طلبك إلى لجنة المتابعة.
+                لا تعتبر المشاركة مؤكدة إلا بعد قبول طلبك من اللجنة.
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitRegistration"
+            >
+                إرسال طلب المشاركة
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PROFESSIONAL MESSAGE MODAL
+===================================================== -->
+
+<div
+    class="message-modal"
+    id="messageModal"
+>
+
+    <div class="message-box">
+
+        <button
+            class="message-close"
+            onclick="closeMessageModal()"
+            aria-label="إغلاق"
+        >
+            ×
+        </button>
+
+
+        <div
+            class="message-icon"
+            id="messageIcon"
+        >
+            ✓
+        </div>
+
+
+        <h3 id="messageTitle">
+            تم بنجاح
+        </h3>
+
+
+        <p id="messageText">
+            تمت العملية بنجاح.
+        </p>
+
+
+        <button
+            class="message-button"
+            onclick="closeMessageModal()"
+        >
+            حسنًا
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <strong>
+        منصة عُضد
+    </strong>
+
+    <p>
+        منصة رقمية لتشجيع الشباب على التطوع وتوثيق أثرهم في المجتمع.
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script type="module">
+
+    import {
+        db,
+        auth
+    } from "./js/firebase.js";
+
+
+    import {
+        collection,
+        query,
+        where,
+        getDocs,
+        addDoc,
+        serverTimestamp,
+        doc,
+        getDoc
+    }
+    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+    import {
+        onAuthStateChanged
+    }
+    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+    /* =====================================================
+       VARIABLES
+    ===================================================== */
+
+    let campaigns = [];
+
+    let currentUser = null;
+
+    let authReady = false;
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const campaignGrid =
+        document.getElementById("campaignGrid");
+
+    const campaignCount =
+        document.getElementById("campaignCount");
+
+    const resultCount =
+        document.getElementById("resultCount");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const fieldFilter =
+        document.getElementById("fieldFilter");
+
+    const organizerFilter =
+        document.getElementById("organizerFilter");
+
+    const wilayaFilter =
+        document.getElementById("wilayaFilter");
+
+    const typeFilter =
+        document.getElementById("typeFilter");
+
+
+    /* =====================================================
+       PROFESSIONAL MESSAGE
+    ===================================================== */
+
+    window.showMessage =
+        function(
+            type,
+            title,
+            message
+        ) {
+
+            const modal =
+                document.getElementById(
+                    "messageModal"
+                );
+
+            const icon =
+                document.getElementById(
+                    "messageIcon"
+                );
+
+            const titleElement =
+                document.getElementById(
+                    "messageTitle"
+                );
+
+            const textElement =
+                document.getElementById(
+                    "messageText"
+                );
+
+
+            icon.className =
+                "message-icon " +
+                type;
+
+
+            if (type === "success") {
+
+                icon.textContent = "✓";
+
+            }
+            else if (type === "warning") {
+
+                icon.textContent = "!";
+
+            }
+            else if (type === "error") {
+
+                icon.textContent = "×";
+
+            }
+            else {
+
+                icon.textContent = "i";
+
+            }
+
+
+            titleElement.textContent =
+                title;
+
+
+            textElement.textContent =
+                message;
+
+
+            modal.classList.add(
+                "active"
+            );
+
+        };
+
+
+    window.closeMessageModal =
+        function() {
+
+            document.getElementById(
+                "messageModal"
+            ).classList.remove(
+                "active"
+            );
+
+        };
+
+
+    /* =====================================================
+       AUTH STATE
+    ===================================================== */
+
+    onAuthStateChanged(
+        auth,
+        (user) => {
+
+            currentUser =
+                user || null;
+
+            authReady = true;
+
+            console.log(
+                "المستخدم الحالي:",
+                currentUser
+                    ? currentUser.uid
+                    : "لا يوجد مستخدم"
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       LOAD CAMPAIGNS
+    ===================================================== */
+
+    async function loadCampaigns() {
+
+        try {
+
+            const q =
+                query(
+                    collection(
+                        db,
+                        "campaigns"
+                    ),
+                    where(
+                        "status",
+                        "==",
+                        "published"
+                    )
+                );
+
+
+            const snapshot =
+                await getDocs(q);
+
+
+            campaigns = [];
+
+
+            snapshot.forEach(
+                (docSnap) => {
+
+                    campaigns.push({
+
+                        id:
+                            docSnap.id,
+
+                        ...docSnap.data()
+
+                    });
+
+                }
+            );
+
+
+            campaigns.sort(
+                (a, b) => {
+
+                    const dateA =
+                        a.date || "";
+
+                    const dateB =
+                        b.date || "";
+
+                    return dateA.localeCompare(
+                        dateB
+                    );
+
+                }
+            );
+
+
+            campaignCount.textContent =
+                campaigns.length;
+
+
+            renderCampaigns();
+
+
+        } catch (error) {
+
+            console.error(
+                "Erreur lors du chargement:",
+                error
+            );
+
+
+            campaignGrid.innerHTML = `
+
+                <div class="empty">
+
+                    <div style="font-size:35px;">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        تعذر تحميل الحملات
+                    </h3>
+
+                    <p>
+                        تأكدي من اتصال Firebase
+                        وقواعد Firestore.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       FILTER
+    ===================================================== */
+
+    function renderCampaigns() {
+
+        const search =
+            searchInput.value
+                .trim()
+                .toLowerCase();
+
+
+        const field =
+            fieldFilter.value;
+
+
+        const organizer =
+            organizerFilter.value;
+
+
+        const wilaya =
+            wilayaFilter.value;
+
+
+        const type =
+            typeFilter.value;
+
+
+        const filtered =
+            campaigns.filter(
+                (campaign) => {
+
+                    const searchableText = [
+
+                        campaign.title,
+
+                        campaign.description,
+
+                        campaign.organizerName,
+
+                        campaign.field,
+
+                        campaign.wilaya,
+
+                        campaign.location
+
+                    ]
+                    .filter(Boolean)
+                    .join(" ")
+                    .toLowerCase();
+
+
+                    const matchesSearch =
+                        !search ||
+                        searchableText.includes(
+                            search
+                        );
+
+
+                    const matchesField =
+                        !field ||
+                        campaign.field === field;
+
+
+                    const matchesOrganizer =
+                        !organizer ||
+                        campaign.organizerType === organizer;
+
+
+                    const matchesWilaya =
+                        !wilaya ||
+                        campaign.wilaya === wilaya;
+
+
+                    const matchesType =
+                        !type ||
+                        campaign.campaignType === type;
+
+
+                    return (
+                        matchesSearch &&
+                        matchesField &&
+                        matchesOrganizer &&
+                        matchesWilaya &&
+                        matchesType
+                    );
+
+                }
+            );
+
+
+        resultCount.textContent =
+            filtered.length;
+
+
+        if (
+            filtered.length === 0
+        ) {
+
+            campaignGrid.innerHTML = `
+
+                <div class="empty">
+
+                    <div style="font-size:40px;">
+                        🔍
+                    </div>
+
+                    <h3>
+                        لا توجد حملات مطابقة
+                    </h3>
+
+                    <p>
+                        جرّبي تغيير كلمات البحث أو الفلاتر.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        campaignGrid.innerHTML =
+            filtered
+                .map(createCampaignCard)
+                .join("");
+
+    }
+
+
+    /* =====================================================
+       CAMPAIGN CARD
+    ===================================================== */
+
+    function createCampaignCard(campaign) {
+
+        const registrationOpen =
+            isRegistrationOpen(campaign);
+
+
+        const dateText =
+            formatDateRange(campaign);
+
+
+        const description =
+            campaign.description ||
+            "لا يوجد وصف متاح لهذه الحملة.";
+
+
+        const shortDescription =
+            description.length > 130
+                ? description.substring(0, 130) + "..."
+                : description;
+
+
+        return `
+
+            <article class="campaign-card">
+
+                <div class="campaign-top">
+
+                    <div class="badges">
+
+                        ${
+                            campaign.field
+                                ? `
+                                    <span class="badge">
+                                        ${escapeHtml(
+                                            campaign.field
+                                        )}
+                                    </span>
+                                  `
+                                : ""
+                        }
+
+
+                        ${
+                            campaign.campaignType
+                                ? `
+                                    <span class="badge">
+                                        ${escapeHtml(
+                                            campaign.campaignType
+                                        )}
+                                    </span>
+                                  `
+                                : ""
+                        }
+
+                    </div>
+
+
+                    <h3>
+                        ${escapeHtml(
+                            campaign.title ||
+                            "حملة تطوعية"
+                        )}
+                    </h3>
+
+                </div>
+
+
+                <div class="campaign-body">
+
+                    <div class="campaign-description">
+                        ${escapeHtml(
+                            shortDescription
+                        )}
+                    </div>
+
+
+                    <div class="campaign-info">
+
+                        <div class="info-row">
+
+                            <span class="info-icon">
+                                🏛️
+                            </span>
+
+                            <span>
+                                ${
+                                    escapeHtml(
+                                        campaign.organizerName ||
+                                        campaign.organizerType ||
+                                        "غير محدد"
+                                    )
+                                }
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-icon">
+                                📍
+                            </span>
+
+                            <span>
+                                ${
+                                    escapeHtml(
+                                        [
+                                            campaign.location,
+                                            campaign.wilaya
+                                        ]
+                                        .filter(Boolean)
+                                        .join(" - ") ||
+                                        "غير محدد"
+                                    )
+                                }
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-icon">
+                                📅
+                            </span>
+
+                            <span>
+                                ${dateText}
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-icon">
+                                ⏰
+                            </span>
+
+                            <span>
+                                ${
+                                    escapeHtml(
+                                        formatTimeRange(
+                                            campaign
+                                        )
+                                    )
+                                }
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-icon">
+                                👥
+                            </span>
+
+                            <span>
+                                ${
+                                    campaign.capacity
+                                        ? "الحد الأقصى للمشاركين: " +
+                                          escapeHtml(
+                                              String(
+                                                  campaign.capacity
+                                              )
+                                          ) +
+                                          " مشارك"
+                                        : "عدد المشاركين غير محدد"
+                                }
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="campaign-footer">
+
+                    <button
+                        class="btn btn-details"
+                        onclick="showDetails('${campaign.id}')"
+                    >
+                        👁️ التفاصيل
+                    </button>
+
+
+                    ${
+                        registrationOpen
+
+                        ?
+
+                        `
+                            <button
+                                class="btn btn-participate"
+                                onclick="openRegistration('${campaign.id}')"
+                            >
+                                🙋 المشاركة
+                            </button>
+                        `
+
+                        :
+
+                        `
+                            <button
+                                class="btn btn-disabled"
+                                disabled
+                            >
+                                التسجيل مغلق
+                            </button>
+                        `
+                    }
+
+                </div>
+
+            </article>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       DETAILS
+    ===================================================== */
+
+    window.showDetails =
+        function(campaignId) {
+
+            const campaign =
+                campaigns.find(
+                    item =>
+                        item.id === campaignId
+                );
+
+
+            if (!campaign) {
+                return;
+            }
+
+
+            document.getElementById(
+                "detailsTitle"
+            ).textContent =
+                campaign.title ||
+                "الحملة التطوعية";
+
+
+            document.getElementById(
+                "detailsContent"
+            ).innerHTML = `
+
+                <div class="detail-section">
+
+                    <h4>
+                        📌 المجال
+                    </h4>
+
+                    <p>
+                        ${escapeHtml(
+                            campaign.field ||
+                            "غير محدد"
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div class="detail-section">
+
+                    <h4>
+                        🏛️ الجهة المنظمة
+                    </h4>
+
+                    <p>
+                        ${escapeHtml(
+                            [
+                                campaign.organizerType,
+                                campaign.organizerName
+                            ]
+                            .filter(Boolean)
+                            .join(" - ") ||
+                            "غير محدد"
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div class="detail-section">
+
+                    <h4>
+                        📍 المكان
+                    </h4>
+
+                    <p>
+                        ${escapeHtml(
+                            [
+                                campaign.location,
+                                campaign.wilaya
+                            ]
+                            .filter(Boolean)
+                            .join(" - ") ||
+                            "غير محدد"
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div class="detail-section">
+
+                    <h4>
+                        📅 التاريخ
+                    </h4>
+
+                    <p>
+                        ${escapeHtml(
+                            formatDateRange(
+                                campaign
+                            )
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div class="detail-section">
+
+                    <h4>
+                        ⏰ التوقيت
+                    </h4>
+
+                    <p>
+                        ${escapeHtml(
+                            formatTimeRange(
+                                campaign
+                            )
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div class="detail-section">
+
+                    <h4>
+                        📝 وصف الحملة
+                    </h4>
+
+                    <p>
+                        ${escapeHtml(
+                            campaign.description ||
+                            "لا يوجد وصف."
+                        )}
+                    </p>
+
+                </div>
+
+
+                ${
+                    campaign.objectives
+
+                    ?
+
+                    `
+                        <div class="detail-section">
+
+                            <h4>
+                                🎯 الأهداف
+                            </h4>
+
+                            <p>
+                                ${escapeHtml(
+                                    campaign.objectives
+                                )}
+                            </p>
+
+                        </div>
+                    `
+
+                    : ""
+                }
+
+
+                ${
+                    campaign.tasks
+
+                    ?
+
+                    `
+                        <div class="detail-section">
+
+                            <h4>
+                                📋 المهام
+                            </h4>
+
+                            <p>
+                                ${escapeHtml(
+                                    campaign.tasks
+                                )}
+                            </p>
+
+                        </div>
+                    `
+
+                    : ""
+                }
+
+
+                <div class="detail-section">
+
+                    <h4>
+                        ⏳ آخر أجل للتسجيل
+                    </h4>
+
+                    <p>
+                        ${
+                            escapeHtml(
+                                campaign.registrationDeadline
+                                    ? formatDate(
+                                        campaign.registrationDeadline
+                                    )
+                                    : "غير محدد"
+                            )
+                        }
+                    </p>
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "detailsModal"
+            ).classList.add("active");
+
+        };
+
+
+    /* =====================================================
+       GET ACTIVE VOLUNTEER CARD
+    ===================================================== */
+
+    async function getActiveVolunteerCard(userId) {
+
+        if (!userId) {
+            return null;
+        }
+
+
+        try {
+
+            const cardsQuery =
+                query(
+                    collection(
+                        db,
+                        "volunteerCards"
+                    ),
+                    where(
+                        "userId",
+                        "==",
+                        userId
+                    ),
+                    where(
+                        "status",
+                        "==",
+                        "active"
+                    )
+                );
+
+
+            const snapshot =
+                await getDocs(
+                    cardsQuery
+                );
+
+
+            if (
+                snapshot.empty
+            ) {
+
+                return null;
+
+            }
+
+
+            const cardDoc =
+                snapshot.docs[0];
+
+
+            return {
+
+                id:
+                    cardDoc.id,
+
+                ...cardDoc.data()
+
+            };
+
+
+        } catch (error) {
+
+            console.error(
+                "خطأ أثناء التحقق من بطاقة المتطوع:",
+                error
+            );
+
+
+            return null;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       NORMALIZE PHONE
+    ===================================================== */
+
+    function normalizePhone(
+        phone
+    ) {
+
+        return String(
+            phone || ""
+        )
+        .replace(
+           (/\s|-/g),
+            ""
+        )
+        .trim();
+
+    }
+
+
+    /* =====================================================
+       NORMALIZE EMAIL
+    ===================================================== */
+
+    function normalizeEmail(
+        email
+    ) {
+
+        return String(
+            email || ""
+        )
+        .trim()
+        .toLowerCase();
+
+    }
+
+
+    /* =====================================================
+       CHECK GUEST DUPLICATE
+       نفس الهاتف أو البريد في نفس الحملة
+    ===================================================== */
+
+    async function checkGuestDuplicate(
+        campaignId,
+        phone,
+        email
+    ) {
+
+        /*
+           مهم:
+           الزائر لا يمنع من التسجيل إلا إذا كان لديه
+           تسجيل سابق من نوع guest في نفس الحملة.
+
+           - نفس الحملة + guest سابق => ممنوع
+           - حملة أخرى + guest سابق => مسموح
+           - تسجيل سابق من نوع volunteer => لا يؤثر على تسجيل الزائر
+        */
+
+        const registrationsQuery =
+            query(
+                collection(
+                    db,
+                    "registrations"
+                ),
+                where(
+                    "campaignId",
+                    "==",
+                    campaignId
+                ),
+                where(
+                    "registrationType",
+                    "==",
+                    "guest"
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(
+                registrationsQuery
+            );
+
+
+        const normalizedPhone =
+            normalizePhone(
+                phone
+            );
+
+
+        const normalizedEmail =
+            normalizeEmail(
+                email
+            );
+
+
+        let phoneExists =
+            false;
+
+        let emailExists =
+            false;
+
+
+        snapshot.forEach(
+            (docSnap) => {
+
+                const data =
+                    docSnap.data();
+
+
+                /*
+                   نتحقق فقط من التسجيلات التي
+                   registrationType فيها guest.
+
+                   هذا يمنع الخلط بين الزائر والمتطوع.
+                */
+                if (
+                    data.registrationType !==
+                    "guest"
+                ) {
+                    return;
+                }
+
+
+                const existingPhone =
+                    normalizePhone(
+                        data.phone
+                    );
+
+
+                const existingEmail =
+                    normalizeEmail(
+                        data.email
+                    );
+
+
+                if (
+                    normalizedPhone &&
+                    existingPhone &&
+                    normalizedPhone ===
+                    existingPhone
+                ) {
+
+                    phoneExists = true;
+
+                }
+
+
+                if (
+                    normalizedEmail &&
+                    existingEmail &&
+                    normalizedEmail ===
+                    existingEmail
+                ) {
+
+                    emailExists = true;
+
+                }
+
+            }
+        );
+
+
+        return {
+
+            phoneExists:
+                phoneExists,
+
+            emailExists:
+                emailExists,
+
+            duplicate:
+                phoneExists ||
+                emailExists
+
+        };
+
+    }
+
+
+    /* =====================================================
+       OPEN REGISTRATION
+    ===================================================== */
+
+    window.openRegistration =
+        async function(campaignId) {
+
+            const campaign =
+                campaigns.find(
+                    item =>
+                        item.id === campaignId
+                );
+
+
+            if (!campaign) {
+                return;
+            }
+
+
+            if (
+                !isRegistrationOpen(
+                    campaign
+                )
+            ) {
+
+                showMessage(
+                    "warning",
+                    "التسجيل مغلق",
+                    "عذرًا، التسجيل في هذه الحملة مغلق حاليًا."
+                );
+
+                return;
+
+            }
+
+
+            if (!authReady) {
+
+                await new Promise(
+                    resolve => {
+
+                        const check =
+                            setInterval(
+                                () => {
+
+                                    if (
+                                        authReady
+                                    ) {
+
+                                        clearInterval(
+                                            check
+                                        );
+
+                                        resolve();
+
+                                    }
+
+                                },
+                                50
+                            );
+
+                    }
+                );
+
+            }
+
+
+            const modal =
+                document.getElementById(
+                    "registrationModal"
+                );
+
+
+            const nameInput =
+                document.getElementById(
+                    "participantName"
+                );
+
+
+            const phoneInput =
+                document.getElementById(
+                    "participantPhone"
+                );
+
+
+            const emailInput =
+                document.getElementById(
+                    "participantEmail"
+                );
+
+
+            const categoryInput =
+                document.getElementById(
+                    "participantCategory"
+                );
+
+
+            const birthDateInput =
+                document.getElementById(
+                    "participantBirthDate"
+                );
+
+
+            const phoneGroup =
+                document.getElementById(
+                    "phoneGroup"
+                );
+
+
+            const categoryGroup =
+                document.getElementById(
+                    "categoryGroup"
+                );
+
+
+            const birthDateGroup =
+                document.getElementById(
+                    "birthDateGroup"
+                );
+
+
+            const typeMessage =
+                document.getElementById(
+                    "registrationTypeMessage"
+                );
+
+
+            let registrationType =
+                "guest";
+
+
+            let volunteerCard =
+                null;
+
+
+            let userData =
+                null;
+
+
+            /* =================================================
+               إذا كان هناك مستخدم:
+               نتحقق هل لديه بطاقة فعالة
+            ================================================= */
+
+            if (currentUser) {
+
+                volunteerCard =
+                    await getActiveVolunteerCard(
+                        currentUser.uid
+                    );
+
+
+                console.log(
+                    "===== فحص المتطوع ====="
+                );
+
+                console.log(
+                    "Firebase Auth UID:",
+                    currentUser?.uid
+                );
+
+                console.log(
+                    "Firebase Auth Email:",
+                    currentUser?.email
+                );
+
+                console.log(
+                    "Volunteer Card:",
+                    volunteerCard
+                );
+
+                console.log(
+                    "========================"
+                );
+
+
+                if (volunteerCard) {
+
+                    registrationType =
+                        "volunteer";
+
+
+                    const userSnapshot =
+                        await getDoc(
+                            doc(
+                                db,
+                                "users",
+                                currentUser.uid
+                            )
+                        );
+
+
+                    if (
+                        userSnapshot.exists()
+                    ) {
+
+                        userData =
+                            userSnapshot.data();
+
+                    }
+
+
+                    nameInput.value =
+                        userData?.fullName ||
+                        currentUser.displayName ||
+                        currentUser.email ||
+                        "";
+
+
+                    emailInput.value =
+                        userData?.email ||
+                        currentUser.email ||
+                        "";
+
+
+                    phoneInput.value =
+                        userData?.phone ||
+                        "";
+
+
+                    categoryInput.value =
+                        userData?.category ||
+                        "";
+
+
+                    birthDateInput.value =
+                        userData?.birthDate ||
+                        "";
+
+
+                    phoneInput.required =
+                        false;
+
+                    categoryInput.required =
+                        false;
+
+                    birthDateInput.required =
+                        false;
+
+
+                    phoneInput.disabled =
+                        true;
+
+                    categoryInput.disabled =
+                        true;
+
+                    birthDateInput.disabled =
+                        true;
+
+
+                    phoneGroup.style.display =
+                        "none";
+
+                    categoryGroup.style.display =
+                        "none";
+
+                    birthDateGroup.style.display =
+                        "none";
+
+
+                    nameInput.readOnly =
+                        true;
+
+                    emailInput.readOnly =
+                        true;
+
+
+                    typeMessage.innerHTML = `
+
+                        <strong>
+                            🪪 متطوع — لديه حساب وبطاقة عُضد
+                        </strong>
+
+                        <br>
+
+                        رقم البطاقة:
+                        <strong>
+                            ${escapeHtml(
+                                volunteerCard.cardNumber ||
+                                ""
+                            )}
+                        </strong>
+
+                    `;
+
+                }
+
+            }
+
+
+            /* =================================================
+               لا توجد بطاقة
+               => زائر
+            ================================================= */
+
+            if (
+                registrationType === "guest"
+            ) {
+
+                nameInput.value =
+                    "";
+
+                phoneInput.value =
+                    "";
+
+                emailInput.value =
+                    "";
+
+                categoryInput.value =
+                    "";
+
+                birthDateInput.value =
+                    "";
+
+
+                phoneInput.required =
+                    true;
+
+                categoryInput.required =
+                    true;
+
+                birthDateInput.required =
+                    true;
+
+
+                phoneInput.disabled =
+                    false;
+
+                categoryInput.disabled =
+                    false;
+
+                birthDateInput.disabled =
+                    false;
+
+
+                phoneGroup.style.display =
+                    "flex";
+
+                categoryGroup.style.display =
+                    "flex";
+
+                birthDateGroup.style.display =
+                    "flex";
+
+
+                nameInput.readOnly =
+                    false;
+
+                emailInput.readOnly =
+                    false;
+
+
+                typeMessage.innerHTML = `
+
+                    <strong>
+                        👤 زائر — بدون حساب
+                    </strong>
+
+                    <br>
+
+                    لا توجد بطاقة متطوع فعالة مرتبطة بهذا الحساب.
+                    سيتم تسجيل المشاركة كزائر.
+
+                `;
+
+            }
+
+
+            modal.dataset.registrationType =
+                registrationType;
+
+
+            modal.dataset.userId =
+                registrationType === "volunteer"
+                    ? currentUser.uid
+                    : "";
+
+
+            modal.dataset.cardNumber =
+                registrationType === "volunteer"
+                    ? (
+                        volunteerCard?.cardNumber ||
+                        ""
+                    )
+                    : "";
+
+
+            document.getElementById(
+                "registrationCampaignId"
+            ).value =
+                campaignId;
+
+
+            document.getElementById(
+                "registrationCampaignName"
+            ).textContent =
+                "الحملة: " +
+                (
+                    campaign.title ||
+                    "حملة تطوعية"
+                );
+
+
+            const submitButton =
+                document.getElementById(
+                    "submitRegistration"
+                );
+
+
+            submitButton.textContent =
+                registrationType === "volunteer"
+                    ? "تأكيد المشاركة كمتطوع"
+                    : "إرسال طلب المشاركة";
+
+
+            modal.classList.add(
+                "active"
+            );
+
+        };
+
+
+    /* =====================================================
+       SUBMIT REGISTRATION
+    ===================================================== */
+
+    document.getElementById(
+        "registrationForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const button =
+                document.getElementById(
+                    "submitRegistration"
+                );
+
+
+            const modal =
+                document.getElementById(
+                    "registrationModal"
+                );
+
+
+            const campaignId =
+                document.getElementById(
+                    "registrationCampaignId"
+                ).value;
+
+
+            const campaign =
+                campaigns.find(
+                    item =>
+                        item.id === campaignId
+                );
+
+
+            if (!campaign) {
+
+                showMessage(
+                    "error",
+                    "تعذر التسجيل",
+                    "تعذر العثور على الحملة المطلوبة."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !isRegistrationOpen(
+                    campaign
+                )
+            ) {
+
+                showMessage(
+                    "warning",
+                    "التسجيل مغلق",
+                    "عذرًا، انتهى التسجيل في هذه الحملة."
+                );
+
+                return;
+
+            }
+
+
+            const registrationType =
+                modal.dataset.registrationType ||
+                "guest";
+
+
+            try {
+
+                button.disabled =
+                    true;
+
+
+                /* =================================================
+                   VOLUNTEER
+                ================================================= */
+
+                if (
+                    registrationType ===
+                    "volunteer"
+                ) {
+
+                    if (!currentUser) {
+
+                        throw new Error(
+                            "يجب تسجيل الدخول بحساب المتطوع."
+                        );
+
+                    }
+
+
+                    button.textContent =
+                        "جاري تسجيل المتطوع...";
+
+
+                    const activeCard =
+                        await getActiveVolunteerCard(
+                            currentUser.uid
+                        );
+
+
+                    if (!activeCard) {
+
+                        throw new Error(
+                            "لا توجد بطاقة عُضد فعالة مرتبطة بهذا الحساب."
+                        );
+
+                    }
+
+
+                    const userSnapshot =
+                        await getDoc(
+                            doc(
+                                db,
+                                "users",
+                                currentUser.uid
+                            )
+                        );
+
+
+                    const userData =
+                        userSnapshot.exists()
+                            ? userSnapshot.data()
+                            : {};
+
+
+                    /* =================================================
+                       منع تسجيل المتطوع مرتين في نفس الحملة
+                    ================================================= */
+
+                    const duplicateQuery =
+                        query(
+                            collection(
+                                db,
+                                "registrations"
+                            ),
+                            where(
+                                "userId",
+                                "==",
+                                currentUser.uid
+                            ),
+                            where(
+                                "campaignId",
+                                "==",
+                                campaignId
+                            )
+                        );
+
+
+                    const duplicateSnapshot =
+                        await getDocs(
+                            duplicateQuery
+                        );
+
+
+                    if (
+                        !duplicateSnapshot.empty
+                    ) {
+
+                        showMessage(
+                            "warning",
+                            "أنت مسجل بالفعل",
+                            "لقد قمت بالتسجيل مسبقًا في هذه الحملة.\n\nلا يمكن تسجيل نفس المتطوع أكثر من مرة في الحملة نفسها."
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* =================================================
+                       إنشاء تسجيل المتطوع
+                    ================================================= */
+
+                    await addDoc(
+                        collection(
+                            db,
+                            "registrations"
+                        ),
+                        {
+
+                            registrationType:
+                                "volunteer",
+
+                            userId:
+                                currentUser.uid,
+
+                            fullName:
+                                userData.fullName ||
+                                currentUser.displayName ||
+                                currentUser.email ||
+                                "",
+
+                            email:
+                                userData.email ||
+                                currentUser.email ||
+                                "",
+
+                            phone:
+                                userData.phone ||
+                                null,
+
+                            category:
+                                userData.category ||
+                                null,
+
+                            birthDate:
+                                userData.birthDate ||
+                                null,
+
+                            cardNumber:
+                                activeCard.cardNumber ||
+                                null,
+
+                            campaignId:
+                                campaignId,
+
+                            campaignTitle:
+                                campaign.title ||
+                                "",
+
+                            status:
+                                "registered",
+
+                            attendance:
+                                "pending",
+
+                            registeredAt:
+                                serverTimestamp()
+
+                        }
+                    );
+
+
+                    document.getElementById(
+                        "registrationForm"
+                    ).reset();
+
+
+                    closeModal(
+                        "registrationModal"
+                    );
+
+
+                    showMessage(
+                        "success",
+                        "تم التسجيل بنجاح",
+                        "تم تسجيلك في الحملة كمتطوع صاحب بطاقة عُضد بنجاح.\n\nستقوم لجنة المتابعة بمراجعة المشاركة وتأكيدها."
+                    );
+
+
+                    return;
+
+                }
+
+
+                /* =================================================
+                   GUEST
+                ================================================= */
+
+                button.textContent =
+                    "جاري التحقق والتسجيل...";
+
+
+                const participantName =
+                    document.getElementById(
+                        "participantName"
+                    ).value.trim();
+
+
+                const phone =
+                    document.getElementById(
+                        "participantPhone"
+                    ).value.trim();
+
+
+                const email =
+                    document.getElementById(
+                        "participantEmail"
+                    ).value.trim();
+
+
+                const category =
+                    document.getElementById(
+                        "participantCategory"
+                    ).value;
+
+
+                const birthDate =
+                    document.getElementById(
+                        "participantBirthDate"
+                    ).value;
+
+
+                if (
+                    !participantName ||
+                    !phone ||
+                    !email ||
+                    !category ||
+                    !birthDate
+                ) {
+
+                    showMessage(
+                        "warning",
+                        "معلومات ناقصة",
+                        "يرجى ملء جميع المعلومات المطلوبة قبل إرسال طلب المشاركة."
+                    );
+
+                    return;
+
+                }
+
+
+                /* =================================================
+                   التحقق من التكرار
+                ================================================= */
+
+                button.textContent =
+                    "جاري التحقق من التسجيل...";
+
+
+                let duplicate;
+
+                try {
+
+                    duplicate =
+                        await checkGuestDuplicate(
+                            campaignId,
+                            phone,
+                            email
+                        );
+
+                } catch (error) {
+
+                    console.error(
+                        "Guest duplicate check error:",
+                        error
+                    );
+
+                    showMessage(
+                        "error",
+                        "تعذر التحقق من التسجيل",
+                        "حدث خطأ أثناء التحقق من وجود تسجيل سابق في هذه الحملة. يرجى المحاولة مرة أخرى."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    duplicate.phoneExists &&
+                    duplicate.emailExists
+                ) {
+
+                    showMessage(
+                        "warning",
+                        "التسجيل موجود مسبقًا",
+                        "رقم الهاتف والبريد الإلكتروني مستخدمان بالفعل في هذه الحملة.\n\nلا يمكن تسجيل نفس الزائر أكثر من مرة."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    duplicate.phoneExists
+                ) {
+
+                    showMessage(
+                        "warning",
+                        "رقم الهاتف مسجل مسبقًا",
+                        "رقم الهاتف الذي أدخلته مستخدم بالفعل في هذه الحملة.\n\nيرجى التحقق من المعلومات أو التواصل مع لجنة المتابعة."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    duplicate.emailExists
+                ) {
+
+                    showMessage(
+                        "warning",
+                        "البريد الإلكتروني مسجل مسبقًا",
+                        "البريد الإلكتروني الذي أدخلته مستخدم بالفعل في هذه الحملة.\n\nلا يمكن تسجيل نفس الزائر مرتين."
+                    );
+
+                    return;
+
+                }
+
+
+                /* =================================================
+                   إنشاء تسجيل الزائر
+                ================================================= */
+
+                button.textContent =
+                    "جاري إرسال الطلب...";
+
+
+                await addDoc(
+                    collection(
+                        db,
+                        "registrations"
+                    ),
+                    {
+
+                        registrationType:
+                            "guest",
+
+                        userId:
+                            null,
+
+                        fullName:
+                            participantName,
+
+                        participantName:
+                            participantName,
+
+                        phone:
+                            normalizePhone(
+                                phone
+                            ),
+
+                        email:
+                            normalizeEmail(
+                                email
+                            ),
+
+                        category:
+                            category,
+
+                        birthDate:
+                            birthDate,
+
+                        cardNumber:
+                            null,
+
+                        campaignId:
+                            campaignId,
+
+                        campaignTitle:
+                            campaign.title ||
+                            "",
+
+                        status:
+                            "registered",
+
+                        attendance:
+                            "pending",
+
+                        registeredAt:
+                            serverTimestamp()
+
+                    }
+                );
+
+
+                document.getElementById(
+                    "registrationForm"
+                ).reset();
+
+
+                closeModal(
+                    "registrationModal"
+                );
+
+
+                showMessage(
+                    "success",
+                    "تم إرسال طلبك بنجاح",
+                    "تم تسجيل طلب مشاركتك في الحملة كزائر بنجاح.\n\nستقوم لجنة المتابعة بمراجعة طلبك، ولا تعتبر المشاركة مؤكدة إلا بعد قبولها."
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Registration error:",
+                    error
+                );
+
+
+                showMessage(
+                    "error",
+                    "تعذر إتمام التسجيل",
+                    error.message ||
+                    "حدث خطأ أثناء التسجيل. يرجى المحاولة مرة أخرى."
+                );
+
+
+            } finally {
+
+                button.disabled =
+                    false;
+
+
+                button.textContent =
+                    registrationType ===
+                    "volunteer"
+                        ? "تأكيد المشاركة كمتطوع"
+                        : "إرسال طلب المشاركة";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       MODAL
+    ===================================================== */
+
+    window.closeModal =
+        function(id) {
+
+            document.getElementById(
+                id
+            ).classList.remove(
+                "active"
+            );
+
+        };
+
+
+    document
+        .querySelectorAll(".modal")
+        .forEach(
+            modal => {
+
+                modal.addEventListener(
+                    "click",
+                    function(event) {
+
+                        if (
+                            event.target ===
+                            modal
+                        ) {
+
+                            modal.classList.remove(
+                                "active"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       MESSAGE MODAL CLICK OUTSIDE
+    ===================================================== */
+
+    document
+        .getElementById("messageModal")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    this
+                ) {
+
+                    closeMessageModal();
+
+                }
+
+            }
+        );
+
+
+    /* =====================================================
+       ESC KEY
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeMessageModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       DATE FUNCTIONS
+    ===================================================== */
+
+    function formatDate(
+        dateString
+    ) {
+
+        if (!dateString) {
+            return "غير محدد";
+        }
+
+
+        const date =
+            new Date(
+                dateString +
+                "T00:00:00"
+            );
+
+
+        if (
+            isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return dateString;
+
+        }
+
+
+        return date.toLocaleDateString(
+            "ar-DZ",
+            {
+                year:
+                    "numeric",
+
+                month:
+                    "long",
+
+                day:
+                    "numeric"
+            }
+        );
+
+    }
+
+
+    function formatDateRange(
+        campaign
+    ) {
+
+        if (!campaign.date) {
+
+            return "التاريخ غير محدد";
+
+        }
+
+
+        if (
+            campaign.endDate &&
+            campaign.endDate !==
+            campaign.date
+        ) {
+
+            return (
+                formatDate(
+                    campaign.date
+                ) +
+                " → " +
+                formatDate(
+                    campaign.endDate
+                )
+            );
+
+        }
+
+
+        return formatDate(
+            campaign.date
+        );
+
+    }
+
+
+    function formatTimeRange(
+        campaign
+    ) {
+
+        if (
+            campaign.startTime &&
+            campaign.endTime
+        ) {
+
+            return (
+                campaign.startTime +
+                " — " +
+                campaign.endTime
+            );
+
+        }
+
+
+        if (
+            campaign.startTime
+        ) {
+
+            return campaign.startTime;
+
+        }
+
+
+        return "التوقيت غير محدد";
+
+    }
+
+
+    /* =====================================================
+       REGISTRATION STATUS
+    ===================================================== */
+
+    function isRegistrationOpen(
+        campaign
+    ) {
+
+        if (
+            campaign.status !==
+            "published"
+        ) {
+
+            return false;
+
+        }
+
+
+        if (
+            campaign.registrationDeadline
+        ) {
+
+            const now =
+                new Date();
+
+
+            const deadline =
+                new Date(
+                    campaign.registrationDeadline +
+                    "T23:59:59"
+                );
+
+
+            if (
+                now > deadline
+            ) {
+
+                return false;
+
+            }
+
+        }
+
+
+        if (
+            campaign.date
+        ) {
+
+            if (
+                !campaign.registrationDeadline
+            ) {
+
+                const today =
+                    new Date();
+
+
+                const campaignDate =
+                    new Date(
+                        campaign.date +
+                        "T23:59:59"
+                    );
+
+
+                if (
+                    today >
+                    campaignDate &&
+                    !campaign.endDate
+                ) {
+
+                    return false;
+
+                }
+
+
+                if (
+                    campaign.endDate
+                ) {
+
+                    const endDate =
+                        new Date(
+                            campaign.endDate +
+                            "T23:59:59"
+                        );
+
+
+                    if (
+                        today >
+                        endDate
+                    ) {
+
+                        return false;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        return true;
+
+    }
+
+
+    /* =====================================================
+       HTML ESCAPE
+    ===================================================== */
+
+    function escapeHtml(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return "";
+
+        }
+
+
+        return String(value)
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+   
+/* =====================================================
+   DIRECTORY OF VERIFIED VOLUNTEER PARTICIPANTS
+   Source: participationrecords
+===================================================== */
+
+const volunteerDirectoryGrid =
+    document.getElementById("volunteerDirectoryGrid");
+
+const volunteerDirectoryCount =
+    document.getElementById("volunteerDirectoryCount");
+
+const volunteerSearch =
+    document.getElementById("volunteerSearch");
+
+const volunteerFieldFilter =
+    document.getElementById("volunteerFieldFilter");
+
+let publicVolunteers = [];
+let directoryIsDemo = false;
+
+function directoryArray(value) {
+    if (Array.isArray(value)) {
+        return value.map(v => String(v).trim()).filter(Boolean);
+    }
+
+    if (typeof value === "string" && value.trim()) {
+        return value
+            .split(/[,،؛;]/)
+            .map(v => v.trim())
+            .filter(Boolean);
+    }
+
+    return [];
+}
+
+function safeCvUrl(value) {
+    if (typeof value !== "string" || !value.trim()) return "";
+
+    try {
+        const url = new URL(value.trim(), window.location.href);
+        return url.protocol === "https:" ? url.href : "";
+    } catch {
+        return "";
+    }
+}
+
+/* =====================================================
+   RENDER PUBLIC VOLUNTEER CVS
+   Source: publicvolunteers only
+===================================================== */
+
+function renderVolunteerDirectory() {
+    if (!volunteerDirectoryGrid) return;
+
+    const term = (volunteerSearch?.value || "")
+        .trim()
+        .toLocaleLowerCase("ar");
+
+    const filtered = publicVolunteers.filter(person => {
+        const searchable = [
+            person.fullName,
+            person.professionalTitle,
+            person.wilaya,
+            ...directoryArray(person.volunteerFields),
+            ...directoryArray(person.skills),
+            ...directoryArray(person.education)
+        ]
+            .filter(Boolean)
+            .join(" ")
+            .toLocaleLowerCase("ar");
+
+        return !term || searchable.includes(term);
+    });
+
+    if (volunteerDirectoryCount) {
+        volunteerDirectoryCount.textContent =
+            `عدد السير الذاتية المنشورة: ${filtered.length}`;
+    }
+
+    if (!filtered.length) {
+        volunteerDirectoryGrid.innerHTML = `
+            <div class="directory-empty">
+                <div style="font-size:30px;margin-bottom:8px">👥</div>
+                لا توجد سير ذاتية منشورة مطابقة للبحث حاليًا.
+            </div>
+        `;
+        return;
+    }
+
+    volunteerDirectoryGrid.innerHTML = filtered.map(person => {
+        const fullName = String(person.fullName || "متطوع عُضد");
+        const name = escapeHtml(fullName);
+        const initial = escapeHtml(fullName.trim().charAt(0) || "ع");
+        const title = escapeHtml(person.professionalTitle || "متطوع في منصة عُضد");
+        const wilaya = escapeHtml(person.wilaya || "");
+        const activities = Math.max(0, Number(person.completedActivities) || 0);
+        const campaigns = Math.max(0, Number(person.completedCampaigns) || 0);
+        const fields = directoryArray(person.volunteerFields);
+        const skills = directoryArray(person.skills);
+        const education = directoryArray(person.education);
+        const cvUrl = safeCvUrl(person.cvUrl);
+
+        return `
+            <article class="professional-card">
+                <div class="professional-card-head">
+                    <div class="professional-avatar" aria-hidden="true">${initial}</div>
+                    <div>
+                        <h3>${name}</h3>
+                        <p class="professional-title">${title}</p>
+                        ${wilaya ? `<p class="professional-title">📍 ${wilaya}</p>` : ""}
+                    </div>
+                </div>
+
+                <div class="professional-meta">
+                    <div>🤝 <strong>المشاركات الموثقة:</strong> ${activities}</div>
+                    <div>🌱 <strong>الحملات التي شارك فيها:</strong> ${campaigns}</div>
+                </div>
+
+                ${education.length ? `
+                    <div class="participant-campaigns">
+                        <h4>التعليم والتكوين</h4>
+                        <p>${education.map(escapeHtml).join("، ")}</p>
+                    </div>
+                ` : ""}
+
+                ${fields.length ? `
+                    <div class="participant-campaigns">
+                        <h4>مجالات التطوع</h4>
+                        <p>${fields.map(escapeHtml).join("، ")}</p>
+                    </div>
+                ` : ""}
+
+                ${skills.length ? `
+                    <div class="participant-campaigns">
+                        <h4>المهارات</h4>
+                        <p>${skills.map(escapeHtml).join("، ")}</p>
+                    </div>
+                ` : ""}
+
+                ${cvUrl ? `
+                    <div class="professional-actions">
+                        <a class="cv-link" href="${escapeHtml(cvUrl)}"
+                           target="_blank" rel="noopener noreferrer">
+                            عرض / تحميل السيرة الذاتية PDF ↗
+                        </a>
+                    </div>
+                ` : ""}
+            </article>
+        `;
+    }).join("");
+}
+
+/* =====================================================
+   THE DIRECTORY USES PROFILE DATA ONLY.
+   It does not query private participationRecords.
+===================================================== */
+
+function populateVolunteerFieldFilter() {
+    if (!volunteerFieldFilter) return;
+    volunteerFieldFilter.innerHTML = '<option value="">جميع السير الذاتية</option>';
+    volunteerFieldFilter.value = "";
+    volunteerFieldFilter.disabled = true;
+}
+
+async function loadPublicVolunteers() {
+    if (!volunteerDirectoryGrid) return;
+
+    volunteerDirectoryGrid.innerHTML = `
+        <div class="directory-empty">جارٍ تحميل السير الذاتية المنشورة...</div>
+    `;
+
+    try {
+        const profilesQuery = query(
+            collection(db, "publicVolunteers"),
+            where("isPublic", "==", true)
+        );
+        const profilesSnapshot = await getDocs(profilesQuery);
+
+        publicVolunteers = profilesSnapshot.docs
+            .map(profileDoc => {
+                const profile = profileDoc.data();
+                return {
+                    id: profileDoc.id,
+                    userId: profile.userId || profileDoc.id,
+                    fullName: profile.fullName || "منصة عضد",
+                    professionalTitle: profile.professionalTitle || "",
+                    wilaya: profile.wilaya || "",
+                    education: profile.education || [],
+                    volunteerFields: profile.volunteerFields || [],
+                    skills: profile.skills || [],
+                    completedActivities: Number(profile.completedActivities) || 0,
+                    completedCampaigns: Number(profile.completedCampaigns) || 0,
+                    cvUrl: typeof profile.cvUrl === "string" && profile.cvUrl.startsWith("https://")
+                        ? profile.cvUrl
+                        : ""
+                };
+            })
+            .filter(profile => profile.fullName && profile.cvUrl);
+
+        publicVolunteers.sort((a, b) =>
+            b.completedActivities - a.completedActivities
+        );
+
+        populateVolunteerFieldFilter();
+        renderVolunteerDirectory();
+
+    } catch (error) {
+        console.error("تعذر تحميل السير الذاتية المنشورة:", error);
+        publicVolunteers = [];
+
+        if (volunteerDirectoryCount) {
+            volunteerDirectoryCount.textContent = "تعذر تحميل السير الذاتية المنشورة.";
+        }
+
+        volunteerDirectoryGrid.innerHTML = `
+            <div class="directory-empty">
+                تعذر تحميل دليل المتطوعين. تحققي من اسم مجموعة publicvolunteers
+                وقواعد Firestore، ثم أعيدي تحميل الصفحة.
+            </div>
+        `;
+    }
+}
+
+    /* =====================================================
+       FILTER EVENTS
+    ===================================================== */
+
+    volunteerSearch?.addEventListener("input", renderVolunteerDirectory);
+    volunteerFieldFilter?.addEventListener("change", renderVolunteerDirectory);
+
+    searchInput.addEventListener(
+        "input",
+        renderCampaigns
+    );
+
+
+    fieldFilter.addEventListener(
+        "change",
+        renderCampaigns
+    );
+
+
+    organizerFilter.addEventListener(
+        "change",
+        renderCampaigns
+    );
+
+
+    wilayaFilter.addEventListener(
+        "change",
+        renderCampaigns
+    );
+
+
+    typeFilter.addEventListener(
+        "change",
+        renderCampaigns
+    );
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    loadCampaigns();
+    loadPublicVolunteers();
+
+</script>
+
+
+</body>
+
+</html>

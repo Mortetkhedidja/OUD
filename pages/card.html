@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>بطاقة التطوع — عُضد</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 35px 20px;
+            background: #eef1ef;
+            font-family: "Arial", "Tahoma", sans-serif;
+            color: #172b29;
+        }
+
+        .page {
+            width: min(100%, 880px);
+            margin: 20px auto;
+        }
+
+        /* =========================
+           بطاقة شبيهة بالتصميم المرفق
+           ========================= */
+        .card {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            min-height: 420px;
+            overflow: hidden;
+
+            padding: 30px 34px;
+
+            border: 3px solid #d5b86a;
+            border-radius: 28px;
+
+            color: #fff;
+
+            background:
+                radial-gradient(circle at 72% 40%, rgba(255,255,255,.055) 0 2px, transparent 3px),
+                radial-gradient(circle at 30% 80%, rgba(255,255,255,.035) 0 2px, transparent 3px),
+                linear-gradient(145deg, #0c263f 0%, #123b61 48%, #071f35 100%);
+
+            box-shadow:
+                0 18px 45px rgba(0,0,0,.22),
+                inset 0 0 0 1px rgba(255,255,255,.08);
+
+            isolation: isolate;
+        }
+
+        /* زخارف خضراء مثل البطاقة المرجعية */
+        .card::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: 420px;
+            height: 190px;
+            left: -100px;
+            top: -95px;
+            background: #07552f;
+            transform: rotate(-12deg);
+            border-bottom: 7px solid #d7b75e;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px rgba(215,183,94,.25);
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: 520px;
+            height: 220px;
+            right: -170px;
+            bottom: -130px;
+            background: #07552f;
+            transform: rotate(-18deg);
+            border-top: 7px solid #d7b75e;
+            border-radius: 50%;
+        }
+
+        .gold-line {
+            position: absolute;
+            height: 4px;
+            background: #d7b75e;
+            opacity: .95;
+            border-radius: 10px;
+        }
+
+        .gold-line.one {
+            width: 250px;
+            left: 0;
+            top: 48px;
+            transform: rotate(-17deg);
+        }
+
+        .gold-line.two {
+            width: 300px;
+            right: -15px;
+            bottom: 95px;
+            transform: rotate(-32deg);
+        }
+
+        .leaf-pattern {
+            position: absolute;
+            z-index: -1;
+            right: 260px;
+            bottom: 20px;
+            width: 300px;
+            height: 260px;
+            opacity: .08;
+            background:
+                radial-gradient(ellipse at 50% 100%, #b8e0c7 0 10%, transparent 11%),
+                radial-gradient(ellipse at 30% 70%, #b8e0c7 0 9%, transparent 10%),
+                radial-gradient(ellipse at 70% 55%, #b8e0c7 0 9%, transparent 10%);
+            transform: rotate(-25deg);
+        }
+
+        /* =========================
+           الرأس
+           ========================= */
+        .header {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            min-height: 95px;
+        }
+
+        .brand {
+            text-align: center;
+            width: 245px;
+        }
+
+        .emblem {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 8px;
+
+            border: 3px solid #d7b75e;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #d7b75e;
+            font-size: 38px;
+            font-weight: bold;
+
+            background: rgba(3, 24, 43, .55);
+            box-shadow: inset 0 0 0 5px rgba(215,183,94,.08);
+        }
+
+        .brand-name {
+            color: #f0d78e;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .brand-sub {
+            margin-top: 4px;
+            color: #eee5c7;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .title-block {
+            text-align: right;
+            padding-top: 3px;
+            min-width: 350px;
+        }
+
+        .title {
+            margin: 0;
+            color: #e4c46d;
+            font-size: clamp(28px, 4vw, 46px);
+            font-weight: 800;
+            letter-spacing: .2px;
+        }
+
+        .subtitle {
+            margin-top: 5px;
+            color: #f4e9c7;
+            font-size: clamp(15px, 2vw, 21px);
+        }
+
+        .title-decoration {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 13px;
+        }
+
+        .title-decoration span {
+            display: block;
+            width: 95px;
+            height: 2px;
+            background: #d7b75e;
+        }
+
+        .title-decoration b {
+            color: #d7b75e;
+            font-size: 20px;
+        }
+
+        /* =========================
+           المحتوى
+           ========================= */
+        .main-content {
+            position: relative;
+            z-index: 2;
+
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            gap: 28px;
+            align-items: start;
+
+            margin-top: 18px;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo-frame {
+            width: 165px;
+            height: 190px;
+
+            border: 3px solid #d7b75e;
+            border-radius: 17px;
+
+            padding: 7px;
+
+            background: #e9edf0;
+            box-shadow: 0 7px 18px rgba(0,0,0,.18);
+
+            overflow: hidden;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #506070;
+            background: #e6e9ec;
+            font-size: 16px;
+            gap: 8px;
+        }
+
+        .photo-placeholder .person-icon {
+            font-size: 58px;
+            opacity: .85;
+        }
+
+        .motto {
+            margin-top: 17px;
+            text-align: center;
+            color: #f2e7c6;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .motto .leaf {
+            color: #d7b75e;
+            font-size: 22px;
+        }
+
+        .motto strong {
+            color: #fff1c5;
+        }
+
+        .info-column {
+            padding-top: 4px;
+        }
+
+        .field {
+            min-height: 45px;
+            margin-bottom: 9px;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 6px 14px 6px 8px;
+
+            border: 1px solid rgba(214,183,102,.9);
+            border-radius: 16px;
+
+            background: linear-gradient(
+                90deg,
+                rgba(246,247,247,.95),
+                rgba(218,222,222,.94)
+            );
+
+            color: #1d2b2d;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+        }
+
+        .field-label {
+            min-width: 125px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #23363a;
+        }
+
+        .field-value {
+            flex: 1;
+            font-size: 16px;
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        .field-icon {
+            width: 32px;
+            height: 32px;
+            flex: 0 0 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+            background: #0d5a35;
+            color: #f2d37b;
+            font-size: 18px;
+        }
+
+        /* =========================
+           QR - يبقى فعالاً
+           ========================= */
+        .bottom-area {
+            position: relative;
+            z-index: 3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+
+            margin-top: 8px;
+        }
+
+        .qr-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #qrcode {
+            width: 92px;
+            height: 92px;
+            padding: 6px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #fff;
+            border: 2px solid #d7b75e;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.2);
+        }
+
+        #qrcode img,
+        #qrcode canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .qr-text {
+            max-width: 260px;
+            color: #f0e7cd;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .qr-text strong {
+            color: #e4c46d;
+            font-size: 14px;
+        }
+
+        .validity {
+            text-align: left;
+            color: #d9efdf;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .validity strong {
+            color: #e6ca78;
+            font-size: 15px;
+        }
+
+        /* =========================
+           الأزرار
+           ========================= */
+        .buttons {
+            margin-top: 22px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        button {
+            border: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .print {
+            background: #123c38;
+            color: white;
+        }
+
+        .back {
+            background: #c6a15b;
+            color: #123c38;
+        }
+
+        .loading,
+        .error {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .error {
+            color: #b42318;
+        }
+
+        /* =========================
+           الهاتف
+           ========================= */
+        @media (max-width: 800px) {
+            body {
+                padding: 15px;
+            }
+
+            .card {
+                aspect-ratio: auto;
+                min-height: 0;
+                padding: 22px 18px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .title-block {
+                text-align: center;
+                min-width: 0;
+            }
+
+            .title-decoration {
+                justify-content: center;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .left-column {
+                order: 0;
+            }
+
+            .info-column {
+                order: 1;
+            }
+
+            .bottom-area {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .validity {
+                text-align: center;
+            }
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 8mm;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .page {
+                width: 100%;
+                max-width: none;
+                margin: 0;
+            }
+
+            .card {
+                box-shadow: none;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+    <div id="content">
+        <div class="loading">
+            جاري تحميل بطاقة المتطوع...
+        </div>
+    </div>
+</div>
+
+<script type="module">
+
+    import {
+        auth,
+        db
+    } from "../js/firebase.js";
+
+    import {
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+    import {
+        collection,
+        query,
+        where,
+        getDocs
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+    const content = document.getElementById("content");
+
+    onAuthStateChanged(auth, async (user) => {
+
+        if (!user) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        await loadCard(user);
+    });
+
+
+    function formatDate(value) {
+
+        if (!value) {
+            return "غير متوفر";
+        }
+
+        try {
+
+            if (typeof value.toDate === "function") {
+                return value.toDate().toLocaleDateString("fr-FR");
+            }
+
+            const date = new Date(value);
+
+            if (!isNaN(date.getTime())) {
+                return date.toLocaleDateString("fr-FR");
+            }
+
+        } catch (e) {
+            console.warn("Date format error:", e);
+        }
+
+        return "غير متوفر";
+    }
+
+
+    async function loadCard(user) {
+
+        try {
+
+            const cardQuery = query(
+                collection(db, "volunteerCards"),
+                where("userId", "==", user.uid),
+                where("status", "==", "active")
+            );
+
+            const snapshot = await getDocs(cardQuery);
+
+
+            if (snapshot.empty) {
+
+                content.innerHTML = `
+                    <div class="error">
+                        <h2>لا توجد بطاقة معتمدة</h2>
+                        <p>لم يتم اعتماد بطاقة متطوع لهذا الحساب بعد.</p>
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            const card = snapshot.docs[0].data();
+
+
+            const issueDate = formatDate(card.issueDate);
+
+            /* إذا كانت هذه البيانات موجودة في Firestore ستظهر تلقائياً */
+            /*
+             * هذه الحقول يجب أن تكون محفوظة في Firestore.
+             * ندعم عدة أسماء محتملة للحقول.
+             */
+            const birthValue =
+                card.birthDate ||
+                card.dateOfBirth ||
+                card.birth_date ||
+                card.date_of_birth ||
+                user.birthDate ||
+                user.dateOfBirth;
+
+            const expiryValue =
+                card.expiryDate ||
+                card.expirationDate ||
+                card.expiry_date ||
+                card.expiration_date;
+
+            const birthDate = formatDate(birthValue);
+            const expiryDate = formatDate(expiryValue);
+
+
+            /* رابط التحقق العام - QR يبقى كما هو */
+            const verificationUrl = new URL(
+                "https://oud-platform-613fe.web.app/pages/verify.html"
+            );
+
+            verificationUrl.searchParams.set(
+                "card",
+                card.cardNumber
+            );
+
+
+            // الصورة التي أضافتها لجنة المتابعة إلى بطاقة المتطوع
+            const photoUrl = card.photoUrl || card.photoURL || "";
+
+
+            content.innerHTML = `
+
+                <div class="card">
+
+                    <div class="gold-line one"></div>
+                    <div class="gold-line two"></div>
+                    <div class="leaf-pattern"></div>
+
+
+                    <!-- الرأس -->
+                    <div class="header">
+
+                        <div class="brand">
+
+                            <div class="emblem">
+                                ع
+                            </div>
+
+                            <div class="brand-name">
+                                عضد
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="title-block">
+
+                            <h1 class="title">
+                                بطاقة التطوع
+                            </h1>
+
+
+                            <div class="title-decoration">
+                                <span></span>
+                                <b>✦</b>
+                                <span></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- المعلومات الرئيسية -->
+                    <div class="main-content">
+
+
+                        <!-- الصورة -->
+                        <div class="left-column">
+
+                            <div class="photo-frame">
+
+                                ${
+                                    photoUrl
+                                    ? `<img src="${photoUrl}" alt="صورة المتطوع">`
+                                    : `
+                                        <div class="photo-placeholder">
+                                            <div class="person-icon">👤</div>
+                                            <span>صورة المتطوع</span>
+                                        </div>
+                                      `
+                                }
+
+                            </div>
+
+
+                            <div class="motto">
+
+                                <div class="leaf">❧</div>
+
+                                <strong>
+                                    المساهمة ليست مجرد رقم
+                                </strong>
+
+                                <br>
+
+                                <span>
+                                    بل بصمة أمل
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- البيانات -->
+                        <div class="info-column">
+
+
+                            <div class="field">
+
+                                <div class="field-label">
+                                    الاسم الكامل :
+                                </div>
+
+                                <div class="field-value">
+                                    ${user.displayName || card.fullName || "غير متوفر"}
+                                </div>
+
+                                <div class="field-icon">
+                                    👤
+                                </div>
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <div class="field-label">
+                                    تاريخ الميلاد :
+                                </div>
+
+                                <div class="field-value">
+                                    ${birthDate}
+                                </div>
+
+                                <div class="field-icon">
+                                    📅
+                                </div>
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <div class="field-label">
+                                    تاريخ الإصدار :
+                                </div>
+
+                                <div class="field-value">
+                                    ${issueDate}
+                                </div>
+
+                                <div class="field-icon">
+                                    📅
+                                </div>
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <div class="field-label">
+                                    تاريخ الانتهاء :
+                                </div>
+
+                                <div class="field-value">
+                                    ${expiryDate}
+                                </div>
+
+                                <div class="field-icon">
+                                    📅
+                                </div>
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <div class="field-label">
+                                    رقم البطاقة :
+                                </div>
+
+                                <div class="field-value">
+                                    ${card.cardNumber || "غير متوفر"}
+                                </div>
+
+                                <div class="field-icon">
+                                    🪪
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- QR + الحالة -->
+                    <div class="bottom-area">
+
+                        <div class="qr-box">
+
+                            <div id="qrcode"></div>
+
+
+                        </div>
+
+
+                        <div class="validity">
+
+                            <strong>
+                                ✓ بطاقة فعالة ومعتمدة
+                            </strong>
+
+                            <br>
+
+                            بطاقة متطوع رقمية رسمية
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button
+                        class="print"
+                        onclick="window.print()"
+                    >
+                        طباعة البطاقة
+                    </button>
+
+                    <button
+                        class="back"
+                        onclick="history.back()"
+                    >
+                        رجوع
+                    </button>
+
+                </div>
+            `;
+
+
+            /* =========================
+               إنشاء QR Code
+               نفس وظيفة الكود القديم
+               ========================= */
+            new QRCode(
+                document.getElementById("qrcode"),
+                {
+                    text: verificationUrl.href,
+                    width: 100,
+                    height: 100,
+                    correctLevel: QRCode.CorrectLevel.H
+                }
+            );
+
+        }
+
+        catch (error) {
+
+            console.error("Card error:", error);
+
+            content.innerHTML = `
+                <div class="error">
+                    حدث خطأ أثناء تحميل البطاقة.
+                </div>
+            `;
+        }
+    }
+
+</script>
+
+</body>
+</html>

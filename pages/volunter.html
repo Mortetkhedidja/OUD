@@ -1,0 +1,4388 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>حسابي | منصة عُضد</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            background: #f4f8f7;
+            color: #173c3a;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .topbar {
+            background: linear-gradient(135deg, #073b3a, #0b5d5b);
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #d6ad45;
+            color: #073b3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .brand-text h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .brand-text p {
+            margin: 4px 0 0;
+            color: #dceceb;
+            font-size: 13px;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .account-label {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 9px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: transparent;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* =========================
+           CONTAINER
+        ========================== */
+
+        .container {
+            width: min(1180px, 92%);
+            margin: 35px auto 60px;
+        }
+
+        /* =========================
+           WELCOME
+        ========================== */
+
+        .welcome {
+            background: linear-gradient(135deg, #073b3a, #0b6b67);
+            border-radius: 22px;
+            padding: 32px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(7, 59, 58, 0.16);
+        }
+
+        .welcome::after {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            border: 30px solid rgba(214, 173, 69, 0.12);
+            left: -70px;
+            top: -80px;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-label {
+            color: #e2bd5a;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .welcome h2 {
+            margin: 0 0 8px;
+            font-size: 29px;
+        }
+
+        .welcome p {
+            margin: 0;
+            color: #e1eeee;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           GRID
+        ========================== */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-bottom: 25px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            border: 1px solid #e0e9e7;
+            box-shadow: 0 5px 20px rgba(7, 59, 58, 0.06);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-title h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #073b3a;
+        }
+
+        .section-title span {
+            font-size: 13px;
+            color: #66817e;
+        }
+
+        /* =========================
+           USER INFO
+        ========================== */
+
+        .info-list {
+            display: grid;
+            gap: 13px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px 14px;
+            background: #f7faf9;
+            border-radius: 11px;
+        }
+
+        .info-label {
+            color: #708683;
+            font-size: 13px;
+        }
+
+        .info-value {
+            color: #173c3a;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: left;
+            direction: ltr;
+            max-width: 65%;
+            overflow-wrap: anywhere;
+        }
+
+        /* =========================
+           CARD SECTION
+        ========================== */
+
+        .card-section {
+            background: linear-gradient(135deg, #fffdf6, #fff9e9);
+            border: 1px solid #ead79e;
+            border-radius: 16px;
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            min-height: 180px;
+        }
+
+        .card-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 15px;
+            background: #d6ad45;
+            color: #073b3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .card-section h4 {
+            margin: 0 0 8px;
+            color: #073b3a;
+            font-size: 18px;
+        }
+
+        .card-section p {
+            margin: 0;
+            color: #687c79;
+            line-height: 1.7;
+            font-size: 13px;
+        }
+
+        .card-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            background: #073b3a;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 11px;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .card-button:hover {
+            background: #0b5d5b;
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           CV / PROFESSIONAL DIRECTORY
+        ========================== */
+
+        .cv-section {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid #e0e9e7;
+            box-shadow: 0 5px 20px rgba(7, 59, 58, 0.06);
+            margin-bottom: 25px;
+        }
+
+        .cv-description {
+            color: #6b807d;
+            font-size: 14px;
+            line-height: 1.9;
+            margin: -5px 0 18px;
+        }
+
+        .cv-controls {
+            display: grid;
+            gap: 15px;
+        }
+
+        .cv-file-input {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            border: 1px dashed #b9cfcb;
+            border-radius: 12px;
+            background: #f8fbfa;
+            color: #315b57;
+        }
+
+        .cv-consent {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #fff9e8;
+            border: 1px solid #ead79e;
+            color: #735b19;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .cv-consent input {
+            margin-top: 5px;
+            flex-shrink: 0;
+            accent-color: #0b5d5b;
+        }
+
+        .cv-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .cv-action-btn {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 17px;
+            background: #073b3a;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .cv-action-btn.secondary {
+            background: #edf4f3;
+            color: #0b5d5b;
+        }
+
+        .cv-action-btn.danger {
+            background: #fff0f0;
+            color: #a33737;
+        }
+
+        .cv-action-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .cv-link {
+            display: inline-flex;
+            width: fit-content;
+            color: #0b5d5b;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .cv-link:hover {
+            text-decoration: underline;
+        }
+
+        .cv-status {
+            min-height: 20px;
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.8;
+            color: #526d69;
+            overflow-wrap: anywhere;
+        }
+
+        .cv-status.error { color: #a33737; }
+        .cv-status.success { color: #21694c; }
+
+        /* =========================
+           STATS
+        ========================== */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .stat {
+            background: #f7faf9;
+            border-radius: 13px;
+            padding: 18px 12px;
+            text-align: center;
+            border: 1px solid #e6eeec;
+        }
+
+        .stat-number {
+            font-size: 27px;
+            font-weight: 800;
+            color: #0b5d5b;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #718481;
+            font-size: 12px;
+        }
+
+        /* =========================
+           CAMPAIGNS
+        ========================== */
+
+        .campaigns-section {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid #e0e9e7;
+            box-shadow: 0 5px 20px rgba(7, 59, 58, 0.06);
+            margin-bottom: 25px;
+        }
+
+        .campaigns-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .campaigns-header h3 {
+            margin: 0;
+            color: #073b3a;
+            font-size: 22px;
+        }
+
+        .campaigns-header p {
+            margin: 5px 0 0;
+            color: #708683;
+            font-size: 13px;
+        }
+
+        .campaign-count {
+            background: #edf6f4;
+            color: #0b5d5b;
+            border-radius: 30px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .campaign-card {
+            border: 1px solid #e1eae8;
+            border-radius: 16px;
+            overflow: hidden;
+            background: white;
+            transition: 0.2s;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 9px 25px rgba(7, 59, 58, 0.08);
+        }
+
+        .campaign-top {
+            background: linear-gradient(135deg, #f2f8f7, #edf5f3);
+            padding: 16px 17px;
+            border-bottom: 1px solid #e3ecea;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .badge-field {
+            background: #dcefed;
+            color: #0b5d5b;
+        }
+
+        .badge-type {
+            background: #fff1c9;
+            color: #7c5d12;
+        }
+
+        .campaign-title {
+            margin: 0;
+            color: #073b3a;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .campaign-body {
+            padding: 17px;
+        }
+
+        .campaign-description {
+            color: #647875;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 0 0 15px;
+        }
+
+        .campaign-meta {
+            display: grid;
+            gap: 9px;
+            margin-bottom: 16px;
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: #536b68;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .meta-icon {
+            width: 18px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .campaign-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 10px;
+            padding: 11px 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn-details {
+            background: #edf4f3;
+            color: #0b5d5b;
+        }
+
+        .btn-details:hover {
+            background: #dcebe8;
+        }
+
+        .btn-register {
+            background: #d6ad45;
+            color: #073b3a;
+        }
+
+        .btn-register:hover {
+            background: #e2bd5a;
+        }
+
+        .btn-registered {
+            background: #dfeee8;
+            color: #267056;
+            cursor: default;
+        }
+
+        .btn-closed {
+            background: #eeeeee;
+            color: #777;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #718481;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 45px 20px;
+            background: #f8fbfa;
+            border-radius: 14px;
+            border: 1px dashed #cbdad7;
+        }
+
+        .empty-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state h4 {
+            margin: 0 0 8px;
+            color: #315b57;
+        }
+
+        .empty-state p {
+            margin: 0;
+            color: #7a8c89;
+            font-size: 13px;
+        }
+
+        /* =========================
+           REGISTRATIONS
+        ========================== */
+
+        .registrations-section {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid #e0e9e7;
+            box-shadow: 0 5px 20px rgba(7, 59, 58, 0.06);
+        }
+
+        .registration-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .registration-item {
+            border: 1px solid #e3ebe9;
+            border-radius: 13px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .registration-main {
+            min-width: 0;
+        }
+
+        .registration-title {
+            margin: 0 0 6px;
+            font-size: 15px;
+            color: #173c3a;
+        }
+
+        .registration-date {
+            font-size: 12px;
+            color: #81918f;
+        }
+
+        .status {
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-registered {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-present {
+            background: #d9f0e4;
+            color: #226b4b;
+        }
+
+        .status-completed {
+            background: #d9f0e4;
+            color: #226b4b;
+        }
+
+        .status-absent {
+            background: #f8dddd;
+            color: #9a3d3d;
+        }
+
+        .status-pending {
+            background: #edf1f0;
+            color: #657572;
+        }
+
+        /* =========================
+           MODAL
+        ========================== */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 36, 35, 0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: min(650px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-close {
+            position: absolute;
+            left: 18px;
+            top: 16px;
+            border: none;
+            background: #edf2f1;
+            color: #41615e;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 21px;
+            line-height: 1;
+        }
+
+        .modal h2 {
+            margin: 0 35px 18px 0;
+            color: #073b3a;
+            font-size: 22px;
+        }
+
+        .modal h4 {
+            color: #0b5d5b;
+            margin: 20px 0 8px;
+        }
+
+        .detail-title {
+            background: #f3f8f7;
+            padding: 14px;
+            border-radius: 11px;
+            color: #073b3a;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .detail-item {
+            background: #f8faf9;
+            padding: 11px;
+            border-radius: 9px;
+        }
+
+        .detail-item small {
+            display: block;
+            color: #84928f;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .detail-item span {
+            color: #314e4b;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .detail-description {
+            color: #5f716e;
+            line-height: 1.8;
+            font-size: 14px;
+            background: #fafcfc;
+            border-radius: 10px;
+            padding: 13px;
+        }
+
+        .detail-list {
+            margin: 0;
+            padding-right: 22px;
+            color: #5f716e;
+            line-height: 1.9;
+            font-size: 13px;
+        }
+
+        /* Registration modal */
+
+        .registration-box {
+            background: #f7faf9;
+            border: 1px solid #e0e9e7;
+            border-radius: 13px;
+            padding: 17px;
+            margin-bottom: 16px;
+        }
+
+        .registration-box-title {
+            font-size: 13px;
+            color: #758581;
+            margin-bottom: 7px;
+        }
+
+        .registration-campaign {
+            font-size: 17px;
+            color: #073b3a;
+            font-weight: 800;
+        }
+
+        .volunteer-notice {
+            background: #fff8e2;
+            border: 1px solid #e9d38a;
+            border-radius: 12px;
+            padding: 14px;
+            color: #735b19;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .volunteer-preview {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .preview-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 11px 13px;
+            border-radius: 9px;
+            background: #f8faf9;
+        }
+
+        .preview-row span:first-child {
+            color: #80908d;
+            font-size: 12px;
+        }
+
+        .preview-row span:last-child {
+            color: #294a46;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            border: none;
+            background: #073b3a;
+            color: white;
+            padding: 13px;
+            border-radius: 11px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .confirm-btn:hover {
+            background: #0b5d5b;
+        }
+
+        .confirm-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           TOAST
+        ========================== */
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            max-width: 350px;
+            background: #073b3a;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(120px);
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 2000;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.error {
+            background: #8d3939;
+        }
+
+        .toast.success {
+            background: #21694c;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #78908c;
+            font-size: 12px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 850px) {
+
+            .dashboard-grid,
+            .campaigns-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                padding: 14px 4%;
+            }
+
+            .brand-text p {
+                display: none;
+            }
+
+            .logo {
+                width: 42px;
+                height: 42px;
+                font-size: 24px;
+            }
+
+            .brand-text h1 {
+                font-size: 17px;
+            }
+
+            .account-label {
+                display: none;
+            }
+
+            .container {
+                width: 94%;
+                margin-top: 20px;
+            }
+
+            .welcome {
+                padding: 24px;
+                border-radius: 18px;
+            }
+
+            .welcome h2 {
+                font-size: 23px;
+            }
+
+            .section-card,
+            .campaigns-section,
+            .registrations-section {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                gap: 8px;
+            }
+
+            .stat {
+                padding: 14px 7px;
+            }
+
+            .stat-number {
+                font-size: 22px;
+            }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .card-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .card-button {
+                width: 100%;
+            }
+
+            .campaign-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .registration-item {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .toast {
+                right: 12px;
+                left: 12px;
+                bottom: 15px;
+                max-width: none;
+            }
+        }
+    
+
+/* ===== تصميم احترافي للسيرة الذاتية | منصة عُضد ===== */
+.cv-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffffff 0%, #f5faf8 100%);
+    border: 1px solid #dce9e5;
+    border-radius: 24px;
+    padding: clamp(20px, 4vw, 34px);
+    margin-bottom: 28px;
+    box-shadow: 0 12px 35px rgba(7, 59, 58, .07);
+}
+.cv-section::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 100%; height: 5px;
+    background: linear-gradient(90deg, #d6ad45, #0b5d5b, #073b3a);
+}
+.cv-section .section-title {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px; margin-bottom: 18px;
+}
+.cv-section .section-title h3 {
+    margin: 0; color: #073b3a;
+    font-size: clamp(19px, 2.5vw, 25px); font-weight: 800;
+}
+.cv-section .section-title span {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 13px; border-radius: 30px;
+    background: #fff7df; border: 1px solid #ead9a5;
+    color: #80621a; font-size: 12px; font-weight: 700;
+}
+.cv-description {
+    color: #607773; font-size: 14px; line-height: 2;
+    margin: 0 0 24px; max-width: 850px;
+}
+.cv-controls { display: grid; gap: 16px; }
+.cv-controls > label:not(.cv-consent) {
+    color: #214d47; font-size: 13px; font-weight: 750;
+}
+.cv-file-input {
+    width: 100%; min-height: 60px; padding: 13px;
+    border: 1.5px dashed #9bbdb4; border-radius: 15px;
+    background: #f7fbf9; color: #315b57; cursor: pointer;
+    transition: border-color .2s, background .2s;
+}
+.cv-file-input:hover { border-color: #0b5d5b; background: #eef7f3; }
+.cv-file-input::file-selector-button {
+    margin-left: 12px; padding: 9px 14px; border: 0;
+    border-radius: 9px; background: #e1efea; color: #07534c;
+    font: inherit; font-weight: 700; cursor: pointer;
+}
+.cv-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.cv-action-btn, .cv-link {
+    min-height: 44px; display: inline-flex; align-items: center;
+    justify-content: center; gap: 8px; padding: 12px 18px;
+    border: 1px solid transparent; border-radius: 12px;
+    font: inherit; font-size: 13px; font-weight: 750;
+    text-decoration: none; cursor: pointer;
+    transition: transform .2s, box-shadow .2s, background .2s;
+}
+.cv-action-btn {
+    background: linear-gradient(135deg, #073b3a, #0b6860);
+    color: white; box-shadow: 0 5px 14px rgba(7, 59, 58, .13);
+}
+.cv-action-btn:hover, .cv-link:hover {
+    transform: translateY(-2px); box-shadow: 0 7px 18px rgba(7, 59, 58, .13);
+}
+.cv-action-btn.secondary {
+    background: #edf5f2; color: #07534c; border-color: #d5e6e0; box-shadow: none;
+}
+.cv-action-btn.danger {
+    background: #fff5f4; color: #a33e3e; border-color: #f0d5d2; box-shadow: none;
+}
+.cv-action-btn:disabled { opacity: .6; cursor: wait; transform: none; }
+.cv-link {
+    width: fit-content; background: #fff8e6;
+    border-color: #eddda9; color: #765b18;
+}
+#oudCvLink[hidden] { display: none !important; }
+.cv-consent {
+    display: flex; align-items: flex-start; gap: 12px; padding: 17px;
+    border: 1px solid #e7d9a8; border-radius: 15px;
+    background: linear-gradient(135deg, #fffaf0, #fff7df);
+    color: #68551f; font-size: 13px; line-height: 2; cursor: pointer;
+}
+.cv-consent input {
+    width: 18px; height: 18px; margin-top: 5px;
+    flex-shrink: 0; accent-color: #0b5d5b; cursor: pointer;
+}
+.cv-status { min-height: 0; margin: 0; padding: 0; font-size: 13px; line-height: 1.9; overflow-wrap: anywhere; }
+.cv-status:empty { display: none; }
+.cv-status.success, .cv-status.error { padding: 10px 13px; border-radius: 10px; }
+.cv-status.success { color: #21694c; background: #edf8f0; border: 1px solid #d1e9d7; }
+.cv-status.error { color: #a33737; background: #fff1f0; border: 1px solid #f0d2cf; }
+@media (max-width: 600px) {
+    .cv-section { padding: 20px 16px; border-radius: 18px; }
+    .cv-actions { align-items: stretch; flex-direction: column; }
+    .cv-action-btn, .cv-link { width: 100%; text-align: center; }
+}
+
+
+/* ===== نافذة التأكيد المخصصة لمنصة عُضد ===== */
+.oud-modal[hidden] { display: none !important; }
+.oud-modal {
+    position: fixed; inset: 0; z-index: 10000; display: grid;
+    place-items: center; padding: 20px;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+.oud-modal-backdrop {
+    position: absolute; inset: 0; background: rgba(5, 35, 33, .62);
+    backdrop-filter: blur(5px);
+}
+.oud-modal-card {
+    position: relative; width: min(100%, 440px); padding: 30px 25px 24px;
+    text-align: center; background: #fff; border: 1px solid #e1ebe7;
+    border-radius: 23px; box-shadow: 0 24px 75px rgba(0, 0, 0, .23);
+    animation: oudModalIn .2s ease-out;
+}
+.oud-modal-icon {
+    display: grid; place-items: center; width: 56px; height: 56px;
+    margin: 0 auto 16px; border-radius: 18px;
+    background: #fff3e7; color: #a85a29; font-size: 28px; font-weight: 800;
+}
+.oud-modal-card h3 { margin: 0 0 12px; color: #073b3a; font-size: 20px; }
+.oud-modal-card p { margin: 0; color: #647773; font-size: 14px; line-height: 2; }
+.oud-modal-actions { display: flex; gap: 10px; margin-top: 24px; }
+.oud-modal-actions button {
+    flex: 1; min-height: 45px; padding: 10px; border-radius: 11px;
+    font: inherit; font-size: 13px; font-weight: 750; cursor: pointer;
+}
+.oud-modal-cancel { background: #eef5f2; color: #174b44; border: 1px solid #dce9e4; }
+.oud-modal-delete { background: #a83f3f; color: white; border: 1px solid #a83f3f; }
+.oud-modal-actions button:focus-visible { outline: 3px solid #d6ad45; outline-offset: 3px; }
+@keyframes oudModalIn {
+    from { opacity: 0; transform: translateY(8px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 420px) { .oud-modal-actions { flex-direction: column-reverse; } }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="logo">ع</div>
+
+            <div class="brand-text">
+                <h1>منصة عُضد</h1>
+                <p>نحو شباب أكثر تطوعًا وتأثيرًا</p>
+            </div>
+
+        </div>
+
+        <div class="topbar-actions">
+
+            <div class="account-label">
+                👤 حساب المتطوع
+            </div>
+
+            <button class="logout-btn" id="logoutBtn">
+                تسجيل الخروج
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="container">
+
+        <!-- Welcome -->
+
+        <section class="welcome">
+
+            <div class="welcome-content">
+
+                <div class="welcome-label">
+                    مساحة المتطوع
+                </div>
+
+                <h2 id="welcomeName">
+                    مرحبًا بك 👋
+                </h2>
+
+                <p>
+                    من هنا يمكنك متابعة مشاركاتك، الاطلاع على الحملات التطوعية
+                    الجديدة والتسجيل فيها مباشرة.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- User information + card -->
+
+        <div class="dashboard-grid">
+
+            <!-- User information -->
+
+            <section class="section-card">
+
+                <div class="section-title">
+
+                    <h3>معلوماتي</h3>
+
+                    <span>بيانات الحساب</span>
+
+                </div>
+
+                <div class="info-list">
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            الاسم الكامل
+                        </span>
+
+                        <span class="info-value" id="userFullName">
+                            —
+                        </span>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            البريد الإلكتروني
+                        </span>
+
+                        <span class="info-value" id="userEmail">
+                            —
+                        </span>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            الهاتف
+                        </span>
+
+                        <span class="info-value" id="userPhone">
+                            —
+                        </span>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            الفئة
+                        </span>
+
+                        <span class="info-value" id="userCategory">
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Digital card -->
+
+            <section class="section-card">
+
+                <div class="section-title">
+
+                    <h3>بطاقة عُضد</h3>
+
+                    <span>هويتك الرقمية</span>
+
+                </div>
+
+                <div class="card-section">
+
+                    <div>
+
+                        <div class="card-icon">
+                            🪪
+                        </div>
+
+                        <h4>
+                            بطاقتك الرقمية
+                        </h4>
+
+                        <p>
+                            يمكنك عرض بطاقة المتطوع الرسمية ورمز QR
+                            من صفحة البطاقة المخصصة.
+                        </p>
+
+                    </div>
+
+                    <a href="card.html" class="card-button">
+                        🪪 عرض بطاقتي
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- =========================
+             CV AND PROFESSIONAL DIRECTORY
+        ========================== -->
+
+        <section class="cv-section">
+            <div class="section-title">
+                <h3>سيرتي الذاتية والدليل المهني</h3>
+                <span>اختياري</span>
+            </div>
+
+            <p class="cv-description">
+    يمكنك رفع سيرتك الذاتية بصيغة PDF.
+    تُحفظ بيانات السيرة الذاتية في حسابك وفي سجل المتطوع
+    المخصص للدليل المهني، لتتمكن صفحة الدليل من عرضها.
+    يمكنك تحديث الملف أو إزالته من حسابك.
+      </p>
+
+            <div class="cv-controls">
+                <label for="oudCvFile">اختيار السيرة الذاتية (PDF، حتى 5 MB)</label>
+                <input class="cv-file-input" id="oudCvFile" type="file" accept=".pdf,application/pdf">
+
+                <div class="cv-actions">
+                    <button class="cv-action-btn" id="oudUploadCvBtn" type="button">رفع السيرة الذاتية</button>
+                    <a class="cv-link" id="oudCvLink" href="#" target="_blank" rel="noopener noreferrer" hidden>عرض السيرة الذاتية الحالية</a>
+                </div>
+
+                <p class="cv-status" id="oudCvStatus" role="status" aria-live="polite"></p>
+                <!--
+                <label class="cv-consent" for="oudCvConsent">
+                    <input id="oudCvConsent" type="checkbox">
+                    <span>
+                        أوافق صراحةً على نشر سيرتي الذاتية ورابطها في الدليل المهني لمنصة عُضد،
+                        بحيث يمكن للشركات وزوار المنصة فتحها. يمكنني إلغاء الموافقة لاحقًا.
+                    </span>
+                </label>
+                -->
+
+                <div class="cv-actions">
+                    <button class="cv-action-btn secondary" id="oudRemoveCvBtn" type="button">إزالة السيرة من حسابي والدليل</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Statistics -->
+
+        <section class="section-card" style="margin-bottom:25px;">
+
+            <div class="section-title">
+
+                <h3>إحصائياتي</h3>
+
+                <span>نشاطي التطوعي</span>
+
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat">
+
+                    <div class="stat-number" id="registrationCount">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        إجمالي التسجيلات
+                    </div>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-number" id="completedCount">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        مشاركات موثقة
+                    </div>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-number" id="volunteerRank">
+                        مبتدئ
+                    </div>
+
+                    <div class="stat-label">
+                        الرتبة
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CAMPAIGNS
+        ========================== -->
+
+        <section class="campaigns-section">
+
+            <div class="campaigns-header">
+
+                <div>
+
+                    <h3>
+                        الحملات التطوعية
+                    </h3>
+
+                    <p>
+                        اكتشف الحملات المنشورة وسجل مشاركتك مباشرة من حسابك.
+                    </p>
+
+                </div>
+
+                <div class="campaign-count" id="campaignCount">
+                    0 حملة
+                </div>
+
+            </div>
+
+
+            <div id="campaignsContainer" class="campaigns-grid">
+
+                <div class="loading" style="grid-column:1/-1;">
+                    جاري تحميل الحملات...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             REGISTRATIONS
+        ========================== -->
+
+        <section class="registrations-section">
+
+            <div class="section-title">
+
+                <h3>
+                    مشاركاتي
+                </h3>
+
+                <span>
+                    سجل مشاركاتك التطوعية
+                </span>
+
+            </div>
+
+
+            <div id="registrationsContainer" class="registration-list">
+
+                <div class="loading">
+                    جاري تحميل المشاركات...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         CAMPAIGN DETAILS MODAL
+    ========================== -->
+
+    <div class="modal" id="detailsModal">
+
+        <div class="modal-content">
+
+            <button class="modal-close" onclick="closeDetails()">
+                ×
+            </button>
+
+            <h2>
+                تفاصيل الحملة
+            </h2>
+
+            <div id="detailsContent"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         REGISTRATION MODAL
+    ========================== -->
+
+    <div class="modal" id="registrationModal">
+
+        <div class="modal-content">
+
+            <button class="modal-close" onclick="closeRegistration()">
+                ×
+            </button>
+
+            <h2>
+                التسجيل في الحملة
+            </h2>
+
+            <div class="registration-box">
+
+                <div class="registration-box-title">
+                    الحملة التطوعية
+                </div>
+
+                <div class="registration-campaign" id="registrationCampaignName">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="volunteer-notice">
+
+                🪪 <strong>سيتم تسجيلك كمتطوع</strong>
+
+                <br>
+
+                أنت تدخل من حسابك المرتبط ببطاقة عُضد،
+                لذلك سيتم حفظ هذه المشاركة في النظام كـ
+                <strong>متطوع</strong> وليس كزائر.
+
+                <br>
+
+                رقم البطاقة:
+                <strong id="registrationCardNumber">—</strong>
+
+            </div>
+
+
+            <div class="volunteer-preview">
+
+                <div class="preview-row">
+
+                    <span>
+                        الاسم الكامل
+                    </span>
+
+                    <span id="registrationName">
+                        —
+                    </span>
+
+                </div>
+
+                <div class="preview-row">
+
+                    <span>
+                        البريد الإلكتروني
+                    </span>
+
+                    <span id="registrationEmail">
+                        —
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button class="confirm-btn" id="submitRegistration">
+
+                تأكيد المشاركة كمتطوع
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TOAST
+    ========================== -->
+
+    <div class="toast" id="toast"></div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        منصة عُضد © 2026
+        <br>
+        التطوع يصنع الأثر
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script type="module">
+
+        import { auth, db } from "../js/firebase.js";
+
+        import { logoutUser } from "../js/auth.js";
+
+        import {
+            collection,
+            query,
+            where,
+            getDocs,
+            addDoc,
+            serverTimestamp,
+            doc,
+            getDoc,
+            setDoc,
+            updateDoc,
+            deleteDoc
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+        import {
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+        /* =========================================
+           GLOBAL VARIABLES
+        ========================================== */
+
+        let currentUser = null;
+
+        let currentUserData = null;
+
+        let activeVolunteerCard = null;
+
+        let campaigns = [];
+
+        let registrations = [];
+
+        let registeredCampaignIds = new Set();
+
+        let selectedCampaignId = null;
+
+
+        /* =========================================
+           DOM ELEMENTS
+        ========================================== */
+
+        const campaignsContainer =
+            document.getElementById("campaignsContainer");
+
+        const registrationsContainer =
+            document.getElementById("registrationsContainer");
+
+        const detailsModal =
+            document.getElementById("detailsModal");
+
+        const registrationModal =
+            document.getElementById("registrationModal");
+
+        const detailsContent =
+            document.getElementById("detailsContent");
+
+        const registrationCampaignName =
+            document.getElementById("registrationCampaignName");
+
+        const registrationCardNumber =
+            document.getElementById("registrationCardNumber");
+
+        const registrationName =
+            document.getElementById("registrationName");
+
+        const registrationEmail =
+            document.getElementById("registrationEmail");
+
+        const submitRegistration =
+            document.getElementById("submitRegistration");
+
+
+        /* =========================================
+           AUTH STATE
+        ========================================== */
+
+        onAuthStateChanged(auth, async (user) => {
+
+            if (!user) {
+
+                window.location.href = "login.html";
+
+                return;
+            }
+
+            currentUser = user;
+
+            try {
+
+                await initializePage(user);
+
+            } catch (error) {
+
+                console.error(
+                    "خطأ أثناء تهيئة صفحة المتطوع:",
+                    error
+                );
+
+                showToast(
+                    "حدث خطأ أثناء تحميل حسابك. يرجى إعادة تحميل الصفحة.",
+                    "error"
+                );
+            }
+
+        });
+
+
+        /* =========================================
+           INITIALIZE PAGE
+        ========================================== */
+
+        async function initializePage(user) {
+
+            /*
+             * أولًا نتأكد أن الحساب مرتبط ببطاقة
+             * عُضد فعالة.
+             */
+
+            activeVolunteerCard =
+                await getActiveVolunteerCard(user.uid);
+
+            if (!activeVolunteerCard) {
+
+                showToast(
+                    "لم يتم العثور على بطاقة عُضد فعالة لهذا الحساب.",
+                    "error"
+                );
+
+                /*
+                 * لا نقوم بتحويله إلى زائر.
+                 * هذا الحساب مخصص للمتطوع صاحب البطاقة.
+                 */
+
+                return;
+            }
+
+
+            /*
+             * تحميل بيانات المستخدم
+             */
+
+            await loadUserData(user);
+
+            // إذا كان الحساب يتطلب تغيير كلمة المرور أولًا، نوجه المتطوع إلى الصفحة المخصصة.
+            if (currentUserData?.mustChangePassword === true) {
+                window.location.replace("change-password.html");
+                return;
+            }
+
+            await initCvSharing(user);
+
+            /*
+             * تحميل المشاركات
+             */
+
+            await loadRegistrations(user);
+
+
+            /*
+             * تحميل الحملات المنشورة
+             */
+
+            await loadCampaigns();
+
+
+            /*
+             * عرض البيانات
+             */
+
+            renderUserInfo();
+
+            renderStatistics();
+
+            renderRegistrations();
+
+            renderCampaigns();
+
+        }
+
+
+        /* =========================================
+           GET ACTIVE VOLUNTEER CARD
+        ========================================== */
+
+        async function getActiveVolunteerCard(userId) {
+
+            if (!userId) {
+
+                return null;
+            }
+
+            const cardsQuery = query(
+
+                collection(db, "volunteerCards"),
+
+                where("userId", "==", userId),
+
+                where("status", "==", "active")
+
+            );
+
+            const snapshot =
+                await getDocs(cardsQuery);
+
+            if (snapshot.empty) {
+
+                return null;
+            }
+
+            const cardDoc =
+                snapshot.docs[0];
+
+            return {
+
+                id: cardDoc.id,
+
+                ...cardDoc.data()
+
+            };
+        }
+
+
+        /* =========================================
+           LOAD USER DATA
+        ========================================== */
+
+        async function loadUserData(user) {
+
+            const userRef =
+                doc(db, "users", user.uid);
+
+            const userSnap =
+                await getDoc(userRef);
+
+            if (userSnap.exists()) {
+
+                currentUserData =
+                    userSnap.data();
+
+            } else {
+
+                currentUserData = {
+
+                    fullName:
+                        user.displayName ||
+                        user.email ||
+                        "",
+
+                    email:
+                        user.email || "",
+
+                    phone: "",
+
+                    category: ""
+
+                };
+            }
+
+        }
+
+
+        /* =========================================
+           LOAD REGISTRATIONS
+        ========================================== */
+
+        async function loadRegistrations(user) {
+
+            const registrationsQuery = query(
+
+                collection(db, "registrations"),
+
+                where("userId", "==", user.uid)
+
+            );
+
+            const snapshot =
+                await getDocs(registrationsQuery);
+
+            registrations = [];
+
+            registeredCampaignIds =
+                new Set();
+
+            snapshot.forEach((registrationDoc) => {
+
+                const data =
+                    registrationDoc.data();
+
+                registrations.push({
+
+                    id: registrationDoc.id,
+
+                    ...data
+
+                });
+
+                if (data.campaignId) {
+
+                    registeredCampaignIds.add(
+                        data.campaignId
+                    );
+
+                }
+
+            });
+
+
+            /*
+             * ترتيب المشاركات من الأحدث إلى الأقدم
+             */
+
+            registrations.sort((a, b) => {
+
+                const dateA =
+                    getTimestampMillis(a.registeredAt);
+
+                const dateB =
+                    getTimestampMillis(b.registeredAt);
+
+                return dateB - dateA;
+
+            });
+
+        }
+
+
+        /* =========================================
+           LOAD CAMPAIGNS
+        ========================================== */
+
+        async function loadCampaigns() {
+
+            const campaignsQuery = query(
+
+                collection(db, "campaigns"),
+
+                where("status", "==", "published")
+
+            );
+
+            const snapshot =
+                await getDocs(campaignsQuery);
+
+            campaigns = [];
+
+            snapshot.forEach((campaignDoc) => {
+
+                campaigns.push({
+
+                    id: campaignDoc.id,
+
+                    ...campaignDoc.data()
+
+                });
+
+            });
+
+
+            /*
+             * ترتيب الحملات حسب التاريخ
+             */
+
+            campaigns.sort((a, b) => {
+
+                const dateA =
+                    a.date || "";
+
+                const dateB =
+                    b.date || "";
+
+                return dateA.localeCompare(dateB);
+
+            });
+
+        }
+
+
+        /* =========================================
+           CV UPLOAD + EXPLICIT PUBLIC CONSENT
+           Cloudinary unsigned upload + Firestore metadata
+        ========================================== */
+
+        // استبدلي القيمتين بقيم حساب Cloudinary الخاص بك.
+        const CLOUDINARY_CLOUD_NAME = "vfrzksbw";
+        const CLOUDINARY_UPLOAD_PRESET = "oud_cv_upload";
+
+        /* نافذة تأكيد مخصصة بدل confirm() الذي يعرض اسم المضيف */
+        function showOudConfirm() {
+            const modal = document.getElementById("oudConfirmModal");
+            const acceptBtn = document.getElementById("oudConfirmAccept");
+            const cancelBtn = document.getElementById("oudConfirmCancel");
+
+            return new Promise((resolve) => {
+                if (!modal || !acceptBtn || !cancelBtn) {
+                    resolve(false);
+                    return;
+                }
+
+                let settled = false;
+                const finish = (answer) => {
+                    if (settled) return;
+                    settled = true;
+                    modal.hidden = true;
+                    acceptBtn.removeEventListener("click", onAccept);
+                    cancelBtn.removeEventListener("click", onCancel);
+                    modal.removeEventListener("click", onBackdrop);
+                    document.removeEventListener("keydown", onKeydown);
+                    resolve(answer);
+                };
+                const onAccept = () => finish(true);
+                const onCancel = () => finish(false);
+                const onBackdrop = (event) => {
+                    if (event.target.hasAttribute("data-oud-close")) finish(false);
+                };
+                const onKeydown = (event) => {
+                    if (event.key === "Escape" && !modal.hidden) finish(false);
+                };
+
+                acceptBtn.addEventListener("click", onAccept);
+                cancelBtn.addEventListener("click", onCancel);
+                modal.addEventListener("click", onBackdrop);
+                document.addEventListener("keydown", onKeydown);
+                modal.hidden = false;
+                cancelBtn.focus();
+            });
+        }
+
+        
+async function initCvSharing(user) {
+    const fileInput = document.getElementById("oudCvFile");
+    const uploadBtn = document.getElementById("oudUploadCvBtn");
+    const status = document.getElementById("oudCvStatus");
+    const cvLink = document.getElementById("oudCvLink");
+    const removeBtn = document.getElementById("oudRemoveCvBtn");
+
+    if (!fileInput || !uploadBtn || !status || !cvLink || !removeBtn) {
+        return;
+    }
+
+    const userRef = doc(db, "users", user.uid);
+    const publicRef = doc(db, "publicVolunteers", user.uid);
+
+    function setStatus(message, type = "") {
+        status.textContent = message;
+        status.className = `cv-status ${type}`.trim();
+    }
+
+    async function getLatestUserData() {
+        const snap = await getDoc(userRef);
+
+        if (!snap.exists()) {
+            throw new Error("لم يتم العثور على بيانات الحساب.");
+        }
+
+        currentUserData = snap.data();
+        return currentUserData;
+    }
+
+    // عرض رابط السيرة الذاتية المحفوظة في حساب المتطوع.
+    async function refreshCv() {
+        const data = await getLatestUserData();
+
+        if (
+            typeof data.cvUrl === "string" &&
+            data.cvUrl.startsWith("https://")
+        ) {
+            cvLink.href = data.cvUrl;
+            cvLink.hidden = false;
+        } else {
+            cvLink.removeAttribute("href");
+            cvLink.hidden = true;
+        }
+    }
+
+    // نسخ البيانات اللازمة للدليل إلى publicVolunteers.
+    async function syncPublicProfile() {
+        const data = await getLatestUserData();
+
+        if (
+            typeof data.cvUrl !== "string" ||
+            !data.cvUrl.startsWith("https://")
+        ) {
+            throw new Error("لا توجد سيرة ذاتية صالحة للمزامنة.");
+        }
+
+        const profile = {
+            userId: user.uid,
+
+            isPublic: true,
+
+            fullName: data.fullName || "",
+            professionalTitle: data.professionalTitle || "",
+            wilaya: data.wilaya || "",
+            education: data.education || "",
+
+            volunteerFields: Array.isArray(data.volunteerFields)
+                ? data.volunteerFields
+                : [],
+
+            skills: Array.isArray(data.skills)
+                ? data.skills
+                : [],
+
+            completedActivities: Number(data.completedActivities || 0),
+
+            cvUrl: data.cvUrl,
+            cvName: data.cvName || "CV.pdf",
+
+            updatedAt: serverTimestamp()
+        };
+
+        await setDoc(publicRef, profile, { merge: true });
+    }
+
+    // تحميل السيرة الحالية عند فتح الصفحة.
+    try {
+        await refreshCv();
+    } catch (error) {
+        console.error("CV load error:", error);
+        setStatus("تعذر تحميل بيانات السيرة الذاتية.", "error");
+    }
+
+    // رفع السيرة وحفظ رابطها في المجموعتين.
+    uploadBtn.addEventListener("click", async () => {
+        const file = fileInput.files?.[0];
+
+        if (!file) {
+            setStatus("اختاري ملف PDF أولًا.", "error");
+            return;
+        }
+
+        if (
+            !file.name.toLowerCase().endsWith(".pdf") ||
+            (file.type && file.type !== "application/pdf")
+        ) {
+            setStatus("يُسمح برفع ملفات PDF فقط.", "error");
+            return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+            setStatus("يجب ألا يتجاوز حجم الملف 5 MB.", "error");
+            return;
+        }
+
+        if (
+            !CLOUDINARY_CLOUD_NAME ||
+            !CLOUDINARY_UPLOAD_PRESET ||
+            CLOUDINARY_CLOUD_NAME === "ضعي_cloud_name_هنا" ||
+            CLOUDINARY_UPLOAD_PRESET === "ضعي_unsigned_preset_هنا"
+        ) {
+            setStatus("تحققي من إعدادات Cloudinary أولًا.", "error");
+            return;
+        }
+
+        uploadBtn.disabled = true;
+        setStatus("جارٍ رفع السيرة الذاتية...");
+
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/raw/upload`,
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            const result = await response.json();
+
+            if (!response.ok || !result.secure_url) {
+                throw new Error(
+                    result.error?.message || "فشل رفع السيرة الذاتية."
+                );
+            }
+
+            // أولًا: حفظ رابط الملف في users.
+            await updateDoc(userRef, {
+                cvUrl: result.secure_url,
+                cvPublicId: result.public_id || "",
+                cvName: file.name,
+                cvUpdatedAt: serverTimestamp()
+            });
+
+            // ثانيًا: إنشاء أو تحديث سجل الدليل تلقائيًا.
+            await syncPublicProfile();
+
+            await refreshCv();
+
+            fileInput.value = "";
+
+            setStatus(
+                "تم رفع السيرة الذاتية وحفظها في حسابك ودليل المتطوعين.",
+                "success"
+            );
+        } catch (error) {
+            console.error("CV upload/sync error:", error);
+
+            setStatus(
+                error.message ||
+                "تعذر حفظ السيرة الذاتية. تحققي من إعدادات Cloudinary وقواعد Firestore.",
+                "error"
+            );
+        } finally {
+            uploadBtn.disabled = false;
+        }
+    });
+
+    // إزالة السيرة الذاتية من الحساب ومن سجل الدليل.
+    removeBtn.addEventListener("click", async () => {
+        const confirmed = await showOudConfirm();
+
+        if (!confirmed) return;
+
+        removeBtn.disabled = true;
+        uploadBtn.disabled = true;
+
+        setStatus("جارٍ إزالة السيرة الذاتية...");
+
+        try {
+            // إزالة السجل من الدليل أولًا.
+            await deleteDoc(publicRef);
+
+            // إزالة مرجع الملف من حساب المتطوع.
+            await updateDoc(userRef, {
+                cvUrl: "",
+                cvPublicId: "",
+                cvName: "",
+                cvUpdatedAt: serverTimestamp()
+            });
+
+            cvLink.removeAttribute("href");
+            cvLink.hidden = true;
+
+            currentUserData.cvUrl = "";
+            currentUserData.cvPublicId = "";
+            currentUserData.cvName = "";
+
+            setStatus(
+                "تمت إزالة السيرة الذاتية من الحساب ودليل المتطوعين.",
+                "success"
+            );
+        } catch (error) {
+            console.error("CV removal error:", error);
+
+            setStatus(
+                "تعذرت إزالة السيرة الذاتية بالكامل. تحققي من قواعد Firestore ثم راجعي السجلين.",
+                "error"
+            );
+        } finally {
+            removeBtn.disabled = false;
+            uploadBtn.disabled = false;
+        }
+    });
+}
+
+
+
+        /* =========================================
+           RENDER USER INFO
+        ========================================== */
+
+        function renderUserInfo() {
+
+            const fullName =
+                currentUserData?.fullName ||
+                currentUser.displayName ||
+                currentUser.email ||
+                "المتطوع";
+
+            const email =
+                currentUserData?.email ||
+                currentUser.email ||
+                "—";
+
+            const phone =
+                currentUserData?.phone ||
+                "—";
+
+            const category =
+                currentUserData?.category ||
+                "—";
+
+
+            document.getElementById(
+                "welcomeName"
+            ).textContent =
+                `مرحبًا ${fullName} 👋`;
+
+
+            document.getElementById(
+                "userFullName"
+            ).textContent =
+                fullName;
+
+
+            document.getElementById(
+                "userEmail"
+            ).textContent =
+                email;
+
+
+            document.getElementById(
+                "userPhone"
+            ).textContent =
+                phone;
+
+
+            document.getElementById(
+                "userCategory"
+            ).textContent =
+                category;
+
+        }
+
+
+        /* =========================================
+           RENDER STATISTICS
+        ========================================== */
+
+        function renderStatistics() {
+
+            const registrationCount =
+                registrations.length;
+
+            const completedCount =
+                registrations.filter(
+                    registration => {
+
+                        return (
+                            registration.status === "completed" ||
+                            registration.attendance === "present" ||
+                            registration.attendance === "completed"
+                        );
+
+                    }
+                ).length;
+
+
+            document.getElementById(
+                "registrationCount"
+            ).textContent =
+                registrationCount;
+
+
+            document.getElementById(
+                "completedCount"
+            ).textContent =
+                completedCount;
+
+
+            document.getElementById(
+                "volunteerRank"
+            ).textContent =
+                getRank(completedCount);
+
+        }
+
+
+        /* =========================================
+           RANK
+        ========================================== */
+
+        function getRank(count) {
+
+            if (count >= 20) {
+
+                return "قائد عُضد";
+
+            }
+
+            if (count >= 15) {
+
+                return "متطوع متميز";
+
+            }
+
+            if (count >= 10) {
+
+                return "متطوع نشط";
+
+            }
+
+            return "مبتدئ";
+
+        }
+
+
+        /* =========================================
+           RENDER CAMPAIGNS
+        ========================================== */
+
+        function renderCampaigns() {
+
+            document.getElementById(
+                "campaignCount"
+            ).textContent =
+                `${campaigns.length} حملة`;
+
+
+            if (!campaigns.length) {
+
+                campaignsContainer.innerHTML = `
+
+                    <div class="empty-state"
+                         style="grid-column:1/-1;">
+
+                        <div class="empty-icon">
+                            📭
+                        </div>
+
+                        <h4>
+                            لا توجد حملات منشورة حاليًا
+                        </h4>
+
+                        <p>
+                            ستظهر هنا الحملات الجديدة بمجرد نشرها من لجنة المتابعة.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+            }
+
+
+            campaignsContainer.innerHTML =
+                campaigns.map(
+                    createCampaignCard
+                ).join("");
+
+        }
+
+
+        /* =========================================
+           CREATE CAMPAIGN CARD
+        ========================================== */
+
+        function createCampaignCard(campaign) {
+
+            const isRegistered =
+                registeredCampaignIds.has(
+                    campaign.id
+                );
+
+            const isOpen =
+                isRegistrationOpen(campaign);
+
+
+            const description =
+                campaign.description ||
+                "لا يوجد وصف لهذه الحملة.";
+
+
+            let actionButton = "";
+
+
+            if (isRegistered) {
+
+                actionButton = `
+
+                    <button
+                        class="btn btn-registered"
+                        disabled>
+
+                        ✓ مسجل بالفعل
+
+                    </button>
+
+                `;
+
+            } else if (isOpen) {
+
+                actionButton = `
+
+                    <button
+                        class="btn btn-register"
+                        onclick="openRegistration('${campaign.id}')">
+
+                        المشاركة
+
+                    </button>
+
+                `;
+
+            } else {
+
+                actionButton = `
+
+                    <button
+                        class="btn btn-closed"
+                        disabled>
+
+                        التسجيل مغلق
+
+                    </button>
+
+                `;
+
+            }
+
+
+            return `
+
+                <article class="campaign-card">
+
+                    <div class="campaign-top">
+
+                        <div class="badges">
+
+                            ${
+                                campaign.field
+                                    ? `
+                                        <span class="badge badge-field">
+                                            ${escapeHtml(campaign.field)}
+                                        </span>
+                                      `
+                                    : ""
+                            }
+
+                            ${
+                                campaign.campaignType
+                                    ? `
+                                        <span class="badge badge-type">
+                                            ${escapeHtml(campaign.campaignType)}
+                                        </span>
+                                      `
+                                    : ""
+                            }
+
+                        </div>
+
+                        <h4 class="campaign-title">
+
+                            ${escapeHtml(
+                                campaign.title ||
+                                "حملة تطوعية"
+                            )}
+
+                        </h4>
+
+                    </div>
+
+
+                    <div class="campaign-body">
+
+                        <p class="campaign-description">
+
+                            ${escapeHtml(
+                                truncateText(
+                                    description,
+                                    150
+                                )
+                            )}
+
+                        </p>
+
+
+                        <div class="campaign-meta">
+
+                            ${
+                                campaign.organizerName
+                                    ? `
+                                        <div class="meta-row">
+
+                                            <span class="meta-icon">
+                                                🏢
+                                            </span>
+
+                                            <span>
+                                                ${escapeHtml(
+                                                    campaign.organizerName
+                                                )}
+                                            </span>
+
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+
+                            ${
+                                campaign.location
+                                    ? `
+                                        <div class="meta-row">
+
+                                            <span class="meta-icon">
+                                                📍
+                                            </span>
+
+                                            <span>
+                                                ${escapeHtml(
+                                                    campaign.location
+                                                )}
+
+                                                ${
+                                                    campaign.wilaya
+                                                        ? ` - ${escapeHtml(campaign.wilaya)}`
+                                                        : ""
+                                                }
+
+                                            </span>
+
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+
+                            ${
+                                campaign.date
+                                    ? `
+                                        <div class="meta-row">
+
+                                            <span class="meta-icon">
+                                                📅
+                                            </span>
+
+                                            <span>
+                                                ${formatDateRange(
+                                                    campaign
+                                                )}
+                                            </span>
+
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+
+                            ${
+                                campaign.startTime
+                                    ? `
+                                        <div class="meta-row">
+
+                                            <span class="meta-icon">
+                                                ⏰
+                                            </span>
+
+                                            <span>
+                                                ${formatTimeRange(
+                                                    campaign
+                                                )}
+                                            </span>
+
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+
+                            ${
+                                campaign.capacity
+                                    ? `
+                                        <div class="meta-row">
+
+                                            <span class="meta-icon">
+                                                👥
+                                            </span>
+
+                                            <span>
+                                                السعة:
+                                                ${escapeHtml(
+                                                    String(
+                                                        campaign.capacity
+                                                    )
+                                                )}
+                                                مشارك
+                                            </span>
+
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+                        </div>
+
+
+                        <div class="campaign-actions">
+
+                            <button
+                                class="btn btn-details"
+                                onclick="showDetails('${campaign.id}')">
+
+                                التفاصيل
+
+                            </button>
+
+                            ${actionButton}
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }
+
+
+        /* =========================================
+           SHOW CAMPAIGN DETAILS
+        ========================================== */
+
+        window.showDetails = function(campaignId) {
+
+            const campaign =
+                campaigns.find(
+                    campaign =>
+                        campaign.id === campaignId
+                );
+
+            if (!campaign) {
+
+                return;
+            }
+
+
+            let objectivesHtml = "";
+
+            if (
+                Array.isArray(campaign.objectives) &&
+                campaign.objectives.length
+            ) {
+
+                objectivesHtml = `
+
+                    <h4>
+                        أهداف الحملة
+                    </h4>
+
+                    <ul class="detail-list">
+
+                        ${campaign.objectives.map(
+                            item =>
+                                `<li>${escapeHtml(item)}</li>`
+                        ).join("")}
+
+                    </ul>
+
+                `;
+
+            } else if (
+                typeof campaign.objectives === "string" &&
+                campaign.objectives.trim()
+            ) {
+
+                objectivesHtml = `
+
+                    <h4>
+                        أهداف الحملة
+                    </h4>
+
+                    <div class="detail-description">
+
+                        ${escapeHtml(
+                            campaign.objectives
+                        )}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            let tasksHtml = "";
+
+            if (
+                Array.isArray(campaign.tasks) &&
+                campaign.tasks.length
+            ) {
+
+                tasksHtml = `
+
+                    <h4>
+                        المهام
+                    </h4>
+
+                    <ul class="detail-list">
+
+                        ${campaign.tasks.map(
+                            item =>
+                                `<li>${escapeHtml(item)}</li>`
+                        ).join("")}
+
+                    </ul>
+
+                `;
+
+            } else if (
+                typeof campaign.tasks === "string" &&
+                campaign.tasks.trim()
+            ) {
+
+                tasksHtml = `
+
+                    <h4>
+                        المهام
+                    </h4>
+
+                    <div class="detail-description">
+
+                        ${escapeHtml(
+                            campaign.tasks
+                        )}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            detailsContent.innerHTML = `
+
+                <div class="detail-title">
+
+                    ${escapeHtml(
+                        campaign.title ||
+                        "حملة تطوعية"
+                    )}
+
+                </div>
+
+
+                <div class="detail-grid">
+
+                    ${
+                        campaign.field
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        المجال
+                                    </small>
+
+                                    <span>
+                                        ${escapeHtml(
+                                            campaign.field
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    ${
+                        campaign.campaignType
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        نوع الحملة
+                                    </small>
+
+                                    <span>
+                                        ${escapeHtml(
+                                            campaign.campaignType
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    ${
+                        campaign.organizerName
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        الجهة المنظمة
+                                    </small>
+
+                                    <span>
+                                        ${escapeHtml(
+                                            campaign.organizerName
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    ${
+                        campaign.organizerType
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        نوع الجهة
+                                    </small>
+
+                                    <span>
+                                        ${escapeHtml(
+                                            campaign.organizerType
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    ${
+                        campaign.location
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        المكان
+                                    </small>
+
+                                    <span>
+                                        ${escapeHtml(
+                                            campaign.location
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    ${
+                        campaign.wilaya
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        الولاية
+                                    </small>
+
+                                    <span>
+                                        ${escapeHtml(
+                                            campaign.wilaya
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    ${
+                        campaign.date
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        التاريخ
+                                    </small>
+
+                                    <span>
+                                        ${formatDateRange(
+                                            campaign
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    ${
+                        campaign.startTime
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        التوقيت
+                                    </small>
+
+                                    <span>
+                                        ${formatTimeRange(
+                                            campaign
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    ${
+                        campaign.capacity
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        عدد المشاركين
+                                    </small>
+
+                                    <span>
+                                        ${escapeHtml(
+                                            String(
+                                                campaign.capacity
+                                            )
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    ${
+                        campaign.registrationDeadline
+                            ? `
+                                <div class="detail-item">
+
+                                    <small>
+                                        آخر أجل للتسجيل
+                                    </small>
+
+                                    <span>
+                                        ${formatDateOnly(
+                                            campaign.registrationDeadline
+                                        )}
+                                    </span>
+
+                                </div>
+                              `
+                            : ""
+                    }
+
+                </div>
+
+
+                <h4>
+                    وصف الحملة
+                </h4>
+
+                <div class="detail-description">
+
+                    ${escapeHtml(
+                        campaign.description ||
+                        "لا يوجد وصف."
+                    )}
+
+                </div>
+
+
+                ${objectivesHtml}
+
+                ${tasksHtml}
+
+            `;
+
+
+            detailsModal.classList.add("active");
+
+        };
+
+
+        /* =========================================
+           CLOSE DETAILS
+        ========================================== */
+
+        window.closeDetails = function() {
+
+            detailsModal.classList.remove(
+                "active"
+            );
+
+        };
+
+
+        /* =========================================
+           OPEN REGISTRATION
+        ========================================== */
+
+        window.openRegistration = function(campaignId) {
+
+            const campaign =
+                campaigns.find(
+                    campaign =>
+                        campaign.id === campaignId
+                );
+
+            if (!campaign) {
+
+                return;
+            }
+
+
+            if (!isRegistrationOpen(campaign)) {
+
+                showToast(
+                    "التسجيل في هذه الحملة مغلق.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            /*
+             * منع التسجيل المكرر
+             */
+
+            if (
+                registeredCampaignIds.has(
+                    campaignId
+                )
+            ) {
+
+                showToast(
+                    "أنت مسجل بالفعل في هذه الحملة.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            /*
+             * التأكد مرة أخرى من البطاقة
+             */
+
+            selectedCampaignId =
+                campaignId;
+
+
+            registrationCampaignName.textContent =
+                campaign.title ||
+                "حملة تطوعية";
+
+
+            registrationName.textContent =
+                currentUserData?.fullName ||
+                currentUser.displayName ||
+                currentUser.email ||
+                "—";
+
+
+            registrationEmail.textContent =
+                currentUserData?.email ||
+                currentUser.email ||
+                "—";
+
+
+            registrationCardNumber.textContent =
+                activeVolunteerCard?.cardNumber ||
+                "—";
+
+
+            submitRegistration.disabled =
+                false;
+
+            submitRegistration.textContent =
+                "تأكيد المشاركة كمتطوع";
+
+
+            registrationModal.classList.add(
+                "active"
+            );
+
+        };
+
+
+        /* =========================================
+           CLOSE REGISTRATION
+        ========================================== */
+
+        window.closeRegistration = function() {
+
+            registrationModal.classList.remove(
+                "active"
+            );
+
+            selectedCampaignId = null;
+
+        };
+
+
+        /* =========================================
+           SUBMIT VOLUNTEER REGISTRATION
+        ========================================== */
+
+        submitRegistration.addEventListener(
+            "click",
+            async () => {
+
+                if (!selectedCampaignId) {
+
+                    return;
+                }
+
+
+                if (!currentUser) {
+
+                    showToast(
+                        "يجب تسجيل الدخول أولًا.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                submitRegistration.disabled =
+                    true;
+
+                submitRegistration.textContent =
+                    "جاري التسجيل...";
+
+
+                try {
+
+                    /*
+                     * الحصول على الحملة
+                     */
+
+                    const campaign =
+                        campaigns.find(
+                            item =>
+                                item.id ===
+                                selectedCampaignId
+                        );
+
+
+                    if (!campaign) {
+
+                        throw new Error(
+                            "لم يتم العثور على الحملة."
+                        );
+
+                    }
+
+
+                    /*
+                     * التأكد من أن التسجيل ما زال مفتوحًا
+                     */
+
+                    if (
+                        !isRegistrationOpen(
+                            campaign
+                        )
+                    ) {
+
+                        throw new Error(
+                            "التسجيل في هذه الحملة مغلق."
+                        );
+
+                    }
+
+
+                    /*
+                     * إعادة التحقق من بطاقة المتطوع
+                     *
+                     * مهم جدًا:
+                     * لا نستخدم بيانات قديمة فقط.
+                     */
+
+                    const verifiedCard =
+                        await getActiveVolunteerCard(
+                            currentUser.uid
+                        );
+
+
+                    if (!verifiedCard) {
+
+                        throw new Error(
+                            "لا توجد بطاقة عُضد فعالة مرتبطة بهذا الحساب."
+                        );
+
+                    }
+
+
+                    /*
+                     * إعادة تحميل بيانات المستخدم
+                     */
+
+                    const userRef =
+                        doc(
+                            db,
+                            "users",
+                            currentUser.uid
+                        );
+
+                    const userSnap =
+                        await getDoc(userRef);
+
+
+                    if (!userSnap.exists()) {
+
+                        throw new Error(
+                            "لم يتم العثور على بيانات حساب المتطوع."
+                        );
+
+                    }
+
+
+                    const userData =
+                        userSnap.data();
+
+
+                    /*
+                     * التحقق من عدم وجود تسجيل سابق
+                     */
+
+                    const duplicateQuery =
+                        query(
+
+                            collection(
+                                db,
+                                "registrations"
+                            ),
+
+                            where(
+                                "userId",
+                                "==",
+                                currentUser.uid
+                            ),
+
+                            where(
+                                "campaignId",
+                                "==",
+                                selectedCampaignId
+                            )
+
+                        );
+
+
+                    const duplicateSnapshot =
+                        await getDocs(
+                            duplicateQuery
+                        );
+
+
+                    if (
+                        !duplicateSnapshot.empty
+                    ) {
+
+                        registeredCampaignIds.add(
+                            selectedCampaignId
+                        );
+
+                        throw new Error(
+                            "أنت مسجل بالفعل في هذه الحملة."
+                        );
+
+                    }
+
+
+                    /*
+                     * إنشاء التسجيل
+                     *
+                     * registrationType = volunteer
+                     */
+
+                    await addDoc(
+                        collection(
+                            db,
+                            "registrations"
+                        ),
+                        {
+
+                            registrationType:
+                                "volunteer",
+
+                            userId:
+                                currentUser.uid,
+
+                            fullName:
+                                userData.fullName ||
+                                currentUser.displayName ||
+                                currentUser.email ||
+                                "",
+
+                            email:
+                                userData.email ||
+                                currentUser.email ||
+                                "",
+
+                            phone:
+                                userData.phone ||
+                                null,
+
+                            category:
+                                userData.category ||
+                                null,
+
+                            birthDate:
+                                userData.birthDate ||
+                                null,
+
+                            cardNumber:
+                                verifiedCard.cardNumber ||
+                                null,
+
+                            campaignId:
+                                selectedCampaignId,
+
+                            campaignTitle:
+                                campaign.title ||
+                                "",
+
+                            status:
+                                "registered",
+
+                            attendance:
+                                "pending",
+
+                            registeredAt:
+                                serverTimestamp()
+
+                        }
+                    );
+
+
+                    /*
+                     * تحديث الواجهة مباشرة
+                     */
+
+                    registeredCampaignIds.add(
+                        selectedCampaignId
+                    );
+
+
+                    registrations.unshift({
+
+                        registrationType:
+                            "volunteer",
+
+                        userId:
+                            currentUser.uid,
+
+                        fullName:
+                            userData.fullName ||
+                            currentUser.displayName ||
+                            currentUser.email ||
+                            "",
+
+                        email:
+                            userData.email ||
+                            currentUser.email ||
+                            "",
+
+                        cardNumber:
+                            verifiedCard.cardNumber ||
+                            null,
+
+                        campaignId:
+                            selectedCampaignId,
+
+                        campaignTitle:
+                            campaign.title ||
+                            "",
+
+                        status:
+                            "registered",
+
+                        attendance:
+                            "pending",
+
+                        registeredAt:
+                            null
+
+                    });
+
+
+                    activeVolunteerCard =
+                        verifiedCard;
+
+
+                    currentUserData =
+                        userData;
+
+
+                    renderCampaigns();
+
+                    renderRegistrations();
+
+                    renderStatistics();
+
+
+                    closeRegistration();
+
+
+                    showToast(
+                        "تم تسجيل مشاركتك بنجاح كمتطوع في الحملة.",
+                        "success"
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "خطأ أثناء تسجيل المشاركة:",
+                        error
+                    );
+
+
+                    showToast(
+                        error.message ||
+                        "حدث خطأ أثناء التسجيل.",
+                        "error"
+                    );
+
+                } finally {
+
+                    submitRegistration.disabled =
+                        false;
+
+                    submitRegistration.textContent =
+                        "تأكيد المشاركة كمتطوع";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           RENDER REGISTRATIONS
+        ========================================== */
+
+        function renderRegistrations() {
+
+            if (!registrations.length) {
+
+                registrationsContainer.innerHTML = `
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            🌱
+                        </div>
+
+                        <h4>
+                            لم تسجل في أي حملة بعد
+                        </h4>
+
+                        <p>
+                            اختر إحدى الحملات أعلاه وابدأ أولى مشاركاتك التطوعية.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+            }
+
+
+            registrationsContainer.innerHTML =
+                registrations.map(
+                    createRegistrationItem
+                ).join("");
+
+        }
+
+
+        /* =========================================
+           CREATE REGISTRATION ITEM
+        ========================================== */
+
+        function createRegistrationItem(
+            registration
+        ) {
+
+            const statusInfo =
+                getRegistrationStatus(
+                    registration
+                );
+
+
+            return `
+
+                <div class="registration-item">
+
+                    <div class="registration-main">
+
+                        <h4 class="registration-title">
+
+                            ${escapeHtml(
+                                registration.campaignTitle ||
+                                "حملة تطوعية"
+                            )}
+
+                        </h4>
+
+                        <div class="registration-date">
+
+                            ${formatRegistrationDate(
+                                registration.registeredAt
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="status ${statusInfo.className}">
+
+                        ${statusInfo.label}
+
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================================
+           REGISTRATION STATUS
+        ========================================== */
+
+        function getRegistrationStatus(
+            registration
+        ) {
+
+            if (
+                registration.status ===
+                "completed"
+            ) {
+
+                return {
+
+                    label:
+                        "مشاركة موثقة",
+
+                    className:
+                        "status-completed"
+
+                };
+
+            }
+
+
+            if (
+                registration.attendance ===
+                "present"
+            ) {
+
+                return {
+
+                    label:
+                        "تم الحضور",
+
+                    className:
+                        "status-present"
+
+                };
+
+            }
+
+
+            if (
+                registration.attendance ===
+                "completed"
+            ) {
+
+                return {
+
+                    label:
+                        "مشاركة موثقة",
+
+                    className:
+                        "status-completed"
+
+                };
+
+            }
+
+
+            if (
+                registration.attendance ===
+                "absent"
+            ) {
+
+                return {
+
+                    label:
+                        "غائب",
+
+                    className:
+                        "status-absent"
+
+                };
+
+            }
+
+
+            if (
+                registration.status ===
+                "registered"
+            ) {
+
+                return {
+
+                    label:
+                        "في انتظار الحملة",
+
+                    className:
+                        "status-registered"
+
+                };
+
+            }
+
+
+            return {
+
+                label:
+                    "قيد المتابعة",
+
+                className:
+                    "status-pending"
+
+            };
+
+        }
+
+
+        /* =========================================
+           REGISTRATION OPEN
+        ========================================== */
+
+        function isRegistrationOpen(
+            campaign
+        ) {
+
+            if (
+                !campaign ||
+                campaign.status !==
+                "published"
+            ) {
+
+                return false;
+            }
+
+
+            const now =
+                new Date();
+
+
+            /*
+             * إذا كان هناك آخر أجل للتسجيل
+             */
+
+            if (
+                campaign.registrationDeadline
+            ) {
+
+                const deadline =
+                    new Date(
+                        `${campaign.registrationDeadline}T23:59:59`
+                    );
+
+
+                return now <= deadline;
+
+            }
+
+
+            /*
+             * إذا لم يوجد آخر أجل،
+             * نستعمل تاريخ الحملة.
+             */
+
+            const endDate =
+                campaign.endDate ||
+                campaign.date;
+
+
+            if (endDate) {
+
+                const end =
+                    new Date(
+                        `${endDate}T23:59:59`
+                    );
+
+
+                return now <= end;
+
+            }
+
+
+            return true;
+
+        }
+
+
+        /* =========================================
+           DATE HELPERS
+        ========================================== */
+
+        function formatDateOnly(
+            dateString
+        ) {
+
+            if (!dateString) {
+
+                return "—";
+            }
+
+
+            const date =
+                new Date(
+                    `${dateString}T00:00:00`
+                );
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return dateString;
+
+            }
+
+
+            return date.toLocaleDateString(
+                "fr-FR"
+            );
+
+        }
+
+
+        function formatDateRange(
+            campaign
+        ) {
+
+            if (!campaign.date) {
+
+                return "—";
+            }
+
+
+            const start =
+                formatDateOnly(
+                    campaign.date
+                );
+
+
+            if (
+                campaign.endDate &&
+                campaign.endDate !==
+                campaign.date
+            ) {
+
+                const end =
+                    formatDateOnly(
+                        campaign.endDate
+                    );
+
+                return `${start} → ${end}`;
+
+            }
+
+
+            return start;
+
+        }
+
+
+        function formatTimeRange(
+            campaign
+        ) {
+
+            if (
+                !campaign.startTime &&
+                !campaign.endTime
+            ) {
+
+                return "—";
+            }
+
+
+            if (
+                campaign.startTime &&
+                campaign.endTime
+            ) {
+
+                return `${campaign.startTime} → ${campaign.endTime}`;
+
+            }
+
+
+            return (
+                campaign.startTime ||
+                campaign.endTime ||
+                "—"
+            );
+
+        }
+
+
+        function formatRegistrationDate(
+            timestamp
+        ) {
+
+            if (!timestamp) {
+
+                return "تم التسجيل حديثًا";
+
+            }
+
+
+            try {
+
+                const date =
+                    timestamp.toDate
+                        ? timestamp.toDate()
+                        : new Date(timestamp);
+
+
+                return (
+                    "تاريخ التسجيل: " +
+                    date.toLocaleDateString(
+                        "fr-FR"
+                    )
+                );
+
+            } catch {
+
+                return "تم التسجيل";
+
+            }
+
+        }
+
+
+        function getTimestampMillis(
+            timestamp
+        ) {
+
+            if (!timestamp) {
+
+                return 0;
+            }
+
+
+            try {
+
+                if (
+                    typeof timestamp.toMillis ===
+                    "function"
+                ) {
+
+                    return timestamp.toMillis();
+
+                }
+
+
+                if (
+                    typeof timestamp.toDate ===
+                    "function"
+                ) {
+
+                    return timestamp
+                        .toDate()
+                        .getTime();
+
+                }
+
+
+                return new Date(
+                    timestamp
+                ).getTime();
+
+            } catch {
+
+                return 0;
+
+            }
+
+        }
+
+
+        /* =========================================
+           TEXT HELPERS
+        ========================================== */
+
+        function truncateText(
+            text,
+            maxLength
+        ) {
+
+            if (!text) {
+
+                return "";
+            }
+
+
+            text = String(text);
+
+
+            if (
+                text.length <= maxLength
+            ) {
+
+                return text;
+            }
+
+
+            return (
+                text.substring(
+                    0,
+                    maxLength
+                ) + "..."
+            );
+
+        }
+
+
+        function escapeHtml(
+            value
+        ) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "";
+            }
+
+
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =========================================
+           TOAST
+        ========================================== */
+
+        function showToast(
+            message,
+            type = ""
+        ) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+
+            toast.textContent =
+                message;
+
+
+            toast.className =
+                "toast show " +
+                type;
+
+
+            setTimeout(() => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            }, 3500);
+
+        }
+
+
+        /* =========================================
+           LOGOUT
+        ========================================== */
+
+      
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+    const confirmed = await showLogoutConfirmation();
+
+    if (!confirmed) return;
+
+    try {
+        await logoutUser();
+        window.location.replace("login.html");
+    } catch (error) {
+        console.error("خطأ أثناء تسجيل الخروج:", error);
+        showToast("تعذر تسجيل الخروج. يرجى المحاولة مرة أخرى.", "error");
+    }
+});
+
+function showLogoutConfirmation() {
+    return new Promise((resolve) => {
+        const overlay = document.createElement("div");
+
+        overlay.style.cssText = `
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 20px;
+        `;
+
+        overlay.innerHTML = `
+            <div style="
+                background: white;
+                width: 100%;
+                max-width: 380px;
+                padding: 28px;
+                border-radius: 18px;
+                text-align: center;
+                direction: rtl;
+                box-shadow: 0 15px 45px rgba(0,0,0,.2);
+                font-family: 'Segoe UI', sans-serif;
+            ">
+                
+                <h3 style="color: #123c35; margin: 0 0 12px;">
+                    تسجيل الخروج
+                </h3>
+                <p style="color: #555; margin-bottom: 24px;">
+                    هل تريد تسجيل الخروج من حسابك؟
+                </p>
+                <div style="display: flex; gap: 10px;">
+                    <button id="confirmLogout" style="
+                        flex: 1;
+                        border: none;
+                        background: #123c35;
+                        color: white;
+                        padding: 12px;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    ">نعم، تسجيل الخروج</button>
+                    <button id="cancelLogout" style="
+                        flex: 1;
+                        border: 1px solid #ddd;
+                        background: white;
+                        color: #333;
+                        padding: 12px;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    ">إلغاء</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+
+        overlay.querySelector("#confirmLogout").onclick = () => {
+            overlay.remove();
+            resolve(true);
+        };
+
+        overlay.querySelector("#cancelLogout").onclick = () => {
+            overlay.remove();
+            resolve(false);
+        };
+
+        overlay.addEventListener("click", (event) => {
+            if (event.target === overlay) {
+                overlay.remove();
+                resolve(false);
+            }
+        });
+    });
+}
+
+
+
+        /* =========================================
+           CLOSE MODALS WHEN CLICKING OUTSIDE
+        ========================================== */
+
+        detailsModal.addEventListener(
+            "click",
+            (event) => {
+
+                if (
+                    event.target ===
+                    detailsModal
+                ) {
+
+                    closeDetails();
+
+                }
+
+            }
+        );
+
+
+        registrationModal.addEventListener(
+            "click",
+            (event) => {
+
+                if (
+                    event.target ===
+                    registrationModal
+                ) {
+
+                    closeRegistration();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           ESCAPE KEY
+        ========================================== */
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeDetails();
+
+                    closeRegistration();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+
+    <!-- نافذة تأكيد إزالة السيرة الذاتية دون رسائل المتصفح أو localhost -->
+    <div id="oudConfirmModal" class="oud-modal" hidden>
+        <div class="oud-modal-backdrop" data-oud-close></div>
+        <section class="oud-modal-card" role="dialog" aria-modal="true"
+                 aria-labelledby="oudConfirmTitle" aria-describedby="oudConfirmMessage">
+            <div class="oud-modal-icon" aria-hidden="true">!</div>
+            <h3 id="oudConfirmTitle">تأكيد إزالة السيرة الذاتية</h3>
+            <p id="oudConfirmMessage">
+                هل تريدين إزالة السيرة الذاتية من حسابك والدليل المهني؟
+                لن يظهر رابطها في الدليل بعد الإزالة.
+            </p>
+            <div class="oud-modal-actions">
+                <button type="button" id="oudConfirmCancel" class="oud-modal-cancel">الاحتفاظ بالسيرة</button>
+                <button type="button" id="oudConfirmAccept" class="oud-modal-delete">نعم، إزالة السيرة</button>
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>

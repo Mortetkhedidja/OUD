@@ -1,0 +1,4643 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>الإدارة | منصة عضد </title>
+
+<style>
+
+    * {
+        
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f7f6;
+        color: #1f2933;
+    }
+
+    header {
+        background: #123c35;
+        color: white;
+        padding: 25px 8%;
+    }
+
+    main {
+        width: 84%;
+        max-width: 1100px;
+        margin: 35px auto;
+    }
+
+    .box {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    }
+
+    .box h2 {
+        color: #123c35;
+        margin-top: 0;
+    }
+
+    .section-description {
+        color: #6b7774;
+        line-height: 1.8;
+        margin-bottom: 25px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0 20px;
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        padding: 12px;
+        margin-top: 7px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: inherit;
+        background: white;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: none;
+        border-color: #c6a15b;
+        box-shadow: 0 0 0 3px rgba(198,161,91,0.12);
+    }
+
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    label {
+        font-weight: bold;
+        color: #30423f;
+        display: block;
+    }
+
+    .required {
+        color: #a33;
+    }
+
+    .optional {
+        color: #777;
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    button {
+        border: none;
+        padding: 12px 22px;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #c6a15b;
+        color: white;
+        font-size: 15px;
+        font-family: inherit;
+    }
+
+    button:hover {
+        background: #a98543;
+    }
+
+    button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .publish-button {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .campaign {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 15px;
+        background: #fff;
+    }
+
+    .campaign-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .campaign h3 {
+        color: #123c35;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .campaign-badges {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+        margin: 10px 0;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        background: #eef5f2;
+        color: #277a50;
+    }
+
+    .badge-gold {
+        background: #fff7e6;
+        color: #9a701d;
+    }
+
+    .badge-blue {
+        background: #eef4ff;
+        color: #2563eb;
+    }
+
+    .campaign-info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px 18px;
+    }
+
+    .campaign-info p {
+        margin: 7px 0;
+        line-height: 1.7;
+    }
+
+    .participants {
+        margin-top: 15px;
+        padding: 15px;
+        background: #f5f7f6;
+        border-radius: 10px;
+    }
+
+    .participant {
+        background: white;
+        padding: 18px;
+        margin-top: 10px;
+        border-radius: 8px;
+        border-right: 4px solid #123c35;
+    }
+
+    .message {
+        margin-top: 15px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #eef5f2;
+        display: none;
+    }
+
+    .message.show {
+        display: block;
+    }
+
+    .success {
+        color: #277a50;
+        font-weight: bold;
+    }
+
+    .closed {
+        color: #a33;
+        font-weight: bold;
+    }
+
+    .guest {
+        color: #8a641f;
+        font-weight: bold;
+    }
+
+    .volunteer {
+        color: #277a50;
+        font-weight: bold;
+    }
+
+    .card-info {
+        background: #eef5f2;
+        padding: 10px;
+        border-radius: 8px;
+        margin: 10px 0;
+    }
+
+    .guest-id-info {
+        background: #fff7e6;
+        color: #8a641f;
+        padding: 9px 12px;
+        border-radius: 8px;
+        margin: 10px 0;
+        font-size: 13px;
+    }
+
+    .loading {
+        color: #777;
+        font-style: italic;
+    }
+
+    .status {
+        font-weight: bold;
+    }
+
+    .status-pending {
+        color: #b7791f;
+    }
+
+    .status-accepted {
+        color: #277a50;
+    }
+
+    .status-rejected {
+        color: #a33;
+    }
+
+    .status-completed {
+        color: #2563eb;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+
+    .accept-button {
+        background: #277a50;
+    }
+
+    .accept-button:hover {
+        background: #1f6240;
+    }
+
+    .reject-button {
+        background: #a33;
+    }
+
+    .reject-button:hover {
+        background: #822222;
+    }
+
+    .present-button {
+        background: #2563eb;
+        margin-top: 10px;
+    }
+
+    .present-button:hover {
+        background: #1d4ed8;
+    }
+
+    .participants-button {
+        margin-top: 10px;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .header-content h1 {
+        margin: 0 0 8px;
+    }
+
+    .header-content p {
+        margin: 0;
+        color: #dfc98f;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .header-button,
+    .logout-button {
+        border: none;
+        padding: 11px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .header-button {
+        background: #c6a15b;
+        color: white;
+    }
+
+    .header-button:hover {
+        background: #a98543;
+    }
+
+    .logout-button {
+        background: #a33;
+        color: white;
+    }
+
+    .logout-button:hover {
+        background: #822222;
+    }
+
+    .form-note {
+        background: #f7faf9;
+        border-right: 4px solid #c6a15b;
+        padding: 12px 15px;
+        border-radius: 8px;
+        color: #65716e;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+
+    /* ==========================================
+       إشعارات المنصة ونافذة التأكيد
+    ========================================== */
+
+    .toast-container {
+        position: fixed;
+        top: 22px;
+        left: 22px;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: min(390px, calc(100vw - 44px));
+        pointer-events: none;
+    }
+
+    .toast {
+        pointer-events: auto;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 15px 17px;
+        background: #ffffff;
+        border: 1px solid #e6e9e7;
+        border-right: 5px solid #277a50;
+        border-radius: 13px;
+        box-shadow: 0 12px 35px rgba(18, 60, 53, 0.16);
+        animation: toastIn .28s ease;
+    }
+
+    .toast.error {
+        border-right-color: #a33;
+    }
+
+    .toast.warning {
+        border-right-color: #c6a15b;
+    }
+
+    .toast-icon {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #eef5f2;
+        font-size: 18px;
+    }
+
+    .toast.error .toast-icon {
+        background: #fff1f1;
+    }
+
+    .toast.warning .toast-icon {
+        background: #fff7e6;
+    }
+
+    .toast-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .toast-title {
+        margin: 0 0 3px;
+        color: #123c35;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .toast-message {
+        margin: 0;
+        color: #5f6b68;
+        line-height: 1.7;
+        font-size: 13px;
+    }
+
+    .toast-close {
+        border: none;
+        background: transparent;
+        color: #8a9491;
+        padding: 0 3px;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .toast-close:hover {
+        background: transparent;
+        color: #123c35;
+    }
+
+    .toast.hide {
+        animation: toastOut .22s ease forwards;
+    }
+
+    @keyframes toastIn {
+        from {
+            opacity: 0;
+            transform: translateX(-25px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes toastOut {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateX(-25px);
+        }
+    }
+
+    .confirm-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(15, 35, 31, 0.48);
+        backdrop-filter: blur(4px);
+    }
+
+    .confirm-overlay.show {
+        display: flex;
+    }
+
+    .confirm-modal {
+        width: min(480px, 100%);
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        animation: modalIn .22s ease;
+    }
+
+    .confirm-modal-header {
+        padding: 20px 22px 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .confirm-modal-icon {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: #eef5f2;
+        font-size: 21px;
+    }
+
+    .confirm-modal-title {
+        margin: 0;
+        color: #123c35;
+        font-size: 19px;
+    }
+
+    .confirm-modal-body {
+        padding: 0 22px 20px;
+        color: #5f6b68;
+        line-height: 1.9;
+        font-size: 14px;
+    }
+
+    .confirm-modal-body strong {
+        color: #123c35;
+    }
+
+    .confirm-modal-actions {
+        display: flex;
+        gap: 10px;
+        padding: 15px 22px 20px;
+        border-top: 1px solid #edf0ef;
+        justify-content: flex-start;
+    }
+
+    .confirm-cancel,
+    .confirm-action {
+        min-width: 115px;
+        margin: 0;
+    }
+
+    .confirm-cancel {
+        background: #eef1f0;
+        color: #30423f;
+    }
+
+    .confirm-cancel:hover {
+        background: #e1e6e4;
+    }
+
+    .confirm-action {
+        background: #277a50;
+    }
+
+    .confirm-action.danger {
+        background: #a33;
+    }
+
+    .confirm-action.primary {
+        background: #2563eb;
+    }
+
+    @keyframes modalIn {
+        from {
+            opacity: 0;
+            transform: translateY(12px) scale(.98);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+    
+
+    @media (max-width: 750px) {
+
+        main {
+            width: 92%;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .full-width {
+            grid-column: auto;
+        }
+
+        .campaign-info {
+            grid-template-columns: 1fr;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        .header-content {
+            align-items: stretch;
+        }
+
+        .header-actions {
+            width: 100%;
+        }
+
+        .header-button,
+        .logout-button {
+            flex: 1;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<div
+    id="toastContainer"
+    class="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+></div>
+
+
+<div
+    id="confirmOverlay"
+    class="confirm-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirmTitle"
+>
+
+    <div class="confirm-modal">
+
+        <div class="confirm-modal-header">
+
+            <div
+                id="confirmIcon"
+                class="confirm-modal-icon"
+            >
+                ❓
+            </div>
+
+            <h3
+                id="confirmTitle"
+                class="confirm-modal-title"
+            >
+                تأكيد الإجراء
+            </h3>
+
+        </div>
+
+
+        <div
+            id="confirmMessage"
+            class="confirm-modal-body"
+        ></div>
+
+
+        <div class="confirm-modal-actions">
+
+            <button
+                type="button"
+                id="confirmCancel"
+                class="confirm-cancel"
+            >
+                إلغاء
+            </button>
+
+            <button
+                type="button"
+                id="confirmAction"
+                class="confirm-action"
+            >
+                تأكيد
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<header>
+
+    <div class="header-content">
+
+        <div>
+
+            <h1>
+                منصة عُضد
+            </h1>
+
+            <p>
+                لوحة لجنة المتابعة
+            </p>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <button
+                type="button"
+                id="committeeButton"
+                class="header-button"
+            >
+                👥 لجنة المتابعة
+            </button>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                🚪 تسجيل الخروج
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =====================================
+     إنشاء حملة
+====================================== -->
+
+<div class="box">
+
+    <h2>
+        ➕ إنشاء حملة جديدة
+    </h2>
+
+
+    <p class="section-description">
+
+        أضيفي معلومات الحملة بدقة حتى يتمكن الزوار من العثور عليها
+        ومعرفة نوعها والجهة المنظمة ومكانها وموعدها.
+
+    </p>
+
+
+    <div class="form-note">
+
+        💡 يمكنك إنشاء حملات جامعية، بيئية، اجتماعية، ثقافية،
+        رياضية، تقنية وغيرها. وستظهر هذه المعلومات لاحقًا
+        للزائر كفلاتر للبحث عن الحملات المناسبة.
+
+    </div>
+
+
+    <form id="campaignForm">
+
+        <div class="form-grid">
+
+
+            <div class="full-width">
+
+                <label>
+
+                    اسم الحملة
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="مثال: تنظيف شاطئ صلامندر"
+                    required
+                >
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    المجال
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <select
+                    id="field"
+                    required
+                >
+
+                    <option value="">
+                        اختر المجال
+                    </option>
+
+                    <option value="بيئي">
+                        🌱 بيئي
+                    </option>
+
+                    <option value="اجتماعي">
+                        🤝 اجتماعي
+                    </option>
+
+                    <option value="جامعي">
+                        🎓 جامعي
+                    </option>
+
+                    <option value="تربوي">
+                        🏫 تربوي
+                    </option>
+
+                    <option value="ثقافي">
+                        🎨 ثقافي
+                    </option>
+
+                    <option value="رياضي">
+                        🏃 رياضي
+                    </option>
+
+                    <option value="رقمي وتقني">
+                        💻 رقمي وتقني
+                    </option>
+
+                    <option value="صحي">
+                        🏥 صحي
+                    </option>
+
+                    <option value="إنساني">
+                        ❤️ إنساني
+                    </option>
+
+                    <option value="مجتمعي">
+                        🏘️ مجتمعي
+                    </option>
+
+                    <option value="حماية الحيوانات">
+                        🐾 حماية الحيوانات
+                    </option>
+
+                    <option value="أخرى">
+                        📌 أخرى
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    نوع الحملة
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <select
+                    id="campaignType"
+                    required
+                >
+
+                    <option value="">
+                        اختر نوع الحملة
+                    </option>
+
+                    <option value="حملة يوم واحد">
+                        🟢 حملة يوم واحد
+                    </option>
+
+                    <option value="حملة متعددة الأيام">
+                        🔵 حملة متعددة الأيام
+                    </option>
+
+                    <option value="برنامج تطوعي">
+                        🟣 برنامج تطوعي
+                    </option>
+
+                    <option value="فعالية تطوعية">
+                        🟠 فعالية تطوعية
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    نوع الجهة المنظمة
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <select
+                    id="organizerType"
+                    required
+                >
+
+                    <option value="">
+                        اختر الجهة
+                    </option>
+
+                    <option value="جامعة">
+                        🎓 جامعة
+                    </option>
+
+                    <option value="مؤسسة تربوية">
+                        🏫 مؤسسة تربوية
+                    </option>
+
+                    <option value="جمعية">
+                        🤝 جمعية
+                    </option>
+
+                    <option value="مؤسسة عمومية">
+                        🏛️ مؤسسة عمومية
+                    </option>
+
+                    <option value="مؤسسة اقتصادية">
+                        🏢 مؤسسة اقتصادية / شركة
+                    </option>
+
+                    <option value="مبادرة شبابية">
+                        🧑‍🤝‍🧑 مبادرة شبابية
+                    </option>
+
+                    <option value="بلدية أو جهة محلية">
+                        🏘️ بلدية أو جهة محلية
+                    </option>
+
+                    <option value="مؤسسة صحية">
+                        🏥 مؤسسة صحية
+                    </option>
+
+                    <option value="هيئة أو منظمة">
+                        🌍 هيئة أو منظمة
+                    </option>
+
+                    <option value="أخرى">
+                        📌 أخرى
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    اسم الجهة المنظمة
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="organizerName"
+                    placeholder="مثال: جامعة عبد الحميد بن باديس"
+                    required
+                >
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    الولاية
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <select
+                    id="wilaya"
+                    required
+                >
+
+                    <option value="">
+                        اختر الولاية
+                    </option>
+
+                    <option value="أدرار">أدرار</option>
+                    <option value="الشلف">الشلف</option>
+                    <option value="الأغواط">الأغواط</option>
+                    <option value="أم البواقي">أم البواقي</option>
+                    <option value="باتنة">باتنة</option>
+                    <option value="بجاية">بجاية</option>
+                    <option value="بسكرة">بسكرة</option>
+                    <option value="بشار">بشار</option>
+                    <option value="البليدة">البليدة</option>
+                    <option value="البويرة">البويرة</option>
+                    <option value="تمنراست">تمنراست</option>
+                    <option value="تبسة">تبسة</option>
+                    <option value="تلمسان">تلمسان</option>
+                    <option value="تيارت">تيارت</option>
+                    <option value="تيزي وزو">تيزي وزو</option>
+                    <option value="الجزائر">الجزائر</option>
+                    <option value="الجلفة">الجلفة</option>
+                    <option value="جيجل">جيجل</option>
+                    <option value="سطيف">سطيف</option>
+                    <option value="سعيدة">سعيدة</option>
+                    <option value="سكيكدة">سكيكدة</option>
+                    <option value="سيدي بلعباس">سيدي بلعباس</option>
+                    <option value="عنابة">عنابة</option>
+                    <option value="قالمة">قالمة</option>
+                    <option value="قسنطينة">قسنطينة</option>
+                    <option value="المدية">المدية</option>
+                    <option value="مستغانم">مستغانم</option>
+                    <option value="المسيلة">المسيلة</option>
+                    <option value="معسكر">معسكر</option>
+                    <option value="ورقلة">ورقلة</option>
+                    <option value="وهران">وهران</option>
+                    <option value="البيض">البيض</option>
+                    <option value="إليزي">إليزي</option>
+                    <option value="برج بوعريريج">برج بوعريريج</option>
+                    <option value="بومرداس">بومرداس</option>
+                    <option value="الطارف">الطارف</option>
+                    <option value="تندوف">تندوف</option>
+                    <option value="تيسمسيلت">تيسمسيلت</option>
+                    <option value="الوادي">الوادي</option>
+                    <option value="خنشلة">خنشلة</option>
+                    <option value="سوق أهراس">سوق أهراس</option>
+                    <option value="تيبازة">تيبازة</option>
+                    <option value="ميلة">ميلة</option>
+                    <option value="عين الدفلى">عين الدفلى</option>
+                    <option value="النعامة">النعامة</option>
+                    <option value="عين تموشنت">عين تموشنت</option>
+                    <option value="غرداية">غرداية</option>
+                    <option value="غليزان">غليزان</option>
+                    <option value="تيميمون">تيميمون</option>
+                    <option value="برج باجي مختار">برج باجي مختار</option>
+                    <option value="أولاد جلال">أولاد جلال</option>
+                    <option value="بني عباس">بني عباس</option>
+                    <option value="إن صالح">إن صالح</option>
+                    <option value="إن قزام">إن قزام</option>
+                    <option value="تقرت">تقرت</option>
+                    <option value="جانت">جانت</option>
+                    <option value="المغير">المغير</option>
+                    <option value="المنيعة">المنيعة</option>
+
+                </select>
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    المكان بالتفصيل
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="مثال: شاطئ صلامندر - مستغانم"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="full-width">
+
+                <label>
+
+                    وصف الحملة
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <textarea
+                    id="description"
+                    placeholder="مثال: حملة تطوعية بيئية تهدف إلى تنظيف شاطئ صلامندر بمشاركة الشباب والمتطوعين، ونشر الوعي بأهمية المحافظة على نظافة الشواطئ وحماية البيئة."
+                    required
+                ></textarea>
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    تاريخ البداية
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="date"
+                    id="date"
+                    required
+                >
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    تاريخ النهاية
+
+                    <span class="optional">
+                        (للحملات متعددة الأيام)
+                    </span>
+
+                </label>
+
+
+                <input
+                    type="date"
+                    id="endDate"
+                >
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    وقت البداية
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="time"
+                    id="startTime"
+                    required
+                >
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    وقت النهاية
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="time"
+                    id="endTime"
+                    required
+                >
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    عدد المشاركين
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="number"
+                    id="capacity"
+                    min="1"
+                    placeholder="مثال: 30"
+                    required
+                >
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+
+                    آخر موعد للتسجيل
+
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <input
+                    type="date"
+                    id="registrationDeadline"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="full-width">
+
+                <label>
+
+                    الأهداف
+
+                    <span class="optional">
+                        (اختياري)
+                    </span>
+
+                </label>
+
+
+                <textarea
+                    id="objectives"
+                    placeholder="مثال: المحافظة على نظافة الشاطئ وتعزيز ثقافة التطوع البيئي."
+                ></textarea>
+
+            </div>
+
+
+
+            <div class="full-width">
+
+                <label>
+
+                    المهام
+
+                    <span class="optional">
+                        (اختياري)
+                    </span>
+
+                </label>
+
+
+                <textarea
+                    id="tasks"
+                    placeholder="مثال: جمع النفايات، فرزها، تنظيف المنطقة، توعية الزوار."
+                ></textarea>
+
+            </div>
+
+
+
+            <div class="full-width">
+
+                <label>
+                    حالة الحملة
+                </label>
+
+
+                <select id="status">
+
+                    <option value="published">
+                        منشورة
+                    </option>
+
+                    <option value="draft">
+                        مسودة
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="full-width">
+
+                <button
+                    type="submit"
+                    class="publish-button"
+                >
+                    📢 نشر الحملة
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+</div>
+
+
+
+<!-- =====================================
+     الحملات
+====================================== -->
+
+<div class="box">
+
+    <h2>
+        📋 الحملات
+    </h2>
+
+
+    <div id="campaigns">
+        جاري التحميل...
+    </div>
+
+</div>
+
+
+</main>
+
+
+
+<script type="module">
+
+
+/* ==========================================
+   Firebase
+========================================== */
+
+import {
+    db,
+    auth
+}
+from "../js/firebase.js";
+
+
+import {
+    collection,
+    addDoc,
+    setDoc,
+    serverTimestamp,
+    getDocs,
+    query,
+    where,
+    doc,
+    getDoc,
+    updateDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+import {
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+
+/* ==========================================
+   عناصر الصفحة
+========================================== */
+
+const form =
+    document.getElementById("campaignForm");
+
+
+const message =
+    document.getElementById("message");
+
+
+const campaignsContainer =
+    document.getElementById("campaigns");
+
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+
+const committeeButton =
+    document.getElementById("committeeButton");
+
+
+/* ==========================================
+   إشعارات المنصة
+========================================== */
+
+const toastContainer =
+    document.getElementById("toastContainer");
+
+
+const confirmOverlay =
+    document.getElementById("confirmOverlay");
+
+
+const confirmTitle =
+    document.getElementById("confirmTitle");
+
+
+const confirmIcon =
+    document.getElementById("confirmIcon");
+
+
+const confirmMessage =
+    document.getElementById("confirmMessage");
+
+
+const confirmCancel =
+    document.getElementById("confirmCancel");
+
+
+const confirmAction =
+    document.getElementById("confirmAction");
+
+
+
+function showToast(
+    message,
+    type = "success",
+    title = ""
+) {
+
+    const titles = {
+
+        success:
+            "تمت العملية بنجاح",
+
+        error:
+            "تعذر تنفيذ العملية",
+
+        warning:
+            "تنبيه"
+
+    };
+
+
+    const icons = {
+
+        success:
+            "✓",
+
+        error:
+            "!",
+
+        warning:
+            "!"
+
+    };
+
+
+    const toast =
+        document.createElement("div");
+
+
+    toast.className =
+        `toast ${type}`;
+
+
+    toast.innerHTML = `
+
+        <div class="toast-icon">
+            ${icons[type] || "✓"}
+        </div>
+
+
+        <div class="toast-content">
+
+            <p class="toast-title">
+                ${title || titles[type] || "إشعار"}
+            </p>
+
+            <p class="toast-message">
+                ${message}
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="toast-close"
+            aria-label="إغلاق"
+        >
+            ×
+        </button>
+
+    `;
+
+
+    const closeToast = () => {
+
+        toast.classList.add("hide");
+
+        setTimeout(() => {
+
+            toast.remove();
+
+        }, 220);
+
+    };
+
+
+    toast
+        .querySelector(".toast-close")
+        .addEventListener(
+            "click",
+            closeToast
+        );
+
+
+    toastContainer.appendChild(
+        toast
+    );
+
+
+    setTimeout(() => {
+
+        if (toast.isConnected) {
+            closeToast();
+        }
+
+    }, 5000);
+
+}
+
+
+
+/* ==========================================
+   نافذة التأكيد
+========================================== */
+
+function showConfirm({
+
+    title = "تأكيد الإجراء",
+
+    message = "",
+
+    icon = "❓",
+
+    confirmText = "تأكيد",
+
+    cancelText = "إلغاء",
+
+    type = "success"
+
+} = {}) {
+
+
+    return new Promise((resolve) => {
+
+
+        confirmTitle.textContent =
+            title;
+
+
+        confirmIcon.textContent =
+            icon;
+
+
+        confirmMessage.innerHTML =
+            message;
+
+
+        confirmAction.textContent =
+            confirmText;
+
+
+        confirmCancel.textContent =
+            cancelText;
+
+
+        confirmAction.className =
+            "confirm-action";
+
+
+        if (type === "danger") {
+
+            confirmAction.classList.add(
+                "danger"
+            );
+
+        }
+
+
+        if (type === "primary") {
+
+            confirmAction.classList.add(
+                "primary"
+            );
+
+        }
+
+
+        confirmOverlay.classList.add(
+            "show"
+        );
+
+
+        const finish = (result) => {
+
+
+            confirmOverlay.classList.remove(
+                "show"
+            );
+
+
+            confirmAction.removeEventListener(
+                "click",
+                onConfirm
+            );
+
+
+            confirmCancel.removeEventListener(
+                "click",
+                onCancel
+            );
+
+
+            confirmOverlay.removeEventListener(
+                "click",
+                onOverlay
+            );
+
+
+            document.removeEventListener(
+                "keydown",
+                onKeyDown
+            );
+
+
+            resolve(result);
+
+        };
+
+
+        const onConfirm = () => {
+            finish(true);
+        };
+
+
+        const onCancel = () => {
+            finish(false);
+        };
+
+
+        const onOverlay = (event) => {
+
+            if (
+                event.target ===
+                confirmOverlay
+            ) {
+
+                finish(false);
+
+            }
+
+        };
+
+
+        const onKeyDown = (event) => {
+
+            if (event.key === "Escape") {
+
+                finish(false);
+
+            }
+
+        };
+
+
+        confirmAction.addEventListener(
+            "click",
+            onConfirm
+        );
+
+
+        confirmCancel.addEventListener(
+            "click",
+            onCancel
+        );
+
+
+        confirmOverlay.addEventListener(
+            "click",
+            onOverlay
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            onKeyDown
+        );
+
+
+        setTimeout(() => {
+
+            confirmAction.focus();
+
+        }, 50);
+
+    });
+
+}
+
+
+
+/* ==========================================
+   الانتقال إلى لجنة المتابعة
+========================================== */
+
+committeeButton.addEventListener(
+    "click",
+    function() {
+
+        window.location.href =
+            "committee.html";
+
+    }
+);
+
+
+
+/* ==========================================
+   تسجيل الخروج
+========================================== */
+
+logoutButton.addEventListener(
+    "click",
+    async function() {
+
+
+        try {
+
+            await signOut(auth);
+
+
+            window.location.replace(
+                "login.html"
+            );
+
+
+        } catch (error) {
+
+
+            console.error(
+                "خطأ تسجيل الخروج:",
+                error
+            );
+
+
+            showToast(
+                "تعذر تسجيل الخروج حاليًا. يرجى المحاولة مرة أخرى.",
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* ==========================================
+   تاريخ اليوم
+========================================== */
+
+function getToday() {
+
+
+    const now =
+        new Date();
+
+
+    const year =
+        now.getFullYear();
+
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+
+/* ==========================================
+   حساب عدد الساعات
+========================================== */
+
+function calculateHours(
+    startTime,
+    endTime
+) {
+
+
+    if (
+        !startTime ||
+        !endTime
+    ) {
+
+        return 0;
+
+    }
+
+
+    const startParts =
+        startTime
+            .split(":")
+            .map(Number);
+
+
+    const endParts =
+        endTime
+            .split(":")
+            .map(Number);
+
+
+    const start =
+        startParts[0] * 60 +
+        startParts[1];
+
+
+    const end =
+        endParts[0] * 60 +
+        endParts[1];
+
+
+    const minutes =
+        end - start;
+
+
+    if (minutes <= 0) {
+        return 0;
+    }
+
+
+    return Number(
+        (minutes / 60).toFixed(2)
+    );
+
+}
+
+
+
+/* ==========================================
+   تنظيف النصوص المستخدمة في guestId
+========================================== */
+
+function normalizeIdentityValue(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+        .trim()
+        .toLowerCase()
+        .replace(
+            /\s+/g,
+            " "
+        );
+
+}
+
+
+
+/* ==========================================
+   إنشاء guestId ثابت
+==========================================
+
+   الفكرة:
+
+   إذا كان الشخص زائرًا:
+   - لا نحتاج userId.
+   - نستخدم email/phone/name/birthDate
+     لإنشاء معرف ثابت.
+
+   نفس الشخص في حملات مختلفة
+   سيحصل على نفس guestId.
+
+========================================== */
+
+async function createStableGuestId(
+    registration
+) {
+
+
+    if (
+        registration?.userId
+    ) {
+
+        return null;
+
+    }
+
+
+    if (
+        registration?.guestId
+    ) {
+
+        return registration.guestId;
+
+    }
+
+
+    const email =
+        normalizeIdentityValue(
+            registration?.email
+        );
+
+
+    const phone =
+        normalizeIdentityValue(
+            registration?.phone
+        );
+
+
+    const fullName =
+        normalizeIdentityValue(
+            registration?.fullName
+        );
+
+
+    const birthDate =
+        normalizeIdentityValue(
+            registration?.birthDate
+        );
+
+
+    const identity =
+        [
+            email,
+            phone,
+            fullName,
+            birthDate
+        ]
+        .filter(Boolean)
+        .join("|");
+
+
+    if (!identity) {
+
+        throw new Error(
+            "لا توجد بيانات كافية لإنشاء معرف الزائر."
+        );
+
+    }
+
+
+    /*
+       نستخدم SHA-256 حتى لا يكون
+       guestId عبارة عن البريد أو الهاتف
+       بشكل مباشر.
+    */
+
+    try {
+
+
+        if (
+            window.crypto &&
+            window.crypto.subtle
+        ) {
+
+
+            const encoder =
+                new TextEncoder();
+
+
+            const data =
+                encoder.encode(
+                    identity
+                );
+
+
+            const hashBuffer =
+                await crypto.subtle.digest(
+                    "SHA-256",
+                    data
+                );
+
+
+            const hashArray =
+                Array.from(
+                    new Uint8Array(
+                        hashBuffer
+                    )
+                );
+
+
+            const hash =
+                hashArray
+                    .map(
+                        byte =>
+                            byte
+                                .toString(16)
+                                .padStart(
+                                    2,
+                                    "0"
+                                )
+                    )
+                    .join("");
+
+
+            return `guest_${hash}`;
+
+        }
+
+
+    } catch (error) {
+
+        console.warn(
+            "تعذر استخدام SHA-256، سيتم استخدام معرف بديل.",
+            error
+        );
+
+    }
+
+
+    /*
+       fallback في حال عدم توفر
+       crypto.subtle.
+    */
+
+    const encoded =
+        encodeURIComponent(
+            identity
+        )
+            .replace(
+                /%/g,
+                ""
+            )
+            .slice(
+                0,
+                100
+            );
+
+
+    return `guest_${encoded}`;
+
+}
+
+
+
+/* ==========================================
+   الحصول على guestId وتخزينه في التسجيل
+========================================== */
+
+async function ensureGuestId(
+    registrationDoc
+) {
+
+
+    const registration =
+        registrationDoc.data();
+
+
+    if (
+        registration.userId
+    ) {
+
+        return null;
+
+    }
+
+
+    if (
+        registration.registrationType !==
+        "guest"
+    ) {
+
+        return null;
+
+    }
+
+
+    let guestId =
+        registration.guestId;
+
+
+    if (!guestId) {
+
+
+        guestId =
+            await createStableGuestId(
+                registration
+            );
+
+
+        await updateDoc(
+            doc(
+                db,
+                "registrations",
+                registrationDoc.id
+            ),
+            {
+                guestId: guestId
+            }
+        );
+
+    }
+
+
+    return guestId;
+
+}
+
+
+
+/* ==========================================
+   إنشاء حملة
+========================================== */
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+
+        event.preventDefault();
+
+
+        message.className =
+            "message";
+
+
+        message.textContent =
+            "";
+
+
+        try {
+
+
+            if (!auth.currentUser) {
+
+
+                message.classList.add(
+                    "show"
+                );
+
+
+                message.textContent =
+                    "يجب تسجيل الدخول إلى حساب لجنة المتابعة أولًا.";
+
+
+                return;
+
+            }
+
+
+            const title =
+                document
+                    .getElementById("title")
+                    .value
+                    .trim();
+
+
+            const field =
+                document
+                    .getElementById("field")
+                    .value;
+
+
+            const campaignType =
+                document
+                    .getElementById("campaignType")
+                    .value;
+
+
+            const organizerType =
+                document
+                    .getElementById("organizerType")
+                    .value;
+
+
+            const organizerName =
+                document
+                    .getElementById("organizerName")
+                    .value
+                    .trim();
+
+
+            const wilaya =
+                document
+                    .getElementById("wilaya")
+                    .value;
+
+
+            const description =
+                document
+                    .getElementById("description")
+                    ?.value
+                    .trim()
+                ||
+                "";
+
+
+            const objectives =
+                document
+                    .getElementById("objectives")
+                    .value
+                    .trim();
+
+
+            const tasks =
+                document
+                    .getElementById("tasks")
+                    .value
+                    .trim();
+
+
+            const campaignDate =
+                document
+                    .getElementById("date")
+                    .value;
+
+
+            const endDate =
+                document
+                    .getElementById("endDate")
+                    .value
+                ||
+                campaignDate;
+
+
+            const startTime =
+                document
+                    .getElementById("startTime")
+                    .value;
+
+
+            const endTime =
+                document
+                    .getElementById("endTime")
+                    .value;
+
+
+            const location =
+                document
+                    .getElementById("location")
+                    .value
+                    .trim();
+
+
+            const capacity =
+                Number(
+                    document
+                        .getElementById("capacity")
+                        .value
+                );
+
+
+            const deadline =
+                document
+                    .getElementById(
+                        "registrationDeadline"
+                    )
+                    .value;
+
+
+            const status =
+                document
+                    .getElementById("status")
+                    .value;
+
+
+
+            /* ==================================
+               التحقق
+            ================================== */
+
+            if (!field) {
+
+                message.classList.add(
+                    "show"
+                );
+
+                message.textContent =
+                    "يرجى اختيار مجال الحملة.";
+
+                return;
+
+            }
+
+
+            if (!campaignType) {
+
+                message.classList.add(
+                    "show"
+                );
+
+                message.textContent =
+                    "يرجى اختيار نوع الحملة.";
+
+                return;
+
+            }
+
+
+            if (!organizerType) {
+
+                message.classList.add(
+                    "show"
+                );
+
+                message.textContent =
+                    "يرجى اختيار نوع الجهة المنظمة.";
+
+                return;
+
+            }
+
+
+            if (!organizerName) {
+
+                message.classList.add(
+                    "show"
+                );
+
+                message.textContent =
+                    "يرجى إدخال اسم الجهة المنظمة.";
+
+                return;
+
+            }
+
+
+            if (!wilaya) {
+
+                message.classList.add(
+                    "show"
+                );
+
+                message.textContent =
+                    "يرجى اختيار الولاية.";
+
+                return;
+
+            }
+
+
+            if (startTime >= endTime) {
+
+                message.classList.add(
+                    "show"
+                );
+
+                message.textContent =
+                    "وقت نهاية الحملة يجب أن يكون بعد وقت بدايتها.";
+
+                return;
+
+            }
+
+
+            if (endDate < campaignDate) {
+
+                message.classList.add(
+                    "show"
+                );
+
+                message.textContent =
+                    "تاريخ نهاية الحملة لا يمكن أن يكون قبل تاريخ بدايتها.";
+
+                return;
+
+            }
+
+
+            if (
+                campaignType ===
+                    "حملة متعددة الأيام"
+                ||
+                campaignType ===
+                    "برنامج تطوعي"
+            ) {
+
+
+                if (
+                    !document
+                        .getElementById(
+                            "endDate"
+                        )
+                        .value
+                ) {
+
+                    message.classList.add(
+                        "show"
+                    );
+
+                    message.textContent =
+                        "يرجى إدخال تاريخ نهاية الحملة.";
+
+                    return;
+
+                }
+
+            }
+
+
+            if (deadline >= campaignDate) {
+
+                message.classList.add(
+                    "show"
+                );
+
+                message.textContent =
+                    "آخر موعد للتسجيل يجب أن يكون قبل تاريخ بداية الحملة.";
+
+                return;
+
+            }
+
+
+            if (capacity < 1) {
+
+                message.classList.add(
+                    "show"
+                );
+
+                message.textContent =
+                    "عدد المشاركين يجب أن يكون أكبر من صفر.";
+
+                return;
+
+            }
+
+
+            const durationType =
+                campaignDate === endDate
+                ? "يوم واحد"
+                : "متعددة الأيام";
+
+
+
+            /* ==================================
+               حفظ الحملة
+            ================================== */
+
+            await addDoc(
+                collection(
+                    db,
+                    "campaigns"
+                ),
+                {
+
+                    title: title,
+
+                    field: field,
+
+                    campaignType:
+                        campaignType,
+
+                    durationType:
+                        durationType,
+
+                    organizerType:
+                        organizerType,
+
+                    organizerName:
+                        organizerName,
+
+                    wilaya:
+                        wilaya,
+
+                    description:
+                        description,
+
+                    objectives:
+                        objectives,
+
+                    tasks:
+                        tasks,
+
+                    date:
+                        campaignDate,
+
+                    endDate:
+                        endDate,
+
+                    startTime:
+                        startTime,
+
+                    endTime:
+                        endTime,
+
+                    location:
+                        location,
+
+                    capacity:
+                        capacity,
+
+                    registrationDeadline:
+                        deadline,
+
+                    status:
+                        status,
+
+                    createdAt:
+                        serverTimestamp(),
+
+                    createdBy:
+                        auth.currentUser.uid
+
+                }
+            );
+
+
+            message.classList.add(
+                "show"
+            );
+
+
+            message.textContent =
+                "تم إنشاء الحملة ونشرها بنجاح. أصبحت الآن متاحة للتسجيل. ✅";
+
+
+            form.reset();
+
+
+            await loadCampaigns();
+
+
+        } catch (error) {
+
+
+            console.error(
+                "خطأ إنشاء الحملة:",
+                error
+            );
+
+
+            message.classList.add(
+                "show"
+            );
+
+
+            message.textContent =
+                "تعذر إنشاء الحملة حاليًا. يرجى التحقق من البيانات والمحاولة مرة أخرى.";
+
+        }
+
+    }
+);
+
+
+
+/* ==========================================
+   تحميل الحملات
+========================================== */
+
+async function loadCampaigns() {
+
+
+    campaignsContainer.innerHTML =
+        "جاري تحميل الحملات...";
+
+
+    try {
+
+
+        const campaignsQuery =
+            query(
+                collection(
+                    db,
+                    "campaigns"
+                ),
+                where(
+                    "status",
+                    "==",
+                    "published"
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(
+                campaignsQuery
+            );
+
+
+        campaignsContainer.innerHTML =
+            "";
+
+
+        if (snapshot.empty) {
+
+
+            campaignsContainer.innerHTML =
+                "لا توجد حملات منشورة حاليًا.";
+
+
+            return;
+
+        }
+
+
+        const today =
+            getToday();
+
+
+        for (
+            const campaignDoc
+            of snapshot.docs
+        ) {
+
+
+            const campaign =
+                campaignDoc.data();
+
+
+            const campaignDiv =
+                document.createElement(
+                    "div"
+                );
+
+
+            campaignDiv.className =
+                "campaign";
+
+
+            const campaignPassed =
+                campaign.endDate
+                ?
+                campaign.endDate < today
+                :
+                campaign.date < today;
+
+
+            const registrationClosed =
+                campaign.registrationDeadline <
+                today;
+
+
+            const displayedDate =
+                campaign.endDate &&
+                campaign.endDate !==
+                    campaign.date
+
+                ?
+
+                `${campaign.date} إلى ${campaign.endDate}`
+
+                :
+
+                campaign.date;
+
+
+
+            campaignDiv.innerHTML = `
+
+                <div class="campaign-header">
+
+                    <div>
+
+                        <h3>
+                            ${campaign.title || ""}
+                        </h3>
+
+                        <div class="campaign-badges">
+
+                            <span class="badge">
+                                ${campaign.field || ""}
+                            </span>
+
+                            <span class="badge badge-gold">
+                                ${campaign.campaignType || ""}
+                            </span>
+
+                            <span class="badge badge-blue">
+                                ${campaign.organizerType || ""}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="campaign-info">
+
+                    <p>
+                        <strong>
+                            الجهة المنظمة:
+                        </strong>
+
+                        ${campaign.organizerName || ""}
+
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            الولاية:
+                        </strong>
+
+                        ${campaign.wilaya || ""}
+
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            التاريخ:
+                        </strong>
+
+                        ${displayedDate}
+
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            الوقت:
+                        </strong>
+
+                        ${campaign.startTime || ""}
+                        -
+                        ${campaign.endTime || ""}
+
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            المكان:
+                        </strong>
+
+                        ${campaign.location || ""}
+
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            آخر موعد للتسجيل:
+                        </strong>
+
+                        ${campaign.registrationDeadline || ""}
+
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            السعة:
+                        </strong>
+
+                        ${campaign.capacity || 0}
+
+                        مشارك
+
+                    </p>
+
+                </div>
+
+
+                ${
+                    campaign.description
+                    ?
+                    `
+                        <p>
+                            <strong>
+                                الوصف:
+                            </strong>
+
+                            ${campaign.description}
+
+                        </p>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    campaignPassed
+
+                    ?
+
+                    `
+                        <p class="closed">
+                            انتهت الحملة.
+                        </p>
+                    `
+
+                    :
+
+                    registrationClosed
+
+                    ?
+
+                    `
+                        <p class="closed">
+                            التسجيل مغلق.
+                        </p>
+                    `
+
+                    :
+
+                    `
+                        <p class="success">
+                            التسجيل مفتوح.
+                        </p>
+                    `
+                }
+
+
+                <button
+                    class="participants-button"
+                >
+                    عرض المسجلين
+                </button>
+
+
+                <div
+                    class="participants"
+                    style="display:none;"
+                >
+                    جاري تحميل المسجلين...
+                </div>
+
+            `;
+
+
+            campaignsContainer.appendChild(
+                campaignDiv
+            );
+
+
+            const button =
+                campaignDiv.querySelector(
+                    ".participants-button"
+                );
+
+
+            const participantsDiv =
+                campaignDiv.querySelector(
+                    ".participants"
+                );
+
+
+            button.addEventListener(
+                "click",
+                async function() {
+
+
+                    if (
+                        participantsDiv.style.display
+                        ===
+                        "none"
+                    ) {
+
+
+                        participantsDiv.style.display =
+                            "block";
+
+
+                        button.textContent =
+                            "إخفاء المسجلين";
+
+
+                        await loadParticipants(
+                            campaignDoc.id,
+                            campaign,
+                            participantsDiv
+                        );
+
+
+                    } else {
+
+
+                        participantsDiv.style.display =
+                            "none";
+
+
+                        button.textContent =
+                            "عرض المسجلين";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+    } catch (error) {
+
+
+        console.error(
+            "خطأ تحميل الحملات:",
+            error
+        );
+
+
+        campaignsContainer.innerHTML =
+            "تعذر تحميل الحملات حاليًا.";
+
+    }
+
+}
+
+
+
+/* ==========================================
+   البحث عن بطاقة المتطوع
+========================================== */
+
+async function getVolunteerCard(
+    userId,
+    guestId = null
+) {
+
+
+    try {
+
+
+        if (userId) {
+
+
+            const cardsQuery =
+                query(
+                    collection(
+                        db,
+                        "volunteerCards"
+                    ),
+                    where(
+                        "userId",
+                        "==",
+                        userId
+                    )
+                );
+
+
+            const snapshot =
+                await getDocs(
+                    cardsQuery
+                );
+
+
+            if (
+                !snapshot.empty
+            ) {
+
+                return snapshot
+                    .docs[0]
+                    .data();
+
+            }
+
+        }
+
+
+
+        if (guestId) {
+
+
+            const guestCardsQuery =
+                query(
+                    collection(
+                        db,
+                        "volunteerCards"
+                    ),
+                    where(
+                        "guestId",
+                        "==",
+                        guestId
+                    )
+                );
+
+
+            const guestSnapshot =
+                await getDocs(
+                    guestCardsQuery
+                );
+
+
+            if (
+                !guestSnapshot.empty
+            ) {
+
+                return guestSnapshot
+                    .docs[0]
+                    .data();
+
+            }
+
+        }
+
+
+        return null;
+
+
+    } catch (error) {
+
+
+        console.error(
+            "خطأ تحميل بطاقة المتطوع:",
+            error
+        );
+
+
+        return null;
+
+    }
+
+}
+
+
+
+/* ==========================================
+   تحميل بيانات المتطوع
+========================================== */
+
+async function getVolunteerData(
+    userId
+) {
+
+
+    if (!userId) {
+
+        return null;
+
+    }
+
+
+    try {
+
+
+        const userRef =
+            doc(
+                db,
+                "users",
+                userId
+            );
+
+
+        const userSnapshot =
+            await getDoc(
+                userRef
+            );
+
+
+        if (
+            !userSnapshot.exists()
+        ) {
+
+            return null;
+
+        }
+
+
+        return userSnapshot.data();
+
+
+    } catch (error) {
+
+
+        console.error(
+            "خطأ تحميل بيانات المتطوع:",
+            error
+        );
+
+
+        return null;
+
+    }
+
+}
+
+
+
+/* ==========================================
+   تحميل المسجلين
+========================================== */
+
+async function loadParticipants(
+    campaignId,
+    campaignData,
+    container
+) {
+
+
+    container.innerHTML =
+        "جاري تحميل المسجلين...";
+
+
+    try {
+
+
+        const registrationsQuery =
+            query(
+                collection(
+                    db,
+                    "registrations"
+                ),
+                where(
+                    "campaignId",
+                    "==",
+                    campaignId
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(
+                registrationsQuery
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        if (snapshot.empty) {
+
+
+            container.innerHTML =
+                "لا يوجد مسجلون حتى الآن.";
+
+
+            return;
+
+        }
+
+
+
+        for (
+            const registrationDoc
+            of snapshot.docs
+        ) {
+
+
+            const registration =
+                registrationDoc.data();
+
+
+            let userData =
+                null;
+
+
+            let cardData =
+                null;
+
+
+            let guestId =
+                registration.guestId
+                ||
+                null;
+
+
+
+            /* ==================================
+               إنشاء guestId للزائر
+            ================================== */
+
+            if (
+                registration.registrationType ===
+                "guest"
+                &&
+                !registration.userId
+            ) {
+
+
+                try {
+
+
+                    guestId =
+                        await ensureGuestId(
+                            registrationDoc
+                        );
+
+
+                } catch (guestError) {
+
+
+                    console.error(
+                        "خطأ إنشاء guestId:",
+                        guestError
+                    );
+
+                }
+
+            }
+
+
+
+            /* ==================================
+               بيانات صاحب الحساب
+            ================================== */
+
+            if (
+                registration.userId
+            ) {
+
+
+                userData =
+                    await getVolunteerData(
+                        registration.userId
+                    );
+
+            }
+
+
+
+            /* ==================================
+               بطاقة المتطوع
+            ================================== */
+
+            cardData =
+                await getVolunteerCard(
+                    registration.userId
+                    ||
+                    null,
+
+                    guestId
+                    ||
+                    null
+                );
+
+
+
+            const isGuest =
+                registration.registrationType ===
+                "guest";
+
+
+            const participantName =
+                registration.fullName
+                ||
+                userData?.fullName
+                ||
+                cardData?.fullName
+                ||
+                (
+                    isGuest
+                    ?
+                    "زائر"
+                    :
+                    "متطوع"
+                );
+
+
+            const participantEmail =
+                registration.email
+                ||
+                userData?.email
+                ||
+                cardData?.email
+                ||
+                "";
+
+
+            const participantPhone =
+                registration.phone
+                ||
+                userData?.phone
+                ||
+                cardData?.phone
+                ||
+                "";
+
+
+            const participantCategory =
+                registration.category
+                ||
+                userData?.category
+                ||
+                cardData?.category
+                ||
+                "";
+
+
+            const participantBirthDate =
+                registration.birthDate
+                ||
+                userData?.birthDate
+                ||
+                cardData?.birthDate
+                ||
+                "";
+
+
+            const participantCardNumber =
+                registration.cardNumber
+                ||
+                userData?.cardNumber
+                ||
+                cardData?.cardNumber
+                ||
+                "";
+
+
+            const registrationStatus =
+                registration.status
+                ||
+                "pending";
+
+
+            const hasAttendance =
+                registration.attendance ===
+                "present";
+
+
+            const isCompleted =
+                hasAttendance
+                ||
+                registrationStatus ===
+                "completed";
+
+
+            const isAccepted =
+                registrationStatus ===
+                "accepted"
+                &&
+                !hasAttendance;
+
+
+            const isRejected =
+                registrationStatus ===
+                "rejected";
+
+
+            const isPending =
+                !isAccepted
+                &&
+                !isRejected
+                &&
+                !isCompleted;
+
+
+
+            const participant =
+                document.createElement(
+                    "div"
+                );
+
+
+            participant.className =
+                "participant";
+
+
+            participant.innerHTML = `
+
+                <strong>
+                    ${participantName}
+                </strong>
+
+
+                <p class="${
+                    isGuest
+                    ?
+                    "guest"
+                    :
+                    "volunteer"
+                }">
+
+                    ${
+                        isGuest
+                        ?
+                        "زائر — بدون حساب"
+                        :
+                        "متطوع — لديه حساب"
+                    }
+
+                </p>
+
+
+                ${
+                    isGuest && guestId
+                    ?
+                    `
+                        <div class="guest-id-info">
+
+                            <strong>
+                                معرف الزائر:
+                            </strong>
+
+                            تم ربط هذا المشارك
+                            بسجل ثابت يمكن من خلاله
+                            احتساب مشاركاته عبر الحملات المختلفة.
+
+                        </div>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    participantPhone
+                    ?
+                    `
+                        <p>
+
+                            <strong>
+                                رقم الهاتف:
+                            </strong>
+
+                            ${participantPhone}
+
+                        </p>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    participantEmail
+                    ?
+                    `
+                        <p>
+
+                            <strong>
+                                البريد الإلكتروني:
+                            </strong>
+
+                            ${participantEmail}
+
+                        </p>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    participantCategory
+                    ?
+                    `
+                        <p>
+
+                            <strong>
+                                الفئة:
+                            </strong>
+
+                            ${participantCategory}
+
+                        </p>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    participantBirthDate
+                    ?
+                    `
+                        <p>
+
+                            <strong>
+                                تاريخ الميلاد:
+                            </strong>
+
+                            ${participantBirthDate}
+
+                        </p>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    participantCardNumber
+                    ?
+                    `
+                        <div class="card-info">
+
+                            <strong>
+                                رقم بطاقة المتطوع:
+                            </strong>
+
+                            ${participantCardNumber}
+
+                        </div>
+                    `
+                    :
+                    ""
+                }
+
+
+                <p>
+
+                    <strong>
+                        حالة التسجيل:
+                    </strong>
+
+
+                    <span class="status ${
+                        isPending
+                        ?
+                        "status-pending"
+                        :
+                        isAccepted
+                        ?
+                        "status-accepted"
+                        :
+                        isRejected
+                        ?
+                        "status-rejected"
+                        :
+                        "status-completed"
+                    }">
+
+
+                        ${
+                            isPending
+                            ?
+                            "⏳ قيد المراجعة"
+
+                            :
+
+                            isAccepted
+                            ?
+                            "✅ تم القبول"
+
+                            :
+
+                            isRejected
+                            ?
+                            "❌ تم الرفض"
+
+                            :
+
+                            "✓ اكتملت المشاركة"
+                        }
+
+
+                    </span>
+
+                </p>
+
+
+                ${
+                    isPending
+                    ?
+
+                    `
+                        <div class="action-buttons">
+
+                            <button
+                                class="accept-button"
+                            >
+                                ✅ قبول التسجيل
+                            </button>
+
+
+                            <button
+                                class="reject-button"
+                            >
+                                ❌ رفض التسجيل
+                            </button>
+
+                        </div>
+                    `
+
+                    :
+
+                    ""
+                }
+
+
+                ${
+                    isAccepted
+                    ?
+
+                    `
+
+                        <p class="success">
+
+                            ✓ تم قبول طلب التسجيل بنجاح.
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                حالة الحضور:
+                            </strong>
+
+                            في انتظار تأكيد الحضور
+
+                        </p>
+
+
+                        <button
+                            class="present-button"
+                        >
+
+                            ✓ تأكيد الحضور واحتساب المشاركة
+
+                        </button>
+
+                    `
+
+                    :
+
+                    ""
+                }
+
+
+                ${
+                    isCompleted
+                    ?
+
+                    `
+                        <p class="success">
+
+                            ✓ تم تأكيد الحضور واحتساب المشاركة بنجاح.
+
+                        </p>
+                    `
+
+                    :
+
+                    ""
+                }
+
+
+                ${
+                    isRejected
+                    ?
+
+                    `
+                        <p class="closed">
+
+                            ✕ تم رفض طلب التسجيل.
+
+                        </p>
+                    `
+
+                    :
+
+                    ""
+                }
+
+            `;
+
+
+            container.appendChild(
+                participant
+            );
+
+
+
+            /* ==================================
+               زر القبول
+            ================================== */
+
+            const acceptButton =
+                participant.querySelector(
+                    ".accept-button"
+                );
+
+
+            if (acceptButton) {
+
+
+                acceptButton.addEventListener(
+                    "click",
+                    async function() {
+
+
+                        const confirmAccept =
+                            await showConfirm({
+
+                                title:
+                                    "تأكيد قبول التسجيل",
+
+                                icon:
+                                    "✅",
+
+                                type:
+                                    "success",
+
+                                confirmText:
+                                    "نعم، قبول التسجيل",
+
+                                message: `
+
+                                    <p>
+
+                                        هل تريدين قبول طلب تسجيل
+                                        <strong>
+                                            ${participantName}
+                                        </strong>
+                                        في حملة
+                                        <strong>
+                                            ${campaignData.title}
+                                        </strong>؟
+
+                                    </p>
+
+
+                                    <p>
+
+                                        بعد القبول، سيصبح المشارك
+                                        مؤهلًا لتأكيد حضوره واحتساب
+                                        مشاركته عند مشاركته الفعلية
+                                        في الحملة.
+
+                                    </p>
+
+                                `
+
+                            });
+
+
+                        if (!confirmAccept) {
+
+                            return;
+
+                        }
+
+
+                        acceptButton.disabled =
+                            true;
+
+
+                        acceptButton.textContent =
+                            "جاري اعتماد التسجيل...";
+
+
+                        try {
+
+
+                            if (!auth.currentUser) {
+
+                                throw new Error(
+                                    "لا يوجد مستخدم مسجل الدخول."
+                                );
+
+                            }
+
+
+                            await updateDoc(
+                                doc(
+                                    db,
+                                    "registrations",
+                                    registrationDoc.id
+                                ),
+                                {
+
+                                    status:
+                                        "accepted",
+
+                                    acceptedAt:
+                                        serverTimestamp(),
+
+                                    acceptedBy:
+                                        auth.currentUser.uid
+
+                                }
+                            );
+
+
+                            showToast(
+
+                                `تم قبول <strong>${participantName}</strong> في حملة <strong>${campaignData.title}</strong>. يمكن الآن تأكيد حضوره واحتساب مشاركته عند مشاركته الفعلية.`,
+
+                                "success",
+
+                                "تم قبول المشارك"
+
+                            );
+
+
+                            await loadParticipants(
+                                campaignId,
+                                campaignData,
+                                container
+                            );
+
+
+                        } catch (error) {
+
+
+                            console.error(
+                                "خطأ قبول التسجيل:",
+                                error
+                            );
+
+
+                            acceptButton.disabled =
+                                false;
+
+
+                            acceptButton.textContent =
+                                "✅ قبول التسجيل";
+
+
+                            showToast(
+
+                                "تعذر اعتماد التسجيل حاليًا. يرجى التحقق من الاتصال وقاعدة البيانات ثم المحاولة مرة أخرى.",
+
+                                "error"
+
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+
+            /* ==================================
+               زر الرفض
+            ================================== */
+
+            const rejectButton =
+                participant.querySelector(
+                    ".reject-button"
+                );
+
+
+            if (rejectButton) {
+
+
+                rejectButton.addEventListener(
+                    "click",
+                    async function() {
+
+
+                        const confirmReject =
+                            await showConfirm({
+
+                                title:
+                                    "تأكيد رفض التسجيل",
+
+                                icon:
+                                    "⚠️",
+
+                                type:
+                                    "danger",
+
+                                confirmText:
+                                    "نعم، رفض التسجيل",
+
+                                message: `
+
+                                    <p>
+
+                                        هل تريدين رفض طلب تسجيل
+                                        <strong>
+                                            ${participantName}
+                                        </strong>
+                                        في حملة
+                                        <strong>
+                                            ${campaignData.title}
+                                        </strong>؟
+
+                                    </p>
+
+
+                                    <p>
+
+                                        لن يتم احتساب هذا التسجيل
+                                        كمشاركة تطوعية.
+
+                                    </p>
+
+                                `
+
+                            });
+
+
+                        if (!confirmReject) {
+
+                            return;
+
+                        }
+
+
+                        rejectButton.disabled =
+                            true;
+
+
+                        rejectButton.textContent =
+                            "جاري معالجة الطلب...";
+
+
+                        try {
+
+
+                            if (!auth.currentUser) {
+
+                                throw new Error(
+                                    "لا يوجد مستخدم مسجل الدخول."
+                                );
+
+                            }
+
+
+                            await updateDoc(
+                                doc(
+                                    db,
+                                    "registrations",
+                                    registrationDoc.id
+                                ),
+                                {
+
+                                    status:
+                                        "rejected",
+
+                                    rejectedAt:
+                                        serverTimestamp(),
+
+                                    rejectedBy:
+                                        auth.currentUser.uid
+
+                                }
+                            );
+
+
+                            showToast(
+
+                                `تم رفض طلب تسجيل <strong>${participantName}</strong> في حملة <strong>${campaignData.title}</strong> وتحديث حالته في النظام.`,
+
+                                "success",
+
+                                "تم رفض التسجيل"
+
+                            );
+
+
+                            await loadParticipants(
+                                campaignId,
+                                campaignData,
+                                container
+                            );
+
+
+                        } catch (error) {
+
+
+                            console.error(
+                                "خطأ رفض التسجيل:",
+                                error
+                            );
+
+
+                            rejectButton.disabled =
+                                false;
+
+
+                            rejectButton.textContent =
+                                "❌ رفض التسجيل";
+
+
+                            showToast(
+
+                                "تعذر معالجة رفض التسجيل حاليًا. يرجى المحاولة مرة أخرى.",
+
+                                "error"
+
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+
+            /* ==================================
+               زر تأكيد الحضور
+            ================================== */
+
+            const presentButton =
+                participant.querySelector(
+                    ".present-button"
+                );
+
+
+            if (presentButton) {
+
+
+                presentButton.addEventListener(
+                    "click",
+                    async function() {
+
+
+                        const calculatedHours =
+                            calculateHours(
+
+                                campaignData.startTime,
+
+                                campaignData.endTime
+
+                            );
+
+
+                        const confirmAttendance =
+                            await showConfirm({
+
+                                title:
+                                    "تأكيد المشاركة التطوعية",
+
+                                icon:
+                                    "🎉",
+
+                                type:
+                                    "primary",
+
+                                confirmText:
+                                    "نعم، احتساب المشاركة",
+
+                                message: `
+
+                                    <p>
+
+                                        سيتم توثيق مشاركة
+                                        <strong>
+                                            ${participantName}
+                                        </strong>
+                                        في حملة
+                                        <strong>
+                                            ${campaignData.title}
+                                        </strong>.
+
+                                    </p>
+
+
+                                    <p>
+
+                                        <strong>
+                                            التاريخ:
+                                        </strong>
+
+                                        ${campaignData.date}
+
+                                        <br>
+
+                                        <strong>
+                                            التوقيت:
+                                        </strong>
+
+                                        ${campaignData.startTime}
+                                        —
+                                        ${campaignData.endTime}
+
+                                        <br>
+
+                                        <strong>
+                                            الساعات المحتسبة:
+                                        </strong>
+
+                                        ${calculatedHours}
+                                        ساعة
+
+                                    </p>
+
+
+                                    ${
+                                        isGuest
+                                        ?
+
+                                        `
+                                            <p>
+
+                                                <strong>
+                                                    نوع المشارك:
+                                                </strong>
+
+                                                زائر
+
+                                                <br>
+
+                                                سيتم ربط هذه المشاركة
+                                                بمعرف الزائر نفسه حتى
+                                                تُحتسب له مع مشاركاته
+                                                الأخرى عند مراجعة
+                                                استحقاق بطاقة المتطوع.
+
+                                            </p>
+                                        `
+
+                                        :
+
+                                        ""
+                                    }
+
+
+                                    <p>
+
+                                        بعد التأكيد ستُسجّل
+                                        المشاركة رسميًا ضمن
+                                        سجل المشاركات التطوعية.
+
+                                    </p>
+
+                                `
+
+                            });
+
+
+                        if (!confirmAttendance) {
+
+                            return;
+
+                        }
+
+
+                        presentButton.disabled =
+                            true;
+
+
+                        presentButton.textContent =
+                            "جاري اعتماد المشاركة...";
+
+
+                        try {
+
+
+                            if (!auth.currentUser) {
+
+                                throw new Error(
+                                    "لا يوجد مستخدم مسجل الدخول."
+                                );
+
+                            }
+
+
+
+                            /* ==================================
+                               guestId للزائر
+                            ================================== */
+
+                            let finalGuestId =
+                                guestId;
+
+
+                            if (
+                                isGuest
+                                &&
+                                !finalGuestId
+                            ) {
+
+
+                                finalGuestId =
+                                    await ensureGuestId(
+                                        registrationDoc
+                                    );
+
+                            }
+
+
+
+                            /* ==================================
+                               إنشاء سجل المشاركة
+                            ================================== */
+
+                            const participationRef =
+                                doc(
+                                    db,
+                                    "participationRecords",
+                                    registrationDoc.id
+                                );
+
+
+                            const participationData = {
+
+                                registrationId:
+                                    registrationDoc.id,
+
+
+                                registrationType:
+                                    registration.registrationType
+                                    ||
+                                    "volunteer",
+
+
+                                userId:
+                                    registration.userId
+                                    ||
+                                    null,
+
+
+                                guestId:
+                                    finalGuestId
+                                    ||
+                                    null,
+
+
+                                participantName:
+                                    participantName,
+
+
+                                phone:
+                                    participantPhone
+                                    ||
+                                    null,
+
+
+                                email:
+                                    participantEmail
+                                    ||
+                                    null,
+
+
+                                category:
+                                    participantCategory
+                                    ||
+                                    null,
+
+
+                                birthDate:
+                                    participantBirthDate
+                                    ||
+                                    null,
+
+
+                                cardNumber:
+                                    participantCardNumber
+                                    ||
+                                    null,
+
+
+                                campaignId:
+                                    campaignId,
+
+
+                                campaignTitle:
+                                    campaignData.title
+                                    ||
+                                    null,
+
+
+                                date:
+                                    campaignData.date,
+
+
+                                hours:
+                                    calculatedHours,
+
+
+                                verified:
+                                    true,
+
+
+                                verifiedBy:
+                                    auth.currentUser.uid,
+
+
+                                verifiedAt:
+                                    serverTimestamp()
+
+                            };
+
+
+                            await setDoc(
+                                participationRef,
+                                participationData
+                            );
+
+
+
+                            /* ==================================
+                               تحديث registration
+                            ================================== */
+
+                            const registrationUpdate = {
+
+                                attendance:
+                                    "present",
+
+                                status:
+                                    "completed",
+
+                                completedAt:
+                                    serverTimestamp()
+
+                            };
+
+
+                            if (
+                                isGuest
+                                &&
+                                finalGuestId
+                            ) {
+
+                                registrationUpdate.guestId =
+                                    finalGuestId;
+
+                            }
+
+
+                            await updateDoc(
+                                doc(
+                                    db,
+                                    "registrations",
+                                    registrationDoc.id
+                                ),
+                                registrationUpdate
+                            );
+
+
+
+                            /* ==================================
+                               إشعار نجاح
+                            ================================== */
+
+                            showToast(
+
+                                isGuest
+
+                                ?
+
+                                `تم توثيق مشاركة <strong>${participantName}</strong> بنجاح. تم ربطها بمعرف الزائر نفسه، وستُحتسب مع مشاركاته التطوعية الأخرى.`
+
+                                :
+
+                                `تم توثيق مشاركة <strong>${participantName}</strong> بنجاح، واحتساب <strong>${calculatedHours} ساعة</strong> ضمن سجل المشاركات التطوعية.`,
+
+                                "success",
+
+                                "تم احتساب المشاركة"
+
+                            );
+
+
+                            await loadParticipants(
+                                campaignId,
+                                campaignData,
+                                container
+                            );
+
+
+                        } catch (error) {
+
+
+                            console.error(
+                                "خطأ تأكيد الحضور:",
+                                error
+                            );
+
+
+                            presentButton.disabled =
+                                false;
+
+
+                            presentButton.textContent =
+                                "✓ تأكيد الحضور واحتساب المشاركة";
+
+
+                            showToast(
+
+                                "تعذر اعتماد المشاركة التطوعية حاليًا، ولم يتم تأكيد الحضور. يرجى المحاولة مرة أخرى.",
+
+                                "error"
+
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+        }
+
+
+    } catch (error) {
+
+
+        console.error(
+            "خطأ تحميل المشاركين:",
+            error
+        );
+
+
+        container.innerHTML =
+            "تعذر تحميل قائمة المشاركين حاليًا.";
+
+    }
+
+}
+
+
+
+/* ==========================================
+   التحقق من صلاحية الإدارة
+========================================== */
+
+onAuthStateChanged(
+    auth,
+    async function(user) {
+
+
+        if (!user) {
+
+
+            window.location.href =
+                "login.html";
+
+
+            return;
+
+        }
+
+
+        try {
+
+
+            const userSnapshot =
+                await getDoc(
+                    doc(
+                        db,
+                        "users",
+                        user.uid
+                    )
+                );
+
+
+            if (
+                !userSnapshot.exists()
+            ) {
+
+
+                document.body.innerHTML = `
+
+                    <div
+                        style="
+                            text-align:center;
+                            padding:80px 20px;
+                            font-family:Arial;
+                        "
+                    >
+
+                        <h2>
+                            بيانات الحساب غير موجودة
+                        </h2>
+
+
+                        <p>
+                            لم يتم العثور على بيانات حساب لجنة المتابعة.
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                return;
+
+            }
+
+
+            const userData =
+                userSnapshot.data();
+
+
+            if (
+                userData.role !==
+                "admin"
+            ) {
+
+
+                document.body.innerHTML = `
+
+                    <div
+                        style="
+                            text-align:center;
+                            padding:80px 20px;
+                            font-family:Arial;
+                        "
+                    >
+
+                        <h2>
+                            ليس لديك صلاحية الدخول
+                        </h2>
+
+
+                        <p>
+                            هذه الصفحة مخصصة لأعضاء لجنة المتابعة فقط.
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                return;
+
+            }
+
+
+            await loadCampaigns();
+
+
+        } catch (error) {
+
+
+            console.error(
+                "خطأ التحقق من الحساب:",
+                error
+            );
+
+
+            document.body.innerHTML = `
+
+                <div
+                    style="
+                        text-align:center;
+                        padding:80px 20px;
+                        font-family:Arial;
+                    "
+                >
+
+                    <h2>
+                        حدث خطأ أثناء التحقق
+                    </h2>
+
+
+                    <p>
+
+                        تعذر التحقق من صلاحيات الحساب حاليًا.
+                        يرجى المحاولة مرة أخرى.
+
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+);
+
+
+</script>
+
+</body>
+
+</html>
